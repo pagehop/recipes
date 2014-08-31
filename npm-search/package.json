@@ -3,7 +3,7 @@
   "description": "Recipe for searching the NPM (Node Package Manager) registry.",
   "version": "0.1.0",
 
-  "homepage": "https://github.com/pagehop/recipes/pagehop-npm-search-recipe",
+  "homepage": "https://github.com/pagehop/recipes/tree/master/npm-search",
   "author": {
     "name": "nicroto",
     "email": "nikolay@tsenkov.net",

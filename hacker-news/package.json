@@ -3,7 +3,7 @@
   "description": "Recipe for browsing the HackerNews (news.ycombinator.com).",
   "version": "0.1.0",
 
-  "homepage": "https://github.com/pagehop/recipes/pagehop-hacker-news-recipe",
+  "homepage": "https://github.com/pagehop/recipes/tree/master/hacker-news",
   "author": {
     "name": "nicroto",
     "email": "nikolay@tsenkov.net",

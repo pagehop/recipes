@@ -3,7 +3,7 @@
   "description": "System recipe, showing a list with all available recipes.",
   "version": "0.1.0",
 
-  "homepage": "https://github.com/pagehop/recipes/pagehop-all-recipes-recipe",
+  "homepage": "https://github.com/pagehop/recipes/tree/master/all-recipes",
   "author": {
     "name": "nicroto",
     "email": "nikolay@tsenkov.net",

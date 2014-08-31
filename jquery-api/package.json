@@ -2,7 +2,7 @@
   "name": "pagehop-jquery-api-recipe",
   "description": "Recipe for searching in the api docs of jQuery.",
   "version": "0.1.0",
-  "homepage": "https://github.com/pagehop/recipes/pagehop-jquery-api-recipe",
+  "homepage": "https://github.com/pagehop/recipes/tree/master/jquery-api",
   "author": {
     "name": "nicroto",
     "email": "nikolay@tsenkov.net",

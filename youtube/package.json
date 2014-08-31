@@ -3,7 +3,7 @@
   "description": "Recipe for search in YouTube.",
   "version": "0.1.0",
 
-  "homepage": "https://github.com/pagehop/recipes/pagehop-youtube-recipe",
+  "homepage": "https://github.com/pagehop/recipes/tree/master/youtube",
   "author": {
     "name": "nicroto",
     "email": "nikolay@tsenkov.net",

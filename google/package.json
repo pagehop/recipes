@@ -3,7 +3,7 @@
   "description": "Recipe for search with Google.",
   "version": "0.1.0",
 
-  "homepage": "https://github.com/pagehop/recipes/pagehop-google-recipe",
+  "homepage": "https://github.com/pagehop/recipes/tree/master/google",
   "author": {
     "name": "nicroto",
     "email": "nikolay@tsenkov.net",

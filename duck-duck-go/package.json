@@ -3,7 +3,7 @@
   "description": "Recipe for search with DuckDuckGo.",
   "version": "0.1.0",
 
-  "homepage": "https://github.com/pagehop/recipes/pagehop-duck-duck-go-recipe",
+  "homepage": "https://github.com/pagehop/recipes/tree/master/duck-duck-go",
   "author": {
     "name": "nicroto",
     "email": "nikolay@tsenkov.net",

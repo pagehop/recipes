@@ -2,7 +2,7 @@
   "name": "pagehop-stackoverflow-recipe",
   "description": "Recipe for search in StackOverflow.",
   "version": "0.1.0",
-  "homepage": "https://github.com/pagehop/recipes/pagehop-stackoverflow-recipe",
+  "homepage": "https://github.com/pagehop/recipes/tree/master/stackoverflow",
   "author": {
     "name": "nicroto",
     "email": "nikolay@tsenkov.net",

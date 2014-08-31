@@ -3,7 +3,7 @@
   "description": "System recipe, showing a list with all available tools.",
   "version": "0.1.0",
 
-  "homepage": "https://github.com/pagehop/recipes/pagehop-all-tools-recipe",
+  "homepage": "https://github.com/pagehop/recipes/tree/master/all-tools",
   "author": {
     "name": "nicroto",
     "email": "nikolay@tsenkov.net",

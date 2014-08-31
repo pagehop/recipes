@@ -2,7 +2,7 @@
   "name": "pagehop-bing-recipe",
   "description": "Recipe for search with Bing.",
   "version": "0.1.0",
-  "homepage": "https://github.com/pagehop/recipes/pagehop-bing-recipe",
+  "homepage": "https://github.com/pagehop/recipes/tree/master/bing",
   "author": {
     "name": "nicroto",
     "email": "nikolay@tsenkov.net",
