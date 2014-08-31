@@ -1,0 +1,69 @@
+{
+  "name": "pagehop-hacker-news-recipe",
+  "description": "Recipe for browsing the HackerNews (news.ycombinator.com).",
+  "version": "0.1.0",
+
+  "homepage": "https://github.com/pagehop/recipes/pagehop-hacker-news-recipe",
+  "author": {
+    "name": "nicroto",
+    "email": "nikolay@tsenkov.net",
+    "url": "about.me/tsenkov"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/pagehop/recipes.git"
+  },
+  "bugs": {
+    "url": "https://github.com/pagehop/recipes/issues"
+  },
+  "licenses": [],
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-jshint": "~0.6.4",
+    "grunt-simple-mocha": "~0.4.0",
+    "mocha": "~1.13.0",
+    "should": "~3.1.2",
+    "pagehop": "^1.0.2"
+  },
+  "private": true,
+  "keywords": [],
+
+  "pagehop": {
+    "id": "HackerNews",
+    "options": [
+      {
+        "keyword": ":n",
+        "description": "Gets the list with the newest posts."
+      },
+      {
+        "keyword": ":c",
+        "description": "Gets the list with the newest comments."
+      },
+      {
+        "keyword": ":ask",
+        "description": "Gets the list with the newest Ask HN: questions."
+      },
+      {
+        "keyword": ":s",
+        "description": "Gets the list with the newest Show HN: posts."
+      },
+      {
+        "keyword": ":j",
+        "description": "Gets the list with the job offers."
+      },
+      {
+        "keyword": ":d",
+        "description": "(WHERE APPLICABLE!) Whichever list is loaded, all items will point to the discussions."
+      }
+    ],
+    "hasQuery": false
+  }
+}

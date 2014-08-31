@@ -1,0 +1,2009 @@
+<!doctype html>
+<!--[if IE 7 ]>		 <html class="no-js ie ie7 lte7 lte8 lte9" lang="en-US"> <![endif]-->
+<!--[if IE 8 ]>		 <html class="no-js ie ie8 lte8 lte9" lang="en-US"> <![endif]-->
+<!--[if IE 9 ]>		 <html class="no-js ie ie9 lte9>" lang="en-US"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html class="no-js" lang="en-US"> <!--<![endif]-->
+<head data-live-domain="api.jquery.com">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+	<title> selector | Search Results  | jQuery API Documentation</title>
+
+	<meta name="author" content="jQuery Foundation - jquery.org">
+	<meta name="description" content="jQuery: The Write Less, Do More, JavaScript Library">
+
+	<meta name="viewport" content="width=device-width">
+
+	<link rel="shortcut icon" href="//api.jquery.com/jquery-wp-content/themes/api.jquery.com/i/favicon.ico">
+
+	<link rel="stylesheet" href="//api.jquery.com/jquery-wp-content/themes/jquery/css/base.css?v=1">
+	<link rel="stylesheet" href="//api.jquery.com/jquery-wp-content/themes/api.jquery.com/style.css">
+	<!--[if lt IE 7]><link rel="stylesheet" href="css/font-awesome-ie7.min.css"><![endif]-->
+
+	<script src="//api.jquery.com/jquery-wp-content/themes/jquery/js/modernizr.custom.2.6.2.min.js"></script>
+
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script>window.jQuery || document.write(unescape('%3Cscript src="//api.jquery.com/jquery-wp-content/themes/jquery/js/jquery-1.9.1.min.js"%3E%3C/script%3E'))</script>
+
+	<script src="//api.jquery.com/jquery-wp-content/themes/jquery/js/plugins.js"></script>
+	<script src="//api.jquery.com/jquery-wp-content/themes/jquery/js/main.js"></script>
+
+	<script src="//use.typekit.net/wde1aof.js"></script>
+	<script>try{Typekit.load();}catch(e){}</script>
+
+<meta name="generator" content="WordPress 3.8" />
+
+</head>
+<body class="api jquery search search-results listing single-author">
+
+<!--[if lt IE 7]>
+<p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
+<![endif]-->
+
+<header>
+	<section id="global-nav">
+		<nav>
+			<div class="constrain">
+				<ul class="projects">
+					<li class="project jquery"><a href="http://jquery.com/" title="jQuery">jQuery</a></li>
+					<li class="project jquery-ui"><a href="http://jqueryui.com/" title="jQuery UI">jQuery UI</a></li>
+					<li class="project jquery-mobile"><a href="http://jquerymobile.com/" title="jQuery Mobile">jQuery Mobile</a></li>
+					<li class="project sizzlejs"><a href="http://sizzlejs.com/" title="Sizzle">Sizzle</a></li>
+					<li class="project qunitjs"><a href="http://qunitjs.com/" title="QUnit">QUnit</a></li>
+				</ul>
+				<ul class="links">
+					<li><a href="http://plugins.jquery.com/">Plugins</a></li>
+					<li class="dropdown"><a href="http://contribute.jquery.org/">Contribute</a>
+						<ul>
+							<li><a href="http://contribute.jquery.org/cla/">CLA</a></li>
+							<li><a href="http://contribute.jquery.org/style-guide/">Style Guides</a></li>
+							<li><a href="http://contribute.jquery.org/triage/">Bug Triage</a></li>
+							<li><a href="http://contribute.jquery.org/code/">Code</a></li>
+							<li><a href="http://contribute.jquery.org/documentation/">Documentation</a></li>
+							<li><a href="http://contribute.jquery.org/web-sites/">Web Sites</a></li>
+						</ul>
+					</li>
+					<li class="dropdown"><a href="http://events.jquery.org/">Events</a>
+						<ul class="wide">
+							<li><a href="http://appendto.com/what-we-do/training/schedule/jquery-virtual-training-june-2014/">Jun 17-19 | jQuery Virtual Training</a></li>
+							<li><a href="http://events.jquery.org/2014/chicago/">Sep 12-13 | jQuery Chicago</a></li>
+							<li><a href="http://2014.cssdevconf.com/">Oct 13-15 | CSS Dev Conf 2014</a></li>
+						</ul>
+					</li>
+					<li class="dropdown"><a href="https://jquery.org/support/">Support</a>
+						<ul>
+							<li><a href="http://learn.jquery.com/">Learning Center</a></li>
+							<li><a href="http://try.jquery.com/">Try jQuery</a></li>
+							<li><a href="http://irc.jquery.org/">IRC/Chat</a></li>
+							<li><a href="http://forum.jquery.com/">Forums</a></li>
+							<li><a href="http://stackoverflow.com/tags/jquery/info">Stack Overflow</a></li>
+							<li><a href="https://jquery.org/support/">Commercial Support</a></li>
+						</ul>
+					</li>
+					<li class="dropdown"><a href="https://jquery.org/">jQuery Foundation</a>
+						<ul>
+							<li><a href="https://jquery.org/join/">Join</a></li>
+							<li><a href="https://jquery.org/members/">Members</a></li>
+							<li><a href="https://jquery.org/team/">Team</a></li>
+							<li><a href="http://brand.jquery.org/">Brand Guide</a></li>
+							<li><a href="https://jquery.org/donate/">Donate</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</nav>
+	</section>
+</header>
+
+<div id="container">
+	<div id="logo-events" class="constrain clearfix">
+		<h2 class="logo"><a href="http://jquery.com/" title="jQuery API Documentation">jQuery API Documentation</a></h2>
+
+		<aside><div id="broadcast"></div></aside>
+	</div>
+
+	<nav id="main" class="constrain clearfix">
+		<div class="menu-top-container">
+	<ul id="menu-top" class="menu">
+<li class="menu-item"><a href="http://jquery.com/download/">Download</a></li>
+<li class="menu-item current"><a href="http://api.jquery.com/">API Documentation</a></li>
+<li class="menu-item"><a href="http://blog.jquery.com/">Blog</a></li>
+<li class="menu-item"><a href="http://plugins.jquery.com/">Plugins</a></li>
+<li class="menu-item"><a href="http://jquery.com/browser-support/">Browser Support</a></li>
+	</ul>
+</div>
+
+		<form method="get" class="searchform" action="//api.jquery.com/">
+	<button type="submit" class="icon-search"><span class="visuallyhidden">search</span></button>
+	<label>
+		<span class="visuallyhidden">Search jQuery API Documentation</span>
+		<input type="text" name="s" value="selector"
+			placeholder="Search">
+	</label>
+</form>
+	</nav>
+
+	<div id="content-wrapper" class="clearfix row">
+
+<div class="content-right twelve columns">
+	<div id="content">
+
+		<header class="page-header">
+			<h1 class="page-title">Search Results for: <span>selector</span></h1>
+			<hr>
+		</header>
+
+					
+<article id="post-25" class="post-25 post type-post status-publish format-standard hentry category-basic-css-selectors category-10">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/selectors/" title="View all posts in Selectors">Selectors</a> &gt; <a href="//api.jquery.com/category/selectors/basic-css-selectors/" title="View all posts in Basic">Basic</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/all-selector/" title="Permalink to All Selector (&#8220;*&#8221;)" rel="bookmark">All Selector (&#8220;*&#8221;)</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Selects all elements.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-31" class="post-31 post type-post status-publish format-standard hentry category-basic-filter-selectors category-jquery-selector-extensions category-12">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/selectors/" title="View all posts in Selectors">Selectors</a> &gt; <a href="//api.jquery.com/category/selectors/basic-filter-selectors/" title="View all posts in Basic Filter">Basic Filter</a></span><span class="category-divider"> | </span><span class="category"><a href="//api.jquery.com/category/selectors/" title="View all posts in Selectors">Selectors</a> &gt; <a href="//api.jquery.com/category/selectors/jquery-selector-extensions/" title="View all posts in jQuery Extensions">jQuery Extensions</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/animated-selector/" title="Permalink to :animated Selector" rel="bookmark">:animated Selector</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Select all elements that are in the progress of an animation at the time the selector is run.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-39" class="post-39 post type-post status-publish format-standard hentry category-attribute-selectors category-10">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/selectors/" title="View all posts in Selectors">Selectors</a> &gt; <a href="//api.jquery.com/category/selectors/attribute-selectors/" title="View all posts in Attribute">Attribute</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/attribute-contains-prefix-selector/" title="Permalink to Attribute Contains Prefix Selector [name|=&quot;value&quot;]" rel="bookmark">Attribute Contains Prefix Selector [name|="value"]</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Selects elements that have the specified attribute with a value either equal to a given string or starting with that string followed by a hyphen (-).</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-41" class="post-41 post type-post status-publish format-standard hentry category-attribute-selectors category-10">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/selectors/" title="View all posts in Selectors">Selectors</a> &gt; <a href="//api.jquery.com/category/selectors/attribute-selectors/" title="View all posts in Attribute">Attribute</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/attribute-contains-selector/" title="Permalink to Attribute Contains Selector [name*=&quot;value&quot;]" rel="bookmark">Attribute Contains Selector [name*="value"]</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Selects elements that have the specified attribute with a value containing a given substring.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-43" class="post-43 post type-post status-publish format-standard hentry category-attribute-selectors category-10">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/selectors/" title="View all posts in Selectors">Selectors</a> &gt; <a href="//api.jquery.com/category/selectors/attribute-selectors/" title="View all posts in Attribute">Attribute</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/attribute-contains-word-selector/" title="Permalink to Attribute Contains Word Selector [name~=&quot;value&quot;]" rel="bookmark">Attribute Contains Word Selector [name~="value"]</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Selects elements that have the specified attribute with a value containing a given word, delimited by spaces.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-45" class="post-45 post type-post status-publish format-standard hentry category-attribute-selectors category-10">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/selectors/" title="View all posts in Selectors">Selectors</a> &gt; <a href="//api.jquery.com/category/selectors/attribute-selectors/" title="View all posts in Attribute">Attribute</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/attribute-ends-with-selector/" title="Permalink to Attribute Ends With Selector [name$=&quot;value&quot;]" rel="bookmark">Attribute Ends With Selector [name$="value"]</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Selects elements that have the specified attribute with a value ending exactly with a given string. The comparison is case sensitive.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-47" class="post-47 post type-post status-publish format-standard hentry category-attribute-selectors category-10">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/selectors/" title="View all posts in Selectors">Selectors</a> &gt; <a href="//api.jquery.com/category/selectors/attribute-selectors/" title="View all posts in Attribute">Attribute</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/attribute-equals-selector/" title="Permalink to Attribute Equals Selector [name=&quot;value&quot;]" rel="bookmark">Attribute Equals Selector [name="value"]</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Selects elements that have the specified attribute with a value exactly equal to a certain value.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-49" class="post-49 post type-post status-publish format-standard hentry category-attribute-selectors category-jquery-selector-extensions category-10">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/selectors/" title="View all posts in Selectors">Selectors</a> &gt; <a href="//api.jquery.com/category/selectors/attribute-selectors/" title="View all posts in Attribute">Attribute</a></span><span class="category-divider"> | </span><span class="category"><a href="//api.jquery.com/category/selectors/" title="View all posts in Selectors">Selectors</a> &gt; <a href="//api.jquery.com/category/selectors/jquery-selector-extensions/" title="View all posts in jQuery Extensions">jQuery Extensions</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/attribute-not-equal-selector/" title="Permalink to Attribute Not Equal Selector [name!=&quot;value&quot;]" rel="bookmark">Attribute Not Equal Selector [name!="value"]</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Select elements that either don&#8217;t have the specified attribute, or do have the specified attribute but not with a certain value.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-51" class="post-51 post type-post status-publish format-standard hentry category-attribute-selectors category-10">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/selectors/" title="View all posts in Selectors">Selectors</a> &gt; <a href="//api.jquery.com/category/selectors/attribute-selectors/" title="View all posts in Attribute">Attribute</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/attribute-starts-with-selector/" title="Permalink to Attribute Starts With Selector [name^=&quot;value&quot;]" rel="bookmark">Attribute Starts With Selector [name^="value"]</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Selects elements that have the specified attribute with a value beginning exactly with a given string.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-59" class="post-59 post type-post status-publish format-standard hentry category-form-selectors category-jquery-selector-extensions category-10">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/selectors/" title="View all posts in Selectors">Selectors</a> &gt; <a href="//api.jquery.com/category/selectors/form-selectors/" title="View all posts in Form">Form</a></span><span class="category-divider"> | </span><span class="category"><a href="//api.jquery.com/category/selectors/" title="View all posts in Selectors">Selectors</a> &gt; <a href="//api.jquery.com/category/selectors/jquery-selector-extensions/" title="View all posts in jQuery Extensions">jQuery Extensions</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/button-selector/" title="Permalink to :button Selector" rel="bookmark">:button Selector</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Selects all button elements and elements of type button.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-85" class="post-85 post type-post status-publish format-standard hentry category-form-selectors category-jquery-selector-extensions category-10">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/selectors/" title="View all posts in Selectors">Selectors</a> &gt; <a href="//api.jquery.com/category/selectors/form-selectors/" title="View all posts in Form">Form</a></span><span class="category-divider"> | </span><span class="category"><a href="//api.jquery.com/category/selectors/" title="View all posts in Selectors">Selectors</a> &gt; <a href="//api.jquery.com/category/selectors/jquery-selector-extensions/" title="View all posts in jQuery Extensions">jQuery Extensions</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/checkbox-selector/" title="Permalink to :checkbox Selector" rel="bookmark">:checkbox Selector</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Selects all elements of type checkbox.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-87" class="post-87 post type-post status-publish format-standard hentry category-form-selectors category-10">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/selectors/" title="View all posts in Selectors">Selectors</a> &gt; <a href="//api.jquery.com/category/selectors/form-selectors/" title="View all posts in Form">Form</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/checked-selector/" title="Permalink to :checked Selector" rel="bookmark">:checked Selector</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Matches all elements that are checked or selected.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-89" class="post-89 post type-post status-publish format-standard hentry category-hierarchy-selectors category-10">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/selectors/" title="View all posts in Selectors">Selectors</a> &gt; <a href="//api.jquery.com/category/selectors/hierarchy-selectors/" title="View all posts in Hierarchy">Hierarchy</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/child-selector/" title="Permalink to Child Selector (&#8220;parent &gt; child&#8221;)" rel="bookmark">Child Selector (&#8220;parent > child&#8221;)</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Selects all direct child elements specified by &#8220;child&#8221; of elements specified by &#8220;parent&#8221;.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-93" class="post-93 post type-post status-publish format-standard hentry category-basic-css-selectors category-10">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/selectors/" title="View all posts in Selectors">Selectors</a> &gt; <a href="//api.jquery.com/category/selectors/basic-css-selectors/" title="View all posts in Basic">Basic</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/class-selector/" title="Permalink to Class Selector (&#8220;.class&#8221;)" rel="bookmark">Class Selector (&#8220;.class&#8221;)</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Selects all elements with the given class.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-103" class="post-103 post type-post status-publish format-standard hentry category-content-filter-selector category-114">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/selectors/" title="View all posts in Selectors">Selectors</a> &gt; <a href="//api.jquery.com/category/selectors/content-filter-selector/" title="View all posts in Content Filter">Content Filter</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/contains-selector/" title="Permalink to :contains() Selector" rel="bookmark">:contains() Selector</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Select all elements that contain the specified text.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-153" class="post-153 post type-post status-publish format-standard hentry category-hierarchy-selectors category-10">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/selectors/" title="View all posts in Selectors">Selectors</a> &gt; <a href="//api.jquery.com/category/selectors/hierarchy-selectors/" title="View all posts in Hierarchy">Hierarchy</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/descendant-selector/" title="Permalink to Descendant Selector (&#8220;ancestor descendant&#8221;)" rel="bookmark">Descendant Selector (&#8220;ancestor descendant&#8221;)</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Selects all elements that are descendants of a given ancestor.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-159" class="post-159 post type-post status-publish format-standard hentry category-form-selectors category-10">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/selectors/" title="View all posts in Selectors">Selectors</a> &gt; <a href="//api.jquery.com/category/selectors/form-selectors/" title="View all posts in Form">Form</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/disabled-selector/" title="Permalink to :disabled Selector" rel="bookmark">:disabled Selector</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Selects all elements that are disabled.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-163" class="post-163 post type-post status-publish format-standard hentry category-basic-css-selectors category-10">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/selectors/" title="View all posts in Selectors">Selectors</a> &gt; <a href="//api.jquery.com/category/selectors/basic-css-selectors/" title="View all posts in Basic">Basic</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/element-selector/" title="Permalink to Element Selector (&#8220;element&#8221;)" rel="bookmark">Element Selector (&#8220;element&#8221;)</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Selects all elements with the given tag name.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-165" class="post-165 post type-post status-publish format-standard hentry category-content-filter-selector category-10">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/selectors/" title="View all posts in Selectors">Selectors</a> &gt; <a href="//api.jquery.com/category/selectors/content-filter-selector/" title="View all posts in Content Filter">Content Filter</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/empty-selector/" title="Permalink to :empty Selector" rel="bookmark">:empty Selector</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Select all elements that have no children (including text nodes).</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-169" class="post-169 post type-post status-publish format-standard hentry category-form-selectors category-10">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/selectors/" title="View all posts in Selectors">Selectors</a> &gt; <a href="//api.jquery.com/category/selectors/form-selectors/" title="View all posts in Form">Form</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/enabled-selector/" title="Permalink to :enabled Selector" rel="bookmark">:enabled Selector</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Selects all elements that are enabled.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-173" class="post-173 post type-post status-publish format-standard hentry category-basic-filter-selectors category-jquery-selector-extensions category-10 category-18">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/selectors/" title="View all posts in Selectors">Selectors</a> &gt; <a href="//api.jquery.com/category/selectors/basic-filter-selectors/" title="View all posts in Basic Filter">Basic Filter</a></span><span class="category-divider"> | </span><span class="category"><a href="//api.jquery.com/category/selectors/" title="View all posts in Selectors">Selectors</a> &gt; <a href="//api.jquery.com/category/selectors/jquery-selector-extensions/" title="View all posts in jQuery Extensions">jQuery Extensions</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/eq-selector/" title="Permalink to :eq() Selector" rel="bookmark">:eq() Selector</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Select the element at index n within the matched set.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-179" class="post-179 post type-post status-publish format-standard hentry category-basic-filter-selectors category-jquery-selector-extensions category-10">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/selectors/" title="View all posts in Selectors">Selectors</a> &gt; <a href="//api.jquery.com/category/selectors/basic-filter-selectors/" title="View all posts in Basic Filter">Basic Filter</a></span><span class="category-divider"> | </span><span class="category"><a href="//api.jquery.com/category/selectors/" title="View all posts in Selectors">Selectors</a> &gt; <a href="//api.jquery.com/category/selectors/jquery-selector-extensions/" title="View all posts in jQuery Extensions">jQuery Extensions</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/even-selector/" title="Permalink to :even Selector" rel="bookmark">:even Selector</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Selects even elements, zero-indexed.  See also odd.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-227" class="post-227 post type-post status-publish format-standard hentry category-form-selectors category-jquery-selector-extensions category-10">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/selectors/" title="View all posts in Selectors">Selectors</a> &gt; <a href="//api.jquery.com/category/selectors/form-selectors/" title="View all posts in Form">Form</a></span><span class="category-divider"> | </span><span class="category"><a href="//api.jquery.com/category/selectors/" title="View all posts in Selectors">Selectors</a> &gt; <a href="//api.jquery.com/category/selectors/jquery-selector-extensions/" title="View all posts in jQuery Extensions">jQuery Extensions</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/file-selector/" title="Permalink to :file Selector" rel="bookmark">:file Selector</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Selects all elements of type file.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-233" class="post-233 post type-post status-publish format-standard hentry category-child-filter-selectors category-114">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/selectors/" title="View all posts in Selectors">Selectors</a> &gt; <a href="//api.jquery.com/category/selectors/child-filter-selectors/" title="View all posts in Child Filter">Child Filter</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/first-child-selector/" title="Permalink to :first-child Selector" rel="bookmark">:first-child Selector</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Selects all elements that are the first child of their parent.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-919" class="post-919 post type-post status-publish format-standard hentry category-child-filter-selectors category-19">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/selectors/" title="View all posts in Selectors">Selectors</a> &gt; <a href="//api.jquery.com/category/selectors/child-filter-selectors/" title="View all posts in Child Filter">Child Filter</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/first-of-type-selector/" title="Permalink to :first-of-type Selector" rel="bookmark">:first-of-type Selector</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Selects all elements that are the first among siblings of the same element name.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-235" class="post-235 post type-post status-publish format-standard hentry category-basic-filter-selectors category-jquery-selector-extensions category-10">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/selectors/" title="View all posts in Selectors">Selectors</a> &gt; <a href="//api.jquery.com/category/selectors/basic-filter-selectors/" title="View all posts in Basic Filter">Basic Filter</a></span><span class="category-divider"> | </span><span class="category"><a href="//api.jquery.com/category/selectors/" title="View all posts in Selectors">Selectors</a> &gt; <a href="//api.jquery.com/category/selectors/jquery-selector-extensions/" title="View all posts in jQuery Extensions">jQuery Extensions</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/first-selector/" title="Permalink to :first Selector" rel="bookmark">:first Selector</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Selects the first matched element.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-239" class="post-239 post type-post status-publish format-standard hentry category-basic-filter-selectors category-form-selectors category-16">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/selectors/" title="View all posts in Selectors">Selectors</a> &gt; <a href="//api.jquery.com/category/selectors/basic-filter-selectors/" title="View all posts in Basic Filter">Basic Filter</a></span><span class="category-divider"> | </span><span class="category"><a href="//api.jquery.com/category/selectors/" title="View all posts in Selectors">Selectors</a> &gt; <a href="//api.jquery.com/category/selectors/form-selectors/" title="View all posts in Form">Form</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/focus-selector/" title="Permalink to :focus Selector" rel="bookmark">:focus Selector</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Selects element if it is currently focused.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-249" class="post-249 post type-post status-publish format-standard hentry category-basic-filter-selectors category-jquery-selector-extensions category-10">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/selectors/" title="View all posts in Selectors">Selectors</a> &gt; <a href="//api.jquery.com/category/selectors/basic-filter-selectors/" title="View all posts in Basic Filter">Basic Filter</a></span><span class="category-divider"> | </span><span class="category"><a href="//api.jquery.com/category/selectors/" title="View all posts in Selectors">Selectors</a> &gt; <a href="//api.jquery.com/category/selectors/jquery-selector-extensions/" title="View all posts in jQuery Extensions">jQuery Extensions</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/gt-selector/" title="Permalink to :gt() Selector" rel="bookmark">:gt() Selector</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Select all elements at an index greater than index within the matched set.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-251" class="post-251 post type-post status-publish format-standard hentry category-attribute-selectors category-10">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/selectors/" title="View all posts in Selectors">Selectors</a> &gt; <a href="//api.jquery.com/category/selectors/attribute-selectors/" title="View all posts in Attribute">Attribute</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/has-attribute-selector/" title="Permalink to Has Attribute Selector [name]" rel="bookmark">Has Attribute Selector [name]</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Selects elements that have the specified attribute, with any value.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-253" class="post-253 post type-post status-publish format-standard hentry category-content-filter-selector category-jquery-selector-extensions category-114">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/selectors/" title="View all posts in Selectors">Selectors</a> &gt; <a href="//api.jquery.com/category/selectors/content-filter-selector/" title="View all posts in Content Filter">Content Filter</a></span><span class="category-divider"> | </span><span class="category"><a href="//api.jquery.com/category/selectors/" title="View all posts in Selectors">Selectors</a> &gt; <a href="//api.jquery.com/category/selectors/jquery-selector-extensions/" title="View all posts in jQuery Extensions">jQuery Extensions</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/has-selector/" title="Permalink to :has() Selector" rel="bookmark">:has() Selector</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Selects elements which contain at least one element that matches the specified selector.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-259" class="post-259 post type-post status-publish format-standard hentry category-basic-filter-selectors category-jquery-selector-extensions category-12">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/selectors/" title="View all posts in Selectors">Selectors</a> &gt; <a href="//api.jquery.com/category/selectors/basic-filter-selectors/" title="View all posts in Basic Filter">Basic Filter</a></span><span class="category-divider"> | </span><span class="category"><a href="//api.jquery.com/category/selectors/" title="View all posts in Selectors">Selectors</a> &gt; <a href="//api.jquery.com/category/selectors/jquery-selector-extensions/" title="View all posts in jQuery Extensions">jQuery Extensions</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/header-selector/" title="Permalink to :header Selector" rel="bookmark">:header Selector</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Selects all elements that are headers, like h1, h2, h3 and so on.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-263" class="post-263 post type-post status-publish format-standard hentry category-jquery-selector-extensions category-10 category-visibility-filter-selectors">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/selectors/" title="View all posts in Selectors">Selectors</a> &gt; <a href="//api.jquery.com/category/selectors/jquery-selector-extensions/" title="View all posts in jQuery Extensions">jQuery Extensions</a></span><span class="category-divider"> | </span><span class="category"><a href="//api.jquery.com/category/selectors/" title="View all posts in Selectors">Selectors</a> &gt; <a href="//api.jquery.com/category/selectors/visibility-filter-selectors/" title="View all posts in Visibility Filter">Visibility Filter</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/hidden-selector/" title="Permalink to :hidden Selector" rel="bookmark">:hidden Selector</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Selects all elements that are hidden.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-271" class="post-271 post type-post status-publish format-standard hentry category-basic-css-selectors category-10">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/selectors/" title="View all posts in Selectors">Selectors</a> &gt; <a href="//api.jquery.com/category/selectors/basic-css-selectors/" title="View all posts in Basic">Basic</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/id-selector/" title="Permalink to ID Selector (&#8220;#id&#8221;)" rel="bookmark">ID Selector (&#8220;#id&#8221;)</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Selects a single element with the given id attribute.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-273" class="post-273 post type-post status-publish format-standard hentry category-form-selectors category-jquery-selector-extensions category-10">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/selectors/" title="View all posts in Selectors">Selectors</a> &gt; <a href="//api.jquery.com/category/selectors/form-selectors/" title="View all posts in Form">Form</a></span><span class="category-divider"> | </span><span class="category"><a href="//api.jquery.com/category/selectors/" title="View all posts in Selectors">Selectors</a> &gt; <a href="//api.jquery.com/category/selectors/jquery-selector-extensions/" title="View all posts in jQuery Extensions">jQuery Extensions</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/image-selector/" title="Permalink to :image Selector" rel="bookmark">:image Selector</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Selects all elements of type image.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-281" class="post-281 post type-post status-publish format-standard hentry category-form-selectors category-jquery-selector-extensions category-10">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/selectors/" title="View all posts in Selectors">Selectors</a> &gt; <a href="//api.jquery.com/category/selectors/form-selectors/" title="View all posts in Form">Form</a></span><span class="category-divider"> | </span><span class="category"><a href="//api.jquery.com/category/selectors/" title="View all posts in Selectors">Selectors</a> &gt; <a href="//api.jquery.com/category/selectors/jquery-selector-extensions/" title="View all posts in jQuery Extensions">jQuery Extensions</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/input-selector/" title="Permalink to :input Selector" rel="bookmark">:input Selector</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Selects all input, textarea, select and button elements.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-920" class="post-920 post type-post status-publish format-standard hentry category-basic-filter-selectors category-19">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/selectors/" title="View all posts in Selectors">Selectors</a> &gt; <a href="//api.jquery.com/category/selectors/basic-filter-selectors/" title="View all posts in Basic Filter">Basic Filter</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/lang-selector/" title="Permalink to :lang() Selector" rel="bookmark">:lang() Selector</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Selects all elements of the specified language.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-401" class="post-401 post type-post status-publish format-standard hentry category-child-filter-selectors category-114">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/selectors/" title="View all posts in Selectors">Selectors</a> &gt; <a href="//api.jquery.com/category/selectors/child-filter-selectors/" title="View all posts in Child Filter">Child Filter</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/last-child-selector/" title="Permalink to :last-child Selector" rel="bookmark">:last-child Selector</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Selects all elements that are the last child of their parent.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-909" class="post-909 post type-post status-publish format-standard hentry category-child-filter-selectors category-19">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/selectors/" title="View all posts in Selectors">Selectors</a> &gt; <a href="//api.jquery.com/category/selectors/child-filter-selectors/" title="View all posts in Child Filter">Child Filter</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/last-of-type-selector/" title="Permalink to :last-of-type Selector" rel="bookmark">:last-of-type Selector</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Selects all elements that are the last among siblings of the same element name.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-403" class="post-403 post type-post status-publish format-standard hentry category-basic-filter-selectors category-jquery-selector-extensions category-10">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/selectors/" title="View all posts in Selectors">Selectors</a> &gt; <a href="//api.jquery.com/category/selectors/basic-filter-selectors/" title="View all posts in Basic Filter">Basic Filter</a></span><span class="category-divider"> | </span><span class="category"><a href="//api.jquery.com/category/selectors/" title="View all posts in Selectors">Selectors</a> &gt; <a href="//api.jquery.com/category/selectors/jquery-selector-extensions/" title="View all posts in jQuery Extensions">jQuery Extensions</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/last-selector/" title="Permalink to :last Selector" rel="bookmark">:last Selector</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Selects the last matched element.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-415" class="post-415 post type-post status-publish format-standard hentry category-basic-filter-selectors category-jquery-selector-extensions category-10">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/selectors/" title="View all posts in Selectors">Selectors</a> &gt; <a href="//api.jquery.com/category/selectors/basic-filter-selectors/" title="View all posts in Basic Filter">Basic Filter</a></span><span class="category-divider"> | </span><span class="category"><a href="//api.jquery.com/category/selectors/" title="View all posts in Selectors">Selectors</a> &gt; <a href="//api.jquery.com/category/selectors/jquery-selector-extensions/" title="View all posts in jQuery Extensions">jQuery Extensions</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/lt-selector/" title="Permalink to :lt() Selector" rel="bookmark">:lt() Selector</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Select all elements at an index less than index within the matched set.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-433" class="post-433 post type-post status-publish format-standard hentry category-attribute-selectors category-10">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/selectors/" title="View all posts in Selectors">Selectors</a> &gt; <a href="//api.jquery.com/category/selectors/attribute-selectors/" title="View all posts in Attribute">Attribute</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/multiple-attribute-selector/" title="Permalink to Multiple Attribute Selector [name=&quot;value&quot;][name2=&quot;value2&quot;]" rel="bookmark">Multiple Attribute Selector [name="value"][name2="value2"]</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Matches elements that match all of the specified attribute filters.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-435" class="post-435 post type-post status-publish format-standard hentry category-basic-css-selectors category-10">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/selectors/" title="View all posts in Selectors">Selectors</a> &gt; <a href="//api.jquery.com/category/selectors/basic-css-selectors/" title="View all posts in Basic">Basic</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/multiple-selector/" title="Permalink to Multiple Selector (&#8220;selector1, selector2, selectorN&#8221;)" rel="bookmark">Multiple Selector (&#8220;selector1, selector2, selectorN&#8221;)</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Selects the combined results of all the specified selectors.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-437" class="post-437 post type-post status-publish format-standard hentry category-hierarchy-selectors category-10">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/selectors/" title="View all posts in Selectors">Selectors</a> &gt; <a href="//api.jquery.com/category/selectors/hierarchy-selectors/" title="View all posts in Hierarchy">Hierarchy</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/next-adjacent-Selector/" title="Permalink to Next Adjacent Selector (&#8220;prev + next&#8221;)" rel="bookmark">Next Adjacent Selector (&#8220;prev + next&#8221;)</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Selects all next elements matching &#8220;next&#8221; that are immediately preceded by a sibling &#8220;prev&#8221;.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-439" class="post-439 post type-post status-publish format-standard hentry category-hierarchy-selectors category-10">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/selectors/" title="View all posts in Selectors">Selectors</a> &gt; <a href="//api.jquery.com/category/selectors/hierarchy-selectors/" title="View all posts in Hierarchy">Hierarchy</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/next-siblings-selector/" title="Permalink to Next Siblings Selector (&#8220;prev ~ siblings&#8221;)" rel="bookmark">Next Siblings Selector (&#8220;prev ~ siblings&#8221;)</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Selects all sibling elements that follow after the &#8220;prev&#8221; element, have the same parent, and match the filtering &#8220;siblings&#8221; selector.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-447" class="post-447 post type-post status-publish format-standard hentry category-basic-filter-selectors category-10">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/selectors/" title="View all posts in Selectors">Selectors</a> &gt; <a href="//api.jquery.com/category/selectors/basic-filter-selectors/" title="View all posts in Basic Filter">Basic Filter</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/not-selector/" title="Permalink to :not() Selector" rel="bookmark">:not() Selector</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Selects all elements that do not match the given selector.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-451" class="post-451 post type-post status-publish format-standard hentry category-child-filter-selectors category-114">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/selectors/" title="View all posts in Selectors">Selectors</a> &gt; <a href="//api.jquery.com/category/selectors/child-filter-selectors/" title="View all posts in Child Filter">Child Filter</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/nth-child-selector/" title="Permalink to :nth-child() Selector" rel="bookmark">:nth-child() Selector</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Selects all elements that are the nth-child of their parent.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-910" class="post-910 post type-post status-publish format-standard hentry category-child-filter-selectors category-19">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/selectors/" title="View all posts in Selectors">Selectors</a> &gt; <a href="//api.jquery.com/category/selectors/child-filter-selectors/" title="View all posts in Child Filter">Child Filter</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/nth-last-child-selector/" title="Permalink to :nth-last-child() Selector" rel="bookmark">:nth-last-child() Selector</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Selects all elements that are the nth-child of their parent, counting from the last element to the first.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-921" class="post-921 post type-post status-publish format-standard hentry category-child-filter-selectors category-19">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/selectors/" title="View all posts in Selectors">Selectors</a> &gt; <a href="//api.jquery.com/category/selectors/child-filter-selectors/" title="View all posts in Child Filter">Child Filter</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/nth-last-of-type-selector/" title="Permalink to :nth-last-of-type() Selector" rel="bookmark">:nth-last-of-type() Selector</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Selects all elements that are the nth-child of their parent, counting from the last element to the first.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-922" class="post-922 post type-post status-publish format-standard hentry category-child-filter-selectors category-19">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/selectors/" title="View all posts in Selectors">Selectors</a> &gt; <a href="//api.jquery.com/category/selectors/child-filter-selectors/" title="View all posts in Child Filter">Child Filter</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/nth-of-type-selector/" title="Permalink to :nth-of-type() Selector" rel="bookmark">:nth-of-type() Selector</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Selects all elements that are the nth child of their parent in relation to siblings with the same element name.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-453" class="post-453 post type-post status-publish format-standard hentry category-basic-filter-selectors category-jquery-selector-extensions category-10">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/selectors/" title="View all posts in Selectors">Selectors</a> &gt; <a href="//api.jquery.com/category/selectors/basic-filter-selectors/" title="View all posts in Basic Filter">Basic Filter</a></span><span class="category-divider"> | </span><span class="category"><a href="//api.jquery.com/category/selectors/" title="View all posts in Selectors">Selectors</a> &gt; <a href="//api.jquery.com/category/selectors/jquery-selector-extensions/" title="View all posts in jQuery Extensions">jQuery Extensions</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/odd-selector/" title="Permalink to :odd Selector" rel="bookmark">:odd Selector</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Selects odd elements, zero-indexed.  See also even.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-465" class="post-465 post type-post status-publish format-standard hentry category-child-filter-selectors category-114">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/selectors/" title="View all posts in Selectors">Selectors</a> &gt; <a href="//api.jquery.com/category/selectors/child-filter-selectors/" title="View all posts in Child Filter">Child Filter</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/only-child-selector/" title="Permalink to :only-child Selector" rel="bookmark">:only-child Selector</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Selects all elements that are the only child of their parent.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-911" class="post-911 post type-post status-publish format-standard hentry category-child-filter-selectors category-19">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/selectors/" title="View all posts in Selectors">Selectors</a> &gt; <a href="//api.jquery.com/category/selectors/child-filter-selectors/" title="View all posts in Child Filter">Child Filter</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/only-of-type-selector/" title="Permalink to :only-of-type Selector" rel="bookmark">:only-of-type Selector</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Selects all elements that have no siblings with the same element name.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-471" class="post-471 post type-post status-publish format-standard hentry category-content-filter-selector category-jquery-selector-extensions category-10">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/selectors/" title="View all posts in Selectors">Selectors</a> &gt; <a href="//api.jquery.com/category/selectors/content-filter-selector/" title="View all posts in Content Filter">Content Filter</a></span><span class="category-divider"> | </span><span class="category"><a href="//api.jquery.com/category/selectors/" title="View all posts in Selectors">Selectors</a> &gt; <a href="//api.jquery.com/category/selectors/jquery-selector-extensions/" title="View all posts in jQuery Extensions">jQuery Extensions</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/parent-selector/" title="Permalink to :parent Selector" rel="bookmark">:parent Selector</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Select all elements that have at least one child node (either an element or text).</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-479" class="post-479 post type-post status-publish format-standard hentry category-form-selectors category-jquery-selector-extensions category-10">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/selectors/" title="View all posts in Selectors">Selectors</a> &gt; <a href="//api.jquery.com/category/selectors/form-selectors/" title="View all posts in Form">Form</a></span><span class="category-divider"> | </span><span class="category"><a href="//api.jquery.com/category/selectors/" title="View all posts in Selectors">Selectors</a> &gt; <a href="//api.jquery.com/category/selectors/jquery-selector-extensions/" title="View all posts in jQuery Extensions">jQuery Extensions</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/password-selector/" title="Permalink to :password Selector" rel="bookmark">:password Selector</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Selects all elements of type password.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-501" class="post-501 post type-post status-publish format-standard hentry category-form-selectors category-jquery-selector-extensions category-10">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/selectors/" title="View all posts in Selectors">Selectors</a> &gt; <a href="//api.jquery.com/category/selectors/form-selectors/" title="View all posts in Form">Form</a></span><span class="category-divider"> | </span><span class="category"><a href="//api.jquery.com/category/selectors/" title="View all posts in Selectors">Selectors</a> &gt; <a href="//api.jquery.com/category/selectors/jquery-selector-extensions/" title="View all posts in jQuery Extensions">jQuery Extensions</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/radio-selector/" title="Permalink to :radio Selector" rel="bookmark">:radio Selector</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Selects all  elements of type radio.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-519" class="post-519 post type-post status-publish format-standard hentry category-form-selectors category-jquery-selector-extensions category-10">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/selectors/" title="View all posts in Selectors">Selectors</a> &gt; <a href="//api.jquery.com/category/selectors/form-selectors/" title="View all posts in Form">Form</a></span><span class="category-divider"> | </span><span class="category"><a href="//api.jquery.com/category/selectors/" title="View all posts in Selectors">Selectors</a> &gt; <a href="//api.jquery.com/category/selectors/jquery-selector-extensions/" title="View all posts in jQuery Extensions">jQuery Extensions</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/reset-selector/" title="Permalink to :reset Selector" rel="bookmark">:reset Selector</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Selects all elements of type reset.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-923" class="post-923 post type-post status-publish format-standard hentry category-basic-filter-selectors category-19">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/selectors/" title="View all posts in Selectors">Selectors</a> &gt; <a href="//api.jquery.com/category/selectors/basic-filter-selectors/" title="View all posts in Basic Filter">Basic Filter</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/root-selector/" title="Permalink to :root Selector" rel="bookmark">:root Selector</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Selects the element that is the root of the document.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-531" class="post-531 post type-post status-publish format-standard hentry category-form-selectors category-jquery-selector-extensions category-10">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/selectors/" title="View all posts in Selectors">Selectors</a> &gt; <a href="//api.jquery.com/category/selectors/form-selectors/" title="View all posts in Form">Form</a></span><span class="category-divider"> | </span><span class="category"><a href="//api.jquery.com/category/selectors/" title="View all posts in Selectors">Selectors</a> &gt; <a href="//api.jquery.com/category/selectors/jquery-selector-extensions/" title="View all posts in jQuery Extensions">jQuery Extensions</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/selected-selector/" title="Permalink to :selected Selector" rel="bookmark">:selected Selector</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Selects all elements that are selected.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-533" class="post-533 post type-post status-publish format-standard hentry category-deprecated-17 category-internals category-global-jquery-object-properties category-13">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/deprecated/" title="View all posts in Deprecated">Deprecated</a> &gt; <a href="//api.jquery.com/category/deprecated/deprecated-1.7/" title="View all posts in Deprecated 1.7">Deprecated 1.7</a></span><span class="category-divider"> | </span><span class="category"><a href="//api.jquery.com/category/internals/" title="View all posts in Internals">Internals</a></span><span class="category-divider"> | </span><span class="category"><a href="//api.jquery.com/category/properties/" title="View all posts in Properties">Properties</a> &gt; <a href="//api.jquery.com/category/properties/global-jquery-object-properties/" title="View all posts in Properties of the Global jQuery Object">Properties of the Global jQuery Object</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/selector/" title="Permalink to .selector" rel="bookmark">.selector</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>A selector representing selector passed to jQuery(), if any, when creating the original set.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-555" class="post-555 post type-post status-publish format-standard hentry category-form-selectors category-jquery-selector-extensions category-10">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/selectors/" title="View all posts in Selectors">Selectors</a> &gt; <a href="//api.jquery.com/category/selectors/form-selectors/" title="View all posts in Form">Form</a></span><span class="category-divider"> | </span><span class="category"><a href="//api.jquery.com/category/selectors/" title="View all posts in Selectors">Selectors</a> &gt; <a href="//api.jquery.com/category/selectors/jquery-selector-extensions/" title="View all posts in jQuery Extensions">jQuery Extensions</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/submit-selector/" title="Permalink to :submit Selector" rel="bookmark">:submit Selector</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Selects all elements of type submit.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-924" class="post-924 post type-post status-publish format-standard hentry category-basic-filter-selectors category-19">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/selectors/" title="View all posts in Selectors">Selectors</a> &gt; <a href="//api.jquery.com/category/selectors/basic-filter-selectors/" title="View all posts in Basic Filter">Basic Filter</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/target-selector/" title="Permalink to :target Selector" rel="bookmark">:target Selector</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Selects the target element indicated by the fragment identifier of the document&#8217;s URI.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-559" class="post-559 post type-post status-publish format-standard hentry category-form-selectors category-jquery-selector-extensions category-10">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/selectors/" title="View all posts in Selectors">Selectors</a> &gt; <a href="//api.jquery.com/category/selectors/form-selectors/" title="View all posts in Form">Form</a></span><span class="category-divider"> | </span><span class="category"><a href="//api.jquery.com/category/selectors/" title="View all posts in Selectors">Selectors</a> &gt; <a href="//api.jquery.com/category/selectors/jquery-selector-extensions/" title="View all posts in jQuery Extensions">jQuery Extensions</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/text-selector/" title="Permalink to :text Selector" rel="bookmark">:text Selector</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Selects all elements of type text.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-585" class="post-585 post type-post status-publish format-standard hentry category-jquery-selector-extensions category-10 category-visibility-filter-selectors">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/selectors/" title="View all posts in Selectors">Selectors</a> &gt; <a href="//api.jquery.com/category/selectors/jquery-selector-extensions/" title="View all posts in jQuery Extensions">jQuery Extensions</a></span><span class="category-divider"> | </span><span class="category"><a href="//api.jquery.com/category/selectors/" title="View all posts in Selectors">Selectors</a> &gt; <a href="//api.jquery.com/category/selectors/visibility-filter-selectors/" title="View all posts in Visibility Filter">Visibility Filter</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/visible-selector/" title="Permalink to :visible Selector" rel="bookmark">:visible Selector</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Selects all elements that are visible.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-7" class="post-7 post type-post status-publish format-standard hentry category-miscellaneous-traversal category-18">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/traversing/" title="View all posts in Traversing">Traversing</a> &gt; <a href="//api.jquery.com/category/traversing/miscellaneous-traversal/" title="View all posts in Miscellaneous Traversing">Miscellaneous Traversing</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/addBack/" title="Permalink to .addBack()" rel="bookmark">.addBack()</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Add the previous set of elements on the stack to the current set, optionally filtered by a selector.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-91" class="post-91 post type-post status-publish format-standard hentry category-tree-traversal category-10">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/traversing/" title="View all posts in Traversing">Traversing</a> &gt; <a href="//api.jquery.com/category/traversing/tree-traversal/" title="View all posts in Tree Traversal">Tree Traversal</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/children/" title="Permalink to .children()" rel="bookmark">.children()</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Get the children of each element in the set of matched elements, optionally filtered by a selector.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-101" class="post-101 post type-post status-publish format-standard hentry category-tree-traversal category-13 category-14 category-16">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/traversing/" title="View all posts in Traversing">Traversing</a> &gt; <a href="//api.jquery.com/category/traversing/tree-traversal/" title="View all posts in Tree Traversal">Tree Traversal</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/closest/" title="Permalink to .closest()" rel="bookmark">.closest()</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>For each element in the set, get the first element that matches the selector by testing the element itself and traversing up through its ancestors in the DOM tree.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-149" class="post-149 post type-post status-publish format-standard hentry category-event-handler-attachment category-142 category-143">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/events/" title="View all posts in Events">Events</a> &gt; <a href="//api.jquery.com/category/events/event-handler-attachment/" title="View all posts in Event Handler Attachment">Event Handler Attachment</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/delegate/" title="Permalink to .delegate()" rel="bookmark">.delegate()</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Attach a handler to one or more events for all elements that match the selector, now or in the future, based on a specific set of root elements.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-229" class="post-229 post type-post status-publish format-standard hentry category-filtering category-10 category-14">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/traversing/" title="View all posts in Traversing">Traversing</a> &gt; <a href="//api.jquery.com/category/traversing/filtering/" title="View all posts in Filtering">Filtering</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/filter/" title="Permalink to .filter()" rel="bookmark">.filter()</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Reduce the set of matched elements to those that match the selector or pass the function&#8217;s test.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-231" class="post-231 post type-post status-publish format-standard hentry category-tree-traversal category-10 category-16">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/traversing/" title="View all posts in Traversing">Traversing</a> &gt; <a href="//api.jquery.com/category/traversing/tree-traversal/" title="View all posts in Tree Traversal">Tree Traversal</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/find/" title="Permalink to .find()" rel="bookmark">.find()</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Get the descendants of each element in the current set of matched elements, filtered by a selector, jQuery object, or element.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-255" class="post-255 post type-post status-publish format-standard hentry category-filtering category-14">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/traversing/" title="View all posts in Traversing">Traversing</a> &gt; <a href="//api.jquery.com/category/traversing/filtering/" title="View all posts in Filtering">Filtering</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/has/" title="Permalink to .has()" rel="bookmark">.has()</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Reduce the set of matched elements to those that have a descendant that matches the selector or DOM element.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-287" class="post-287 post type-post status-publish format-standard hentry category-filtering category-10 category-16 category-17">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/traversing/" title="View all posts in Traversing">Traversing</a> &gt; <a href="//api.jquery.com/category/traversing/filtering/" title="View all posts in Filtering">Filtering</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/is/" title="Permalink to .is()" rel="bookmark">.is()</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Check the current matched set of elements against a selector, element, or jQuery object and return true if at least one of these elements matches the given arguments.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-409" class="post-409 post type-post status-publish format-standard hentry category-deprecated-17 category-event-handler-attachment category-removed category-13">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/deprecated/" title="View all posts in Deprecated">Deprecated</a> &gt; <a href="//api.jquery.com/category/deprecated/deprecated-1.7/" title="View all posts in Deprecated 1.7">Deprecated 1.7</a></span><span class="category-divider"> | </span><span class="category"><a href="//api.jquery.com/category/events/" title="View all posts in Events">Events</a> &gt; <a href="//api.jquery.com/category/events/event-handler-attachment/" title="View all posts in Event Handler Attachment">Event Handler Attachment</a></span><span class="category-divider"> | </span><span class="category"><a href="//api.jquery.com/category/removed/" title="View all posts in Removed">Removed</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/live/" title="Permalink to .live()" rel="bookmark">.live()</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Attach an event handler for all elements which match the current selector, now and in the future.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-441" class="post-441 post type-post status-publish format-standard hentry category-tree-traversal category-10">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/traversing/" title="View all posts in Traversing">Traversing</a> &gt; <a href="//api.jquery.com/category/traversing/tree-traversal/" title="View all posts in Tree Traversal">Tree Traversal</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/next/" title="Permalink to .next()" rel="bookmark">.next()</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Get the immediately following sibling of each element in the set of matched elements. If a selector is provided, it retrieves the next sibling only if it matches that selector.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-443" class="post-443 post type-post status-publish format-standard hentry category-tree-traversal category-12">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/traversing/" title="View all posts in Traversing">Traversing</a> &gt; <a href="//api.jquery.com/category/traversing/tree-traversal/" title="View all posts in Tree Traversal">Tree Traversal</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/nextAll/" title="Permalink to .nextAll()" rel="bookmark">.nextAll()</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Get all following siblings of each element in the set of matched elements, optionally filtered by a selector.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-445" class="post-445 post type-post status-publish format-standard hentry category-tree-traversal category-14 category-16">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/traversing/" title="View all posts in Traversing">Traversing</a> &gt; <a href="//api.jquery.com/category/traversing/tree-traversal/" title="View all posts in Tree Traversal">Tree Traversal</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/nextUntil/" title="Permalink to .nextUntil()" rel="bookmark">.nextUntil()</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Get all following siblings of each element up to but not including the element matched by the selector, DOM node, or jQuery object passed.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-473" class="post-473 post type-post status-publish format-standard hentry category-tree-traversal category-10">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/traversing/" title="View all posts in Traversing">Traversing</a> &gt; <a href="//api.jquery.com/category/traversing/tree-traversal/" title="View all posts in Tree Traversal">Tree Traversal</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/parent/" title="Permalink to .parent()" rel="bookmark">.parent()</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Get the parent of each element in the current set of matched elements, optionally filtered by a selector.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-475" class="post-475 post type-post status-publish format-standard hentry category-tree-traversal category-10">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/traversing/" title="View all posts in Traversing">Traversing</a> &gt; <a href="//api.jquery.com/category/traversing/tree-traversal/" title="View all posts in Tree Traversal">Tree Traversal</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/parents/" title="Permalink to .parents()" rel="bookmark">.parents()</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Get the ancestors of each element in the current set of matched elements, optionally filtered by a selector.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-477" class="post-477 post type-post status-publish format-standard hentry category-tree-traversal category-14 category-16">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/traversing/" title="View all posts in Traversing">Traversing</a> &gt; <a href="//api.jquery.com/category/traversing/tree-traversal/" title="View all posts in Tree Traversal">Tree Traversal</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/parentsUntil/" title="Permalink to .parentsUntil()" rel="bookmark">.parentsUntil()</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Get the ancestors of each element in the current set of matched elements, up to but not including the element matched by the selector, DOM node, or jQuery object.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-487" class="post-487 post type-post status-publish format-standard hentry category-tree-traversal category-10">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/traversing/" title="View all posts in Traversing">Traversing</a> &gt; <a href="//api.jquery.com/category/traversing/tree-traversal/" title="View all posts in Tree Traversal">Tree Traversal</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/prev/" title="Permalink to .prev()" rel="bookmark">.prev()</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Get the immediately preceding sibling of each element in the set of matched elements, optionally filtered by a selector.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-489" class="post-489 post type-post status-publish format-standard hentry category-tree-traversal category-12">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/traversing/" title="View all posts in Traversing">Traversing</a> &gt; <a href="//api.jquery.com/category/traversing/tree-traversal/" title="View all posts in Tree Traversal">Tree Traversal</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/prevAll/" title="Permalink to .prevAll()" rel="bookmark">.prevAll()</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Get all preceding siblings of each element in the set of matched elements, optionally filtered by a selector.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-491" class="post-491 post type-post status-publish format-standard hentry category-tree-traversal category-14 category-16">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/traversing/" title="View all posts in Traversing">Traversing</a> &gt; <a href="//api.jquery.com/category/traversing/tree-traversal/" title="View all posts in Tree Traversal">Tree Traversal</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/prevUntil/" title="Permalink to .prevUntil()" rel="bookmark">.prevUntil()</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Get all preceding siblings of each element up to but not including the element matched by the selector, DOM node, or jQuery object.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-541" class="post-541 post type-post status-publish format-standard hentry category-tree-traversal category-10">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/traversing/" title="View all posts in Traversing">Traversing</a> &gt; <a href="//api.jquery.com/category/traversing/tree-traversal/" title="View all posts in Tree Traversal">Tree Traversal</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/siblings/" title="Permalink to .siblings()" rel="bookmark">.siblings()</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Get the siblings of each element in the set of matched elements, optionally filtered by a selector.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-577" class="post-577 post type-post status-publish format-standard hentry category-event-handler-attachment category-142 category-143 category-16">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/events/" title="View all posts in Events">Events</a> &gt; <a href="//api.jquery.com/category/events/event-handler-attachment/" title="View all posts in Event Handler Attachment">Event Handler Attachment</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/undelegate/" title="Permalink to .undelegate()" rel="bookmark">.undelegate()</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Remove a handler from the event for all elements which match the current selector, based upon a specific set of root elements.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-5" class="post-5 post type-post status-publish format-standard hentry category-miscellaneous-traversal category-10 category-14">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/traversing/" title="View all posts in Traversing">Traversing</a> &gt; <a href="//api.jquery.com/category/traversing/miscellaneous-traversal/" title="View all posts in Miscellaneous Traversing">Miscellaneous Traversing</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/add/" title="Permalink to .add()" rel="bookmark">.add()</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Add elements to the set of matched elements.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-11" class="post-11 post type-post status-publish format-standard hentry category-dom-insertion-outside category-10 category-14">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/manipulation/" title="View all posts in Manipulation">Manipulation</a> &gt; <a href="//api.jquery.com/category/manipulation/dom-insertion-outside/" title="View all posts in DOM Insertion, Outside">DOM Insertion, Outside</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/after/" title="Permalink to .after()" rel="bookmark">.after()</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Insert content, specified by the parameter, after each element in the set of matched elements.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-27" class="post-27 post type-post status-publish format-standard hentry category-deprecated-18 category-miscellaneous-traversal category-12">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/deprecated/" title="View all posts in Deprecated">Deprecated</a> &gt; <a href="//api.jquery.com/category/deprecated/deprecated-1.8/" title="View all posts in Deprecated 1.8">Deprecated 1.8</a></span><span class="category-divider"> | </span><span class="category"><a href="//api.jquery.com/category/traversing/" title="View all posts in Traversing">Traversing</a> &gt; <a href="//api.jquery.com/category/traversing/miscellaneous-traversal/" title="View all posts in Miscellaneous Traversing">Miscellaneous Traversing</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/andSelf/" title="Permalink to .andSelf()" rel="bookmark">.andSelf()</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Add the previous set of elements on the stack to the current set.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-33" class="post-33 post type-post status-publish format-standard hentry category-dom-insertion-inside category-10 category-14">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/manipulation/" title="View all posts in Manipulation">Manipulation</a> &gt; <a href="//api.jquery.com/category/manipulation/dom-insertion-inside/" title="View all posts in DOM Insertion, Inside">DOM Insertion, Inside</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/append/" title="Permalink to .append()" rel="bookmark">.append()</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Insert content, specified by the parameter, to the end of each element in the set of matched elements.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-35" class="post-35 post type-post status-publish format-standard hentry category-dom-insertion-inside category-10">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/manipulation/" title="View all posts in Manipulation">Manipulation</a> &gt; <a href="//api.jquery.com/category/manipulation/dom-insertion-inside/" title="View all posts in DOM Insertion, Inside">DOM Insertion, Inside</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/appendTo/" title="Permalink to .appendTo()" rel="bookmark">.appendTo()</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Insert every element in the set of matched elements to the end of the target.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-53" class="post-53 post type-post status-publish format-standard hentry category-dom-insertion-outside category-10 category-14">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/manipulation/" title="View all posts in Manipulation">Manipulation</a> &gt; <a href="//api.jquery.com/category/manipulation/dom-insertion-outside/" title="View all posts in DOM Insertion, Outside">DOM Insertion, Outside</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/before/" title="Permalink to .before()" rel="bookmark">.before()</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Insert content, specified by the parameter, before each element in the set of matched elements.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-155" class="post-155 post type-post status-publish format-standard hentry category-dom-removal category-14">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/manipulation/" title="View all posts in Manipulation">Manipulation</a> &gt; <a href="//api.jquery.com/category/manipulation/dom-removal/" title="View all posts in DOM Removal">DOM Removal</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/detach/" title="Permalink to .detach()" rel="bookmark">.detach()</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Remove the set of matched elements from the DOM.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-157" class="post-157 post type-post status-publish format-standard hentry category-deprecated-17 category-event-handler-attachment category-removed category-13 category-141 category-143">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/deprecated/" title="View all posts in Deprecated">Deprecated</a> &gt; <a href="//api.jquery.com/category/deprecated/deprecated-1.7/" title="View all posts in Deprecated 1.7">Deprecated 1.7</a></span><span class="category-divider"> | </span><span class="category"><a href="//api.jquery.com/category/events/" title="View all posts in Events">Events</a> &gt; <a href="//api.jquery.com/category/events/event-handler-attachment/" title="View all posts in Event Handler Attachment">Event Handler Attachment</a></span><span class="category-divider"> | </span><span class="category"><a href="//api.jquery.com/category/removed/" title="View all posts in Removed">Removed</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/die/" title="Permalink to .die()" rel="bookmark">.die()</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Remove event handlers previously attached using .live() from the elements.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-221" class="post-221 post type-post status-publish format-standard hentry category-fading category-10 category-143">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/effects/" title="View all posts in Effects">Effects</a> &gt; <a href="//api.jquery.com/category/effects/fading/" title="View all posts in Fading">Fading</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/fadeOut/" title="Permalink to .fadeOut()" rel="bookmark">.fadeOut()</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Hide the matched elements by fading them to transparent.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-267" class="post-267 post type-post status-publish format-standard hentry category-mouse-events category-10">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/events/" title="View all posts in Events">Events</a> &gt; <a href="//api.jquery.com/category/events/mouse-events/" title="View all posts in Mouse Events">Mouse Events</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/hover/" title="Permalink to .hover()" rel="bookmark">.hover()</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Bind one or two handlers to the matched elements, to be executed when the mouse pointer enters and leaves the elements.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-269" class="post-269 post type-post status-publish format-standard hentry category-attributes category-dom-insertion-inside category-10 category-14">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/attributes/" title="View all posts in Attributes">Attributes</a></span><span class="category-divider"> | </span><span class="category"><a href="//api.jquery.com/category/manipulation/" title="View all posts in Manipulation">Manipulation</a> &gt; <a href="//api.jquery.com/category/manipulation/dom-insertion-inside/" title="View all posts in DOM Insertion, Inside">DOM Insertion, Inside</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/html/" title="Permalink to .html()" rel="bookmark">.html()</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Get the HTML contents of the first element in the set of matched elements or set the HTML contents of every matched element.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-275" class="post-275 post type-post status-publish format-standard hentry category-dom-element-methods category-10 category-14">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/miscellaneous/" title="View all posts in Miscellaneous">Miscellaneous</a> &gt; <a href="//api.jquery.com/category/miscellaneous/dom-element-methods/" title="View all posts in DOM Element Methods">DOM Element Methods</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/index/" title="Permalink to .index()" rel="bookmark">.index()</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Search for a given element from among the matched elements.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-283" class="post-283 post type-post status-publish format-standard hentry category-dom-insertion-outside category-10">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/manipulation/" title="View all posts in Manipulation">Manipulation</a> &gt; <a href="//api.jquery.com/category/manipulation/dom-insertion-outside/" title="View all posts in DOM Insertion, Outside">DOM Insertion, Outside</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/insertAfter/" title="Permalink to .insertAfter()" rel="bookmark">.insertAfter()</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Insert every element in the set of matched elements after the target.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-285" class="post-285 post type-post status-publish format-standard hentry category-dom-insertion-outside category-10">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/manipulation/" title="View all posts in Manipulation">Manipulation</a> &gt; <a href="//api.jquery.com/category/manipulation/dom-insertion-outside/" title="View all posts in DOM Insertion, Outside">DOM Insertion, Outside</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/insertBefore/" title="Permalink to .insertBefore()" rel="bookmark">.insertBefore()</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Insert every element in the set of matched elements before the target.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-339" class="post-339 post type-post status-publish format-standard hentry category-core category-10 category-14">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/core/" title="View all posts in Core">Core</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/jQuery/" title="Permalink to jQuery()" rel="bookmark">jQuery()</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Return a collection of matched elements either found in the DOM based on passed argument(s) or created by passing an HTML string.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-315" class="post-315 post type-post status-publish format-standard hentry category-utilities category-10">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/utilities/" title="View all posts in Utilities">Utilities</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/jQuery.each/" title="Permalink to jQuery.each()" rel="bookmark">jQuery.each()</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>A generic iterator function, which can be used to seamlessly iterate over both objects and arrays. Arrays and array-like objects with a length property (such as a function&#8217;s arguments object) are iterated by numeric index, from 0 to length-1. Other objects are iterated via their named properties.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-413" class="post-413 post type-post status-publish format-standard hentry category-shorthand-methods category-10">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/ajax/" title="View all posts in Ajax">Ajax</a> &gt; <a href="//api.jquery.com/category/ajax/shorthand-methods/" title="View all posts in Shorthand Methods">Shorthand Methods</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/load/" title="Permalink to .load()" rel="bookmark">.load()</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Load data from the server and place the returned HTML into the matched element.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-449" class="post-449 post type-post status-publish format-standard hentry category-filtering category-miscellaneous-traversal category-10 category-14">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/traversing/" title="View all posts in Traversing">Traversing</a> &gt; <a href="//api.jquery.com/category/traversing/filtering/" title="View all posts in Filtering">Filtering</a></span><span class="category-divider"> | </span><span class="category"><a href="//api.jquery.com/category/traversing/" title="View all posts in Traversing">Traversing</a> &gt; <a href="//api.jquery.com/category/traversing/miscellaneous-traversal/" title="View all posts in Miscellaneous Traversing">Miscellaneous Traversing</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/not/" title="Permalink to .not()" rel="bookmark">.not()</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Remove elements from the set of matched elements.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-455" class="post-455 post type-post status-publish format-standard hentry category-event-handler-attachment category-17">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/events/" title="View all posts in Events">Events</a> &gt; <a href="//api.jquery.com/category/events/event-handler-attachment/" title="View all posts in Event Handler Attachment">Event Handler Attachment</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/off/" title="Permalink to .off()" rel="bookmark">.off()</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Remove an event handler.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-461" class="post-461 post type-post status-publish format-standard hentry category-event-handler-attachment category-17">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/events/" title="View all posts in Events">Events</a> &gt; <a href="//api.jquery.com/category/events/event-handler-attachment/" title="View all posts in Event Handler Attachment">Event Handler Attachment</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/on/" title="Permalink to .on()" rel="bookmark">.on()</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Attach an event handler function for one or more events to the selected elements.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-463" class="post-463 post type-post status-publish format-standard hentry category-event-handler-attachment category-11">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/events/" title="View all posts in Events">Events</a> &gt; <a href="//api.jquery.com/category/events/event-handler-attachment/" title="View all posts in Event Handler Attachment">Event Handler Attachment</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/one/" title="Permalink to .one()" rel="bookmark">.one()</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Attach a handler to an event for the elements. The handler is executed at most once per element per event type.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-483" class="post-483 post type-post status-publish format-standard hentry category-dom-insertion-inside category-10 category-14">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/manipulation/" title="View all posts in Manipulation">Manipulation</a> &gt; <a href="//api.jquery.com/category/manipulation/dom-insertion-inside/" title="View all posts in DOM Insertion, Inside">DOM Insertion, Inside</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/prepend/" title="Permalink to .prepend()" rel="bookmark">.prepend()</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Insert content, specified by the parameter, to the beginning of each element in the set of matched elements.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-485" class="post-485 post type-post status-publish format-standard hentry category-dom-insertion-inside category-10">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/manipulation/" title="View all posts in Manipulation">Manipulation</a> &gt; <a href="//api.jquery.com/category/manipulation/dom-insertion-inside/" title="View all posts in DOM Insertion, Inside">DOM Insertion, Inside</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/prependTo/" title="Permalink to .prependTo()" rel="bookmark">.prependTo()</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Insert every element in the set of matched elements to the beginning of the target.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-503" class="post-503 post type-post status-publish format-standard hentry category-document-loading category-10">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/events/" title="View all posts in Events">Events</a> &gt; <a href="//api.jquery.com/category/events/document-loading/" title="View all posts in Document Loading">Document Loading</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/ready/" title="Permalink to .ready()" rel="bookmark">.ready()</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Specify a function to execute when the DOM is fully loaded.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-505" class="post-505 post type-post status-publish format-standard hentry category-dom-removal category-10">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/manipulation/" title="View all posts in Manipulation">Manipulation</a> &gt; <a href="//api.jquery.com/category/manipulation/dom-removal/" title="View all posts in DOM Removal">DOM Removal</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/remove/" title="Permalink to .remove()" rel="bookmark">.remove()</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Remove the set of matched elements from the DOM.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-515" class="post-515 post type-post status-publish format-standard hentry category-dom-replacement category-12">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/manipulation/" title="View all posts in Manipulation">Manipulation</a> &gt; <a href="//api.jquery.com/category/manipulation/dom-replacement/" title="View all posts in DOM Replacement">DOM Replacement</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/replaceAll/" title="Permalink to .replaceAll()" rel="bookmark">.replaceAll()</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Replace each target element with the set of matched elements.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-3" class="post-3 page type-page status-publish hentry">
+	<header class="entry-header">
+		<div class="entry-meta">
+					</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/Types/" title="Permalink to Types" rel="bookmark">Types</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>JavaScript provides several built-in datatypes. In addition to those, this page documents virtual types like Selectors, enhanced pseudo-types like Events and all and everything you wanted to know about Functions. You should be able to try out most of the examples below by just copying them to your browser&#8217;s JavaScript Console (Chrome, Safari with Develop &hellip; <a href="//api.jquery.com/Types/">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-583" class="post-583 post type-post status-publish format-standard hentry category-attributes category-forms category-general-attributes category-10 category-14">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/attributes/" title="View all posts in Attributes">Attributes</a></span><span class="category-divider"> | </span><span class="category"><a href="//api.jquery.com/category/forms/" title="View all posts in Forms">Forms</a></span><span class="category-divider"> | </span><span class="category"><a href="//api.jquery.com/category/manipulation/" title="View all posts in Manipulation">Manipulation</a> &gt; <a href="//api.jquery.com/category/manipulation/general-attributes/" title="View all posts in General Attributes">General Attributes</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/val/" title="Permalink to .val()" rel="bookmark">.val()</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Get the current value of the first element in the set of matched elements or set the value of every matched element.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-589" class="post-589 post type-post status-publish format-standard hentry category-dom-insertion-around category-10 category-14">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/manipulation/" title="View all posts in Manipulation">Manipulation</a> &gt; <a href="//api.jquery.com/category/manipulation/dom-insertion-around/" title="View all posts in DOM Insertion, Around">DOM Insertion, Around</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/wrap/" title="Permalink to .wrap()" rel="bookmark">.wrap()</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Wrap an HTML structure around each element in the set of matched elements.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-591" class="post-591 post type-post status-publish format-standard hentry category-dom-insertion-around category-12 category-14">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/manipulation/" title="View all posts in Manipulation">Manipulation</a> &gt; <a href="//api.jquery.com/category/manipulation/dom-insertion-around/" title="View all posts in DOM Insertion, Around">DOM Insertion, Around</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/wrapAll/" title="Permalink to .wrapAll()" rel="bookmark">.wrapAll()</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Wrap an HTML structure around all elements in the set of matched elements.</p>
+	</div><!-- .entry-summary -->
+</article>
+
+<article id="post-593" class="post-593 post type-post status-publish format-standard hentry category-dom-insertion-around category-12 category-14">
+	<header class="entry-header">
+		<div class="entry-meta">
+			<span class="category"><a href="//api.jquery.com/category/manipulation/" title="View all posts in Manipulation">Manipulation</a> &gt; <a href="//api.jquery.com/category/manipulation/dom-insertion-around/" title="View all posts in DOM Insertion, Around">DOM Insertion, Around</a></span>		</div>
+					<h1 class="entry-title">
+				<a href="//api.jquery.com/wrapInner/" title="Permalink to .wrapInner()" rel="bookmark">.wrapInner()</a>
+			</h1>
+			</header>
+
+		<div class="entry-summary">
+		<p>Wrap an HTML structure around the content of each element in the set of matched elements.</p>
+	</div><!-- .entry-summary -->
+</article>
+<div class="pagination"></div>			</div>
+
+	<div id="sidebar" class="widget-area" role="complementary">
+	<aside id="categories" class="widget">
+		<ul>
+				<li class="cat-item cat-item-1"><a href="//api.jquery.com/category/ajax/" title="View all posts filed under Ajax">Ajax</a>
+<ul class='children'>
+	<li class="cat-item cat-item-2"><a href="//api.jquery.com/category/ajax/global-ajax-event-handlers/" title="View all posts filed under Global Ajax Event Handlers">Global Ajax Event Handlers</a>
+</li>
+	<li class="cat-item cat-item-3"><a href="//api.jquery.com/category/ajax/helper-functions/" title="View all posts filed under Helper Functions">Helper Functions</a>
+</li>
+	<li class="cat-item cat-item-4"><a href="//api.jquery.com/category/ajax/low-level-interface/" title="View all posts filed under Low-Level Interface">Low-Level Interface</a>
+</li>
+	<li class="cat-item cat-item-5"><a href="//api.jquery.com/category/ajax/shorthand-methods/" title="View all posts filed under Shorthand Methods">Shorthand Methods</a>
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-6"><a href="//api.jquery.com/category/attributes/" title="View all posts filed under Attributes">Attributes</a>
+</li>
+	<li class="cat-item cat-item-7"><a href="//api.jquery.com/category/callbacks-object/" title="View all posts filed under Callbacks Object">Callbacks Object</a>
+</li>
+	<li class="cat-item cat-item-8"><a href="//api.jquery.com/category/core/" title="View all posts filed under Core">Core</a>
+</li>
+	<li class="cat-item cat-item-9"><a href="//api.jquery.com/category/css/" title="View all posts filed under CSS">CSS</a>
+</li>
+	<li class="cat-item cat-item-10"><a href="//api.jquery.com/category/data/" title="View all posts filed under Data">Data</a>
+</li>
+	<li class="cat-item cat-item-11"><a href="//api.jquery.com/category/deferred-object/" title="View all posts filed under Deferred Object">Deferred Object</a>
+</li>
+	<li class="cat-item cat-item-87"><a href="//api.jquery.com/category/deprecated/" title="View all posts filed under Deprecated">Deprecated</a>
+<ul class='children'>
+	<li class="cat-item cat-item-90"><a href="//api.jquery.com/category/deprecated/deprecated-1.3/" title="View all posts filed under Deprecated 1.3">Deprecated 1.3</a>
+</li>
+	<li class="cat-item cat-item-88"><a href="//api.jquery.com/category/deprecated/deprecated-1.7/" title="View all posts filed under Deprecated 1.7">Deprecated 1.7</a>
+</li>
+	<li class="cat-item cat-item-89"><a href="//api.jquery.com/category/deprecated/deprecated-1.8/" title="View all posts filed under Deprecated 1.8">Deprecated 1.8</a>
+</li>
+	<li class="cat-item cat-item-93"><a href="//api.jquery.com/category/deprecated/deprecated-1.10/" title="View all posts filed under Deprecated 1.10">Deprecated 1.10</a>
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-12"><a href="//api.jquery.com/category/dimensions/" title="View all posts filed under Dimensions">Dimensions</a>
+</li>
+	<li class="cat-item cat-item-13"><a href="//api.jquery.com/category/effects/" title="View all posts filed under Effects">Effects</a>
+<ul class='children'>
+	<li class="cat-item cat-item-14"><a href="//api.jquery.com/category/effects/basics/" title="View all posts filed under Basics">Basics</a>
+</li>
+	<li class="cat-item cat-item-15"><a href="//api.jquery.com/category/effects/custom-effects/" title="View all posts filed under Custom">Custom</a>
+</li>
+	<li class="cat-item cat-item-16"><a href="//api.jquery.com/category/effects/fading/" title="View all posts filed under Fading">Fading</a>
+</li>
+	<li class="cat-item cat-item-17"><a href="//api.jquery.com/category/effects/sliding/" title="View all posts filed under Sliding">Sliding</a>
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-18"><a href="//api.jquery.com/category/events/" title="View all posts filed under Events">Events</a>
+<ul class='children'>
+	<li class="cat-item cat-item-19"><a href="//api.jquery.com/category/events/browser-events/" title="View all posts filed under Browser Events">Browser Events</a>
+</li>
+	<li class="cat-item cat-item-20"><a href="//api.jquery.com/category/events/document-loading/" title="View all posts filed under Document Loading">Document Loading</a>
+</li>
+	<li class="cat-item cat-item-21"><a href="//api.jquery.com/category/events/event-handler-attachment/" title="View all posts filed under Event Handler Attachment">Event Handler Attachment</a>
+</li>
+	<li class="cat-item cat-item-22"><a href="//api.jquery.com/category/events/event-object/" title="View all posts filed under Event Object">Event Object</a>
+</li>
+	<li class="cat-item cat-item-23"><a href="//api.jquery.com/category/events/form-events/" title="View all posts filed under Form Events">Form Events</a>
+</li>
+	<li class="cat-item cat-item-24"><a href="//api.jquery.com/category/events/keyboard-events/" title="View all posts filed under Keyboard Events">Keyboard Events</a>
+</li>
+	<li class="cat-item cat-item-25"><a href="//api.jquery.com/category/events/mouse-events/" title="View all posts filed under Mouse Events">Mouse Events</a>
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-26"><a href="//api.jquery.com/category/forms/" title="View all posts filed under Forms">Forms</a>
+</li>
+	<li class="cat-item cat-item-27"><a href="//api.jquery.com/category/internals/" title="View all posts filed under Internals">Internals</a>
+</li>
+	<li class="cat-item cat-item-28"><a href="//api.jquery.com/category/manipulation/" title="View all posts filed under Manipulation">Manipulation</a>
+<ul class='children'>
+	<li class="cat-item cat-item-29"><a href="//api.jquery.com/category/manipulation/class-attribute/" title="View all posts filed under Class Attribute">Class Attribute</a>
+</li>
+	<li class="cat-item cat-item-30"><a href="//api.jquery.com/category/manipulation/copying/" title="View all posts filed under Copying">Copying</a>
+</li>
+	<li class="cat-item cat-item-32"><a href="//api.jquery.com/category/manipulation/dom-insertion-around/" title="View all posts filed under DOM Insertion, Around">DOM Insertion, Around</a>
+</li>
+	<li class="cat-item cat-item-33"><a href="//api.jquery.com/category/manipulation/dom-insertion-inside/" title="View all posts filed under DOM Insertion, Inside">DOM Insertion, Inside</a>
+</li>
+	<li class="cat-item cat-item-34"><a href="//api.jquery.com/category/manipulation/dom-insertion-outside/" title="View all posts filed under DOM Insertion, Outside">DOM Insertion, Outside</a>
+</li>
+	<li class="cat-item cat-item-35"><a href="//api.jquery.com/category/manipulation/dom-removal/" title="View all posts filed under DOM Removal">DOM Removal</a>
+</li>
+	<li class="cat-item cat-item-36"><a href="//api.jquery.com/category/manipulation/dom-replacement/" title="View all posts filed under DOM Replacement">DOM Replacement</a>
+</li>
+	<li class="cat-item cat-item-37"><a href="//api.jquery.com/category/manipulation/general-attributes/" title="View all posts filed under General Attributes">General Attributes</a>
+</li>
+	<li class="cat-item cat-item-38"><a href="//api.jquery.com/category/manipulation/style-properties/" title="View all posts filed under Style Properties">Style Properties</a>
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-39"><a href="//api.jquery.com/category/miscellaneous/" title="View all posts filed under Miscellaneous">Miscellaneous</a>
+<ul class='children'>
+	<li class="cat-item cat-item-40"><a href="//api.jquery.com/category/miscellaneous/collection-manipulation/" title="View all posts filed under Collection Manipulation">Collection Manipulation</a>
+</li>
+	<li class="cat-item cat-item-41"><a href="//api.jquery.com/category/miscellaneous/data-storage/" title="View all posts filed under Data Storage">Data Storage</a>
+</li>
+	<li class="cat-item cat-item-42"><a href="//api.jquery.com/category/miscellaneous/dom-element-methods/" title="View all posts filed under DOM Element Methods">DOM Element Methods</a>
+</li>
+	<li class="cat-item cat-item-43"><a href="//api.jquery.com/category/miscellaneous/setup-methods/" title="View all posts filed under Setup Methods">Setup Methods</a>
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-44"><a href="//api.jquery.com/category/offset/" title="View all posts filed under Offset">Offset</a>
+</li>
+	<li class="cat-item cat-item-45"><a href="//api.jquery.com/category/properties/" title="View all posts filed under Properties">Properties</a>
+<ul class='children'>
+	<li class="cat-item cat-item-46"><a href="//api.jquery.com/category/properties/jquery-object-instance-properties/" title="View all posts filed under Properties of jQuery Object Instances">Properties of jQuery Object Instances</a>
+</li>
+	<li class="cat-item cat-item-47"><a href="//api.jquery.com/category/properties/global-jquery-object-properties/" title="View all posts filed under Properties of the Global jQuery Object">Properties of the Global jQuery Object</a>
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-92"><a href="//api.jquery.com/category/removed/" title="View all posts filed under Removed">Removed</a>
+</li>
+	<li class="cat-item cat-item-48"><a href="//api.jquery.com/category/selectors/" title="View all posts filed under Selectors">Selectors</a>
+<ul class='children'>
+	<li class="cat-item cat-item-49"><a href="//api.jquery.com/category/selectors/attribute-selectors/" title="View all posts filed under Attribute">Attribute</a>
+</li>
+	<li class="cat-item cat-item-50"><a href="//api.jquery.com/category/selectors/basic-css-selectors/" title="View all posts filed under Basic">Basic</a>
+</li>
+	<li class="cat-item cat-item-51"><a href="//api.jquery.com/category/selectors/basic-filter-selectors/" title="View all posts filed under Basic Filter">Basic Filter</a>
+</li>
+	<li class="cat-item cat-item-52"><a href="//api.jquery.com/category/selectors/child-filter-selectors/" title="View all posts filed under Child Filter">Child Filter</a>
+</li>
+	<li class="cat-item cat-item-53"><a href="//api.jquery.com/category/selectors/content-filter-selector/" title="View all posts filed under Content Filter">Content Filter</a>
+</li>
+	<li class="cat-item cat-item-54"><a href="//api.jquery.com/category/selectors/form-selectors/" title="View all posts filed under Form">Form</a>
+</li>
+	<li class="cat-item cat-item-55"><a href="//api.jquery.com/category/selectors/hierarchy-selectors/" title="View all posts filed under Hierarchy">Hierarchy</a>
+</li>
+	<li class="cat-item cat-item-56"><a href="//api.jquery.com/category/selectors/jquery-selector-extensions/" title="View all posts filed under jQuery Extensions">jQuery Extensions</a>
+</li>
+	<li class="cat-item cat-item-57"><a href="//api.jquery.com/category/selectors/visibility-filter-selectors/" title="View all posts filed under Visibility Filter">Visibility Filter</a>
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-58"><a href="//api.jquery.com/category/traversing/" title="View all posts filed under Traversing">Traversing</a>
+<ul class='children'>
+	<li class="cat-item cat-item-59"><a href="//api.jquery.com/category/traversing/filtering/" title="View all posts filed under Filtering">Filtering</a>
+</li>
+	<li class="cat-item cat-item-60"><a href="//api.jquery.com/category/traversing/miscellaneous-traversal/" title="View all posts filed under Miscellaneous Traversing">Miscellaneous Traversing</a>
+</li>
+	<li class="cat-item cat-item-61"><a href="//api.jquery.com/category/traversing/tree-traversal/" title="View all posts filed under Tree Traversal">Tree Traversal</a>
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-63"><a href="//api.jquery.com/category/utilities/" title="View all posts filed under Utilities">Utilities</a>
+</li>
+	<li class="cat-item cat-item-64"><a href="//api.jquery.com/category/version/" title="View all posts filed under Version">Version</a>
+<ul class='children'>
+	<li class="cat-item cat-item-65"><a href="//api.jquery.com/category/version/1.0/" title="View all posts filed under Version 1.0">Version 1.0</a>
+</li>
+	<li class="cat-item cat-item-66"><a href="//api.jquery.com/category/version/1.0.4/" title="View all posts filed under Version 1.0.4">Version 1.0.4</a>
+</li>
+	<li class="cat-item cat-item-67"><a href="//api.jquery.com/category/version/1.1/" title="View all posts filed under Version 1.1">Version 1.1</a>
+</li>
+	<li class="cat-item cat-item-68"><a href="//api.jquery.com/category/version/1.1.2/" title="View all posts filed under Version 1.1.2">Version 1.1.2</a>
+</li>
+	<li class="cat-item cat-item-69"><a href="//api.jquery.com/category/version/1.1.3/" title="View all posts filed under Version 1.1.3">Version 1.1.3</a>
+</li>
+	<li class="cat-item cat-item-70"><a href="//api.jquery.com/category/version/1.1.4/" title="View all posts filed under Version 1.1.4">Version 1.1.4</a>
+</li>
+	<li class="cat-item cat-item-71"><a href="//api.jquery.com/category/version/1.2/" title="View all posts filed under Version 1.2">Version 1.2</a>
+</li>
+	<li class="cat-item cat-item-72"><a href="//api.jquery.com/category/version/1.2.3/" title="View all posts filed under Version 1.2.3">Version 1.2.3</a>
+</li>
+	<li class="cat-item cat-item-73"><a href="//api.jquery.com/category/version/1.2.6/" title="View all posts filed under Version 1.2.6">Version 1.2.6</a>
+</li>
+	<li class="cat-item cat-item-74"><a href="//api.jquery.com/category/version/1.3/" title="View all posts filed under Version 1.3">Version 1.3</a>
+</li>
+	<li class="cat-item cat-item-75"><a href="//api.jquery.com/category/version/1.4/" title="View all posts filed under Version 1.4">Version 1.4</a>
+</li>
+	<li class="cat-item cat-item-76"><a href="//api.jquery.com/category/version/1.4.1/" title="View all posts filed under Version 1.4.1">Version 1.4.1</a>
+</li>
+	<li class="cat-item cat-item-77"><a href="//api.jquery.com/category/version/1.4.2/" title="View all posts filed under Version 1.4.2">Version 1.4.2</a>
+</li>
+	<li class="cat-item cat-item-78"><a href="//api.jquery.com/category/version/1.4.3/" title="View all posts filed under Version 1.4.3">Version 1.4.3</a>
+</li>
+	<li class="cat-item cat-item-79"><a href="//api.jquery.com/category/version/1.4.4/" title="View all posts filed under Version 1.4.4">Version 1.4.4</a>
+</li>
+	<li class="cat-item cat-item-80"><a href="//api.jquery.com/category/version/1.5/" title="View all posts filed under Version 1.5">Version 1.5</a>
+</li>
+	<li class="cat-item cat-item-81"><a href="//api.jquery.com/category/version/1.5.1/" title="View all posts filed under Version 1.5.1">Version 1.5.1</a>
+</li>
+	<li class="cat-item cat-item-82"><a href="//api.jquery.com/category/version/1.6/" title="View all posts filed under Version 1.6">Version 1.6</a>
+</li>
+	<li class="cat-item cat-item-83"><a href="//api.jquery.com/category/version/1.7/" title="View all posts filed under Version 1.7">Version 1.7</a>
+</li>
+	<li class="cat-item cat-item-84"><a href="//api.jquery.com/category/version/1.8/" title="View all posts filed under Version 1.8">Version 1.8</a>
+</li>
+	<li class="cat-item cat-item-86"><a href="//api.jquery.com/category/version/1.9/" title="View all posts filed under Version 1.9">Version 1.9</a>
+</li>
+</ul>
+</li>
+		</ul>
+	</aside>
+</div>
+</div>
+
+	</div>
+</div>
+
+<footer class="clearfix simple">
+	<div class="constrain">
+		<div class="row">
+			<div class="six columns offset-by-three">
+				<h3><span>Books</span></h3>
+				<ul class="books">
+					<li>
+						<a href="http://www.packtpub.com/learning-jquery-with-simple-javascript-techniques-fourth-edition/book">
+							<img src="//api.jquery.com/jquery-wp-content/themes/jquery/content/books/learning-jquery-4th-ed.jpg" alt="Learning jQuery 4th Edition by Karl Swedberg and Jonathan Chaffer" width="92" height="114">
+							Learning jQuery Fourth Edition
+							<cite>Karl Swedberg and Jonathan Chaffer</cite>
+						</a>
+					</li>
+					<li>
+						<a href="http://www.manning.com/derosa?a_aid=141d9491&a_bid=bdd5b7ad">
+							<img src="//api.jquery.com/jquery-wp-content/themes/jquery/content/books/jquery-in-action.jpg" alt="jQuery in Action by Bear Bibeault, Yehuda Katz, and Aurelio De Rosa" width="92" height="114">
+							jQuery in Action
+							<cite>Bear Bibeault, Yehuda Katz, and Aurelio De Rosa</cite>
+						</a>
+					</li>
+					<li>
+						<a href="http://www.syncfusion.com/resources/techportal/ebooks/jquery?utm_medium=BizDev-jQuery.org0513">
+							<img src="//api.jquery.com/jquery-wp-content/themes/jquery/content/books/jquery-succinctly.jpg" alt="jQuery Succinctly by Cody Lindley" width="92" height="114">
+							jQuery Succinctly
+							<cite>Cody Lindley</cite>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		
+<div id="legal">
+	<ul class="footer-site-links">
+			<li><a class="icon-pencil" href="http://learn.jquery.com/">Learning Center</a></li>
+			<li><a class="icon-group" href="http://forum.jquery.com/">Forum</a></li>
+			<li><a class="icon-wrench" href="http://api.jquery.com/">API</a></li>
+			<li><a class="icon-twitter" href="http://twitter.com/jquery">Twitter</a></li>
+			<li><a class="icon-comments" href="http://irc.jquery.org/">IRC</a></li>
+			<li><a class="icon-github" href="https://github.com/jquery">GitHub</a></li>
+	</ul>
+	<p class="copyright">
+		Copyright 2014 <a href="https://jquery.org/team/">The jQuery Foundation</a>.
+		<a href="https://jquery.org/license/">jQuery License</a>
+		<span class="sponsor-line"><a href="http://mediatemple.net" rel="noindex,nofollow" class="mt-link">Web hosting by Media Temple</a> | <a href="http://www.maxcdn.com" rel="noindex,nofollow" class="mc-link">CDN by MaxCDN</a> | <a href="http://wordpress.org/" class="wp-link">Powered by WordPress</a> | Thanks: <a href="https://jquery.org/members/">Members</a>, <a href="https://jquery.org/sponsors/">Sponsors</a></span>
+	</p>
+</div>
+
+	</div>
+</footer>
+
+<script>
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-1076265-1']);
+    _gaq.push(['_setDomainName', 'api.jquery.com']);
+    _gaq.push(['_setAllowLinker', true]);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+</script>
+
+</body>
+</html>

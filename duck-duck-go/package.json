@@ -1,0 +1,44 @@
+{
+  "name": "pagehop-duck-duck-go-recipe",
+  "description": "Recipe for search with DuckDuckGo.",
+  "version": "0.1.0",
+
+  "homepage": "https://github.com/pagehop/recipes/pagehop-duck-duck-go-recipe",
+  "author": {
+    "name": "nicroto",
+    "email": "nikolay@tsenkov.net",
+    "url": "about.me/tsenkov"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/pagehop/recipes.git"
+  },
+  "bugs": {
+    "url": "https://github.com/pagehop/recipes/issues"
+  },
+  "licenses": [],
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-jshint": "~0.6.4",
+    "grunt-simple-mocha": "~0.4.0",
+    "mocha": "~1.13.0",
+    "should": "~3.1.2",
+    "pagehop": "^1.0.2"
+  },
+  "private": true,
+  "keywords": [],
+
+  "pagehop": {
+    "id": "DuckDuckGo",
+    "options": [],
+    "hasQuery": true
+  }
+}
