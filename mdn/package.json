@@ -1,8 +1,10 @@
 {
   "name": "pagehop-mdn-recipe",
   "description": "Search in MozillaDeveloperNetwork (JS, CSS, HTML, Gecko, FirefoxOS, etc.).",
-  "version": "0.1.0",
-  "homepage": "https://github.com/pagehop/recipes/tree/master/mdn",
+  "version": "0.2.0",
+
+  "homepage": "https://github.com/pagehop/recipes/blob/master/mdn/README.md",
+
   "author": {
     "name": "nicroto",
     "email": "nikolay@tsenkov.net",

@@ -1,8 +1,10 @@
 {
   "name": "pagehop-stackoverflow-recipe",
   "description": "Recipe for search in StackOverflow.",
-  "version": "0.1.0",
-  "homepage": "https://github.com/pagehop/recipes/tree/master/stackoverflow",
+  "version": "0.2.0",
+
+  "homepage": "https://github.com/pagehop/recipes/blob/master/stackoverflow/README.md",
+
   "author": {
     "name": "nicroto",
     "email": "nikolay@tsenkov.net",

@@ -1,8 +1,10 @@
 {
   "name": "pagehop-bing-recipe",
   "description": "Recipe for search with Bing.",
-  "version": "0.1.0",
-  "homepage": "https://github.com/pagehop/recipes/tree/master/bing",
+  "version": "0.2.0",
+
+  "homepage": "https://github.com/pagehop/recipes/blob/master/bing/README.md",
+
   "author": {
     "name": "nicroto",
     "email": "nikolay@tsenkov.net",

@@ -1,9 +1,10 @@
 {
   "name": "pagehop-google-recipe",
   "description": "Recipe for search with Google.",
-  "version": "0.1.0",
+  "version": "0.2.0",
 
-  "homepage": "https://github.com/pagehop/recipes/tree/master/google",
+  "homepage": "https://github.com/pagehop/recipes/blob/master/google/README.md",
+
   "author": {
     "name": "nicroto",
     "email": "nikolay@tsenkov.net",

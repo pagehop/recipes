@@ -1,9 +1,10 @@
 {
   "name": "pagehop-all-tools-recipe",
   "description": "System recipe, showing a list with all available tools.",
-  "version": "0.1.0",
+  "version": "0.2.0",
 
-  "homepage": "https://github.com/pagehop/recipes/tree/master/all-tools",
+  "homepage": "https://github.com/pagehop/recipes/blob/master/all-tools/README.md",
+
   "author": {
     "name": "nicroto",
     "email": "nikolay@tsenkov.net",

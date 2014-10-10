@@ -1,9 +1,10 @@
 {
   "name": "pagehop-duck-duck-go-recipe",
   "description": "Recipe for search with DuckDuckGo.",
-  "version": "0.1.0",
+  "version": "0.2.0",
 
-  "homepage": "https://github.com/pagehop/recipes/tree/master/duck-duck-go",
+  "homepage": "https://github.com/pagehop/recipes/blob/master/duck-duck-go/README.md",
+
   "author": {
     "name": "nicroto",
     "email": "nikolay@tsenkov.net",
