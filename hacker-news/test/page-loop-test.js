@@ -1,501 +1,330 @@
+/* jshint -W054 */
+
 'use strict';
 
 var should = require("should"),
-	pathUtils = require("path");
+	pathUtils = require("path"),
+	helpers = require("./helpers");
 
-var test = require("pagehop").test;
+var test = require("pagehop").test,
+	generateIds = helpers.generateIds,
+	generateRequestResults = helpers.generateRequestResults,
+	enumerateResults = helpers.enumerateResults,
+	initFunc = helpers.initFunc;
 
-var pathToRecipe = pathUtils.resolve( pathUtils.join( __dirname, '../' ) );
+var pathToRecipe = pathUtils.resolve( pathUtils.join( __dirname, '../' ) ),
+	expected = require("./data/results");
 
-var generateResults = function(size) {
-	return Array.apply( null, new Array( size ) ).map( function() {
-		return {
-			text: "text",
-			address: "address",
-			displayAddress: "displayAddress",
-			discussionAddress: "discussionAddress"
-		};
-	} );
-};
-
-describe("hacker-news recipe's pageLoop",function(){
+describe("hacker-news recipe's pageLoop",function() {
 	this.timeout( 10000 );
 	before( function(done) {
 		test.init( done );
 	} );
-	describe( "number of pages to be scraped", function() {
-		it( "scrape 2 pages: maxCount=50, resultsOnPage=30, endReached=false", function(done){
+	describe( "number of requests", function() {
+		it( "makes a request even if no query (query not required)", function(done) {
 			test.pageLoop(
 				pathToRecipe,
-				function() {
-					var query = "irrelevant",
-						options = null,
-						max = 50,
-						scrapeScript = "irrelevant";
-					window.pagehop.init( query, options, max, scrapeScript );
-				},
-				[
-					{
-						result: {
-							nextUrl: "https://news.ycombinator.com/x?fnid=xwRo27NTrZmxqQK6yDFHnv",
-							items: generateResults( 30 )
-						}
-					},
-					{
-						result: {
-							nextUrl: "https://news.ycombinator.com/x?fnid=kljsd8NTrZmxqQK6skdjhf",
-							items: generateResults( 30 )
-						}
-					}
-				],
+				new Function( "(" + initFunc + ")(" +
+					JSON.stringify( [] ) + ", " +
+					JSON.stringify( [] ) +
+				");" ),
 				function(urls, result) {
 					should.exist( urls );
 					should.exist( result );
-					urls.length.should.equal( 2 );
-					result.length.should.equal( 50 );
+					urls.length.should.equal( 1 );
+					result.length.should.equal( 0 );
 					done();
 				}
 			);
-		});
-		it( "scrape 2 pages: maxCount=90, resultsOnPage=30, endReached=true", function(done){
-			test.pageLoop(
-				pathToRecipe,
-				function() {
-					var query = "irrelevant",
-						options = null,
-						max = 90,
-						scrapeScript = "irrelevant";
-					window.pagehop.init( query, options, max, scrapeScript );
-				},
-				[
-					{
-						result: {
-							nextUrl: "https://news.ycombinator.com/x?fnid=xwRo27NTrZmxqQK6yDFHnv",
-							items: generateResults( 30 )
-						}
-					},
-					{
-						result: {
-							items: generateResults( 20 )
-						}
-					}
-				],
-				function(urls, result) {
-					should.exist( urls );
-					should.exist( result );
-					urls.length.should.equal( 2 );
-					result.length.should.equal( 50 );
-					done();
-				}
-			);
-		});
-		it( "scrapes 4 pages: maxCount=40, resultsOnPage=10, endReached=false", function(done){
-			test.pageLoop(
-				pathToRecipe,
-				function() {
-					var query = "irrelevant",
-						options = null,
-						max = 40,
-						scrapeScript = "irrelevant";
-					window.pagehop.init( query, options, max, scrapeScript );
-				},
-				[
-					{
-						result: {
-							nextUrl: "https://news.ycombinator.com/x?fnid=xwRo27NTrZmxqQK6yDFHnv",
-							items: generateResults( 10 )
-						}
-					},
-					{
-						result: {
-							nextUrl: "https://news.ycombinator.com/x?fnid=xwRo27NTrZmxqQK6yDFHn2",
-							items: generateResults( 10 )
-						}
-					},
-					{
-						result: {
-							nextUrl: "https://news.ycombinator.com/x?fnid=xwRo27NTrZmxqQK6yDFHn3",
-							items: generateResults( 10 )
-						}
-					},
-					{
-						result: {
-							nextUrl: "https://news.ycombinator.com/x?fnid=xwRo27NTrZmxqQK6yDFHn4",
-							items: generateResults( 10 )
-						}
-					}
-				],
-				function(urls, result) {
-					should.exist( urls );
-					should.exist( result );
-					urls.length.should.equal( 4 );
-					result.length.should.equal( 40 );
-					done();
-				}
-			);
-		});
+		} );
 	} );
-	describe( "urls of pages to be scraped", function() {
-		it( "scrapes the correct urls", function(done){
+	describe( "requested urls", function() {
+		it( "requests the correct urls", function(done) {
 			var intermediateResults = [
-				{
-					result: {
-						nextUrl: "https://news.ycombinator.com/x?fnid=xwRo27NTrZmxqQK6yDFHnv",
-						items: generateResults( 10 )
-					}
-				},
-				{
-					result: {
-						nextUrl: "https://news.ycombinator.com/x?fnid=xwRo27NTrZmxqQK6yDFHn2",
-						items: generateResults( 10 )
-					}
-				},
-				{
-					result: {
-						nextUrl: "https://news.ycombinator.com/x?fnid=xwRo27NTrZmxqQK6yDFHn3",
-						items: generateResults( 10 )
-					}
-				},
-				{
-					result: {
-						nextUrl: "https://news.ycombinator.com/x?fnid=xwRo27NTrZmxqQK6yDFHn4",
-						items: generateResults( 10 )
-					}
-				}
-			];
+				generateIds( 2 )
+			].concat(
+				generateRequestResults( 1 )
+					.concat( generateRequestResults( 1, "askStory" ) )
+			);
 
 			test.pageLoop(
 				pathToRecipe,
-				function() {
-					var query = "irrelevant",
-						options = null,
-						max = 40,
-						scrapeScript = "irrelevant";
-					window.pagehop.init( query, options, max, scrapeScript );
-				},
-				intermediateResults,
-				function(urls, result) {
+				new Function( "(" + initFunc + ")(" +
+					JSON.stringify( intermediateResults ) + ", " +
+					JSON.stringify( 2 ) + ", " +
+					JSON.stringify( [] ) +
+				");" ),
+				function(urls, results) {
 					should.exist( urls );
-					should.exist( result );
-					urls.should.eql( [ "http://news.ycombinator.com/" ].concat( intermediateResults.map( function(item) {
-						return item.result.nextUrl;
-					} ).slice( 0, intermediateResults.length - 1 ) ) );
-					result.length.should.equal( 40 );
+					urls.should.eql( [
+						"https://hacker-news.firebaseio.com/v0/topstories.json",
+						"https://hacker-news.firebaseio.com/v0/item/%s.json".replace( "%s", intermediateResults[0][0] ),
+						"https://hacker-news.firebaseio.com/v0/item/%s.json".replace( "%s", intermediateResults[0][1] )
+					] );
+					should.exist( results );
+					results.should.eql( enumerateResults( [
+						expected.defaultStory,
+						expected.askStory
+					] ) );
 					done();
 				}
 			);
-		});
+		} );
+	} );
+	describe( "number of results", function() {
+		it( "returns the max number of results, even if they aren't in the first 'max'", function(done) {
+			var intermediateResults = [
+				generateIds( 90 )
+			].concat(
+				generateRequestResults( 3 )
+					.concat( generateRequestResults( 27, "askStory" ) )
+					.concat( generateRequestResults( 30, "showStory" ) )
+					.concat( generateRequestResults( 27, "defaultStory" ) )
+					.concat( generateRequestResults( 3, "askStory" ) )
+			);
+
+			test.pageLoop(
+				pathToRecipe,
+				new Function( "(" + initFunc + ")(" +
+					JSON.stringify( intermediateResults ) + ", " +
+					JSON.stringify( 30 ) + ", " +
+					JSON.stringify( [":ask"] ) +
+				");" ),
+				function(urls, results) {
+					should.exist( urls );
+					should.exist( results );
+					results.length.should.equal( 30 );
+					done();
+				}
+			);
+		} );
 	} );
 	describe( "options", function() {
-		it( "starts scraping from the news page, if only :n option is present", function(done){
+		it( "returns all items on no options", function(done) {
+			var intermediateResults = [
+				generateIds( 5 )
+			].concat(
+				generateRequestResults( 3 )
+					.concat( generateRequestResults( 2, "askStory" ) )
+			);
+
 			test.pageLoop(
 				pathToRecipe,
-				function() {
-					var query = "irrelevant",
-						options = [":n"],
-						max = 10,
-						scrapeScript = "irrelevant";
-					window.pagehop.init( query, options, max, scrapeScript );
-				},
-				[{
-					result: {
-						nextUrl: "https://news.ycombinator.com/x?fnid=xwRo27NTrZmxqQK6yDFHnv",
-						items: generateResults( 10 )
-					}
-				}],
-				function(urls, result) {
+				new Function( "(" + initFunc + ")(" +
+					JSON.stringify( intermediateResults ) + ", " +
+					JSON.stringify( 5 ) + ", " +
+					JSON.stringify( [] ) +
+				");" ),
+				function(urls, results) {
 					should.exist( urls );
-					should.exist( result );
-					urls.should.eql( [ "http://news.ycombinator.com/newest" ] );
-					result.length.should.equal( 10 );
+					should.exist( results );
+					results.should.eql( enumerateResults( [
+						expected.defaultStory,
+						expected.defaultStory,
+						expected.defaultStory,
+						expected.askStory,
+						expected.askStory
+					] ) );
 					done();
 				}
 			);
-		});
-		it( "starts scraping from the comments page, if only :c option is present", function(done){
+		} );
+		it( "returns only Ask items on :ask", function(done) {
+			var intermediateResults = [
+				generateIds( 10 )
+			].concat(
+				generateRequestResults( 8 )
+					.concat( generateRequestResults( 2, "askStory" ) )
+			);
+
 			test.pageLoop(
 				pathToRecipe,
-				function() {
-					var query = "irrelevant",
-						options = [":c"],
-						max = 10,
-						scrapeScript = "irrelevant";
-					window.pagehop.init( query, options, max, scrapeScript );
-				},
-				[{
-					result: {
-						nextUrl: "https://news.ycombinator.com/x?fnid=xwRo27NTrZmxqQK6yDFHnv",
-						items: generateResults( 10 )
-					}
-				}],
-				function(urls, result) {
+				new Function( "(" + initFunc + ")(" +
+					JSON.stringify( intermediateResults ) + ", " +
+					JSON.stringify( 10 ) + ", " +
+					JSON.stringify( [":ask"] ) +
+				");" ),
+				function(urls, results) {
 					should.exist( urls );
-					should.exist( result );
-					urls.should.eql( [ "http://news.ycombinator.com/newcomments" ] );
-					result.length.should.equal( 10 );
+					should.exist( results );
+					results.should.eql( enumerateResults( [
+						expected.askStory,
+						expected.askStory
+					] ) );
 					done();
 				}
 			);
-		});
-		it( "starts scraping from the questions page, if only :ask option is present", function(done){
+		} );
+		it( "returns only Show items on :s", function(done) {
+			var intermediateResults = [
+				generateIds( 10 )
+			].concat(
+				generateRequestResults( 8 )
+					.concat( generateRequestResults( 2, "showStory" ) )
+			);
+
 			test.pageLoop(
 				pathToRecipe,
-				function() {
-					var query = "irrelevant",
-						options = [":ask"],
-						max = 10,
-						scrapeScript = "irrelevant";
-					window.pagehop.init( query, options, max, scrapeScript );
-				},
-				[{
-					result: {
-						nextUrl: "https://news.ycombinator.com/x?fnid=xwRo27NTrZmxqQK6yDFHnv",
-						items: generateResults( 10 )
-					}
-				}],
-				function(urls, result) {
+				new Function( "(" + initFunc + ")(" +
+					JSON.stringify( intermediateResults ) + ", " +
+					JSON.stringify( 10 ) + ", " +
+					JSON.stringify( [":s"] ) +
+				");" ),
+				function(urls, results) {
 					should.exist( urls );
-					should.exist( result );
-					urls.should.eql( [ "http://news.ycombinator.com/ask" ] );
-					result.length.should.equal( 10 );
+					should.exist( results );
+					results.should.eql( enumerateResults( [
+						expected.showStory,
+						expected.showStory
+					] ) );
 					done();
 				}
 			);
-		});
-		it( "starts scraping from the jobs page, if only :j option is present", function(done){
+		} );
+		it( "returns only Jobs items on :j", function(done) {
+			var intermediateResults = [
+				generateIds( 10 )
+			].concat(
+				generateRequestResults( 8 )
+					.concat( generateRequestResults( 2, "job" ) )
+			);
+
 			test.pageLoop(
 				pathToRecipe,
-				function() {
-					var query = "irrelevant",
-						options = [":j"],
-						max = 10,
-						scrapeScript = "irrelevant";
-					window.pagehop.init( query, options, max, scrapeScript );
-				},
-				[{
-					result: {
-						nextUrl: "https://news.ycombinator.com/x?fnid=xwRo27NTrZmxqQK6yDFHnv",
-						items: generateResults( 10 )
-					}
-				}],
-				function(urls, result) {
+				new Function( "(" + initFunc + ")(" +
+					JSON.stringify( intermediateResults ) + ", " +
+					JSON.stringify( 10 ) + ", " +
+					JSON.stringify( [":j"] ) +
+				");" ),
+				function(urls, results) {
 					should.exist( urls );
-					should.exist( result );
-					urls.should.eql( [ "http://news.ycombinator.com/jobs" ] );
-					result.length.should.equal( 10 );
+					should.exist( results );
+					results.should.eql( enumerateResults( [
+						expected.job,
+						expected.job
+					] ) );
 					done();
 				}
 			);
-		});
-		it( "starts scraping from the show page, if only :s option is present", function(done){
+		} );
+		it( "returns discussion items when :d is present", function(done) {
+			var intermediateResults = [
+				generateIds( 10 )
+			].concat(
+				generateRequestResults( 3 )
+					.concat( generateRequestResults( 2, "showStory" ) )
+					.concat( generateRequestResults( 2, "askStory" ) )
+					.concat( generateRequestResults( 3, "job" ) )
+			);
+
 			test.pageLoop(
 				pathToRecipe,
-				function() {
-					var query = "irrelevant",
-						options = [":s"],
-						max = 10,
-						scrapeScript = "irrelevant";
-					window.pagehop.init( query, options, max, scrapeScript );
-				},
-				[{
-					result: {
-						nextUrl: "https://news.ycombinator.com/x?fnid=xwRo27NTrZmxqQK6yDFHnv",
-						items: generateResults( 10 )
-					}
-				}],
-				function(urls, result) {
+				new Function( "(" + initFunc + ")(" +
+					JSON.stringify( intermediateResults ) + ", " +
+					JSON.stringify( 10 ) + ", " +
+					JSON.stringify( [":d"] ) +
+				");" ),
+				function(urls, results) {
 					should.exist( urls );
-					should.exist( result );
-					urls.should.eql( [ "http://news.ycombinator.com/show" ] );
-					result.length.should.equal( 10 );
+					should.exist( results );
+					results.should.eql( enumerateResults( [
+						expected.defaultStoryDiscussion,
+						expected.defaultStoryDiscussion,
+						expected.defaultStoryDiscussion,
+						expected.showStoryDiscussion,
+						expected.showStoryDiscussion,
+						expected.askStory,
+						expected.askStory,
+						expected.job,
+						expected.job,
+						expected.job
+					] ) );
 					done();
 				}
 			);
-		});
-		it( "starts from the page appointed by the last, if multiple options are present", function(done){
+		} );
+		it( "returns discussion items of last type specified by an option", function(done) {
+			var intermediateResults = [
+				generateIds( 10 )
+			].concat(
+				generateRequestResults( 3 )
+					.concat( generateRequestResults( 2, "showStory" ) )
+					.concat( generateRequestResults( 2, "askStory" ) )
+					.concat( generateRequestResults( 3, "job" ) )
+			);
+
 			test.pageLoop(
 				pathToRecipe,
-				function() {
-					var query = "irrelevant",
-						options = [":c", ":ask", ":n", ":j"],
-						max = 10,
-						scrapeScript = "irrelevant";
-					window.pagehop.init( query, options, max, scrapeScript );
-				},
-				[{
-					result: {
-						nextUrl: "https://news.ycombinator.com/x?fnid=xwRo27NTrZmxqQK6yDFHnv",
-						items: generateResults( 10 )
-					}
-				}],
-				function(urls, result) {
+				new Function( "(" + initFunc + ")(" +
+					JSON.stringify( intermediateResults ) + ", " +
+					JSON.stringify( 10 ) + ", " +
+					JSON.stringify( [":s", ":j", ":ask", ":d"] ) +
+				");" ),
+				function(urls, results) {
 					should.exist( urls );
-					should.exist( result );
-					urls.should.eql( [ "http://news.ycombinator.com/jobs" ] );
-					result.length.should.equal( 10 );
+					should.exist( results );
+					results.should.eql( enumerateResults( [
+						expected.askStory,
+						expected.askStory
+					] ) );
 					done();
 				}
 			);
-		});
-		it( "finishes with items with address pointing to the discussion, if :d is present and starting page has discussion links", function(done){
+		} );
+		it( "returns discussion items of last type specified by an option, even if :d isn't the last option", function(done) {
+			var intermediateResults = [
+				generateIds( 10 )
+			].concat(
+				generateRequestResults( 3 )
+					.concat( generateRequestResults( 2, "showStory" ) )
+					.concat( generateRequestResults( 2, "askStory" ) )
+					.concat( generateRequestResults( 3, "job" ) )
+			);
+
 			test.pageLoop(
 				pathToRecipe,
-				function() {
-					var query = "irrelevant",
-						options = [":d"],
-						max = 10,
-						scrapeScript = "irrelevant";
-					window.pagehop.init( query, options, max, scrapeScript );
-				},
-				[{
-					result: {
-						nextUrl: "https://news.ycombinator.com/x?fnid=xwRo27NTrZmxqQK6yDFHnv",
-						items: generateResults( 10 )
-					}
-				}],
-				function(urls, result) {
+				new Function( "(" + initFunc + ")(" +
+					JSON.stringify( intermediateResults ) + ", " +
+					JSON.stringify( 10 ) + ", " +
+					JSON.stringify( [":s", ":d", ":j", ":ask"] ) +
+				");" ),
+				function(urls, results) {
 					should.exist( urls );
-					should.exist( result );
-
-					result[0].address.should.equal( "discussionAddress" );
-					result[0].text.should.equal( "Discussion: text" );
-
+					should.exist( results );
+					results.should.eql( enumerateResults( [
+						expected.askStory,
+						expected.askStory
+					] ) );
 					done();
 				}
 			);
-		});
-		it( "finishes with items with address pointing to address, if :d is present and starting page has no discussion links", function(done){
-			test.pageLoop(
-				pathToRecipe,
-				function() {
-					var query = "irrelevant",
-						options = [":j", ":d"],
-						max = 10,
-						scrapeScript = "irrelevant";
-					window.pagehop.init( query, options, max, scrapeScript );
-				},
-				[{
-					result: {
-						nextUrl: "https://news.ycombinator.com/x?fnid=xwRo27NTrZmxqQK6yDFHnv",
-						items: generateResults( 10 )
-					}
-				}],
-				function(urls, result) {
-					should.exist( urls );
-					should.exist( result );
-
-					result[0].address.should.equal( "address" );
-					result[0].text.should.equal( "text" );
-
-					done();
-				}
-			);
-		});
-		it( "finishes with some items with address pointing to address and some to text if :d is present and not all have discussions", function(done){
-			var intermediateResults = [{
-				result: {
-					nextUrl: "https://news.ycombinator.com/x?fnid=xwRo27NTrZmxqQK6yDFHnv",
-					items: generateResults( 10 )
-				}
-			}];
-			delete intermediateResults[0].result.items[5].discussionAddress;
-			test.pageLoop(
-				pathToRecipe,
-				function() {
-					var query = "irrelevant",
-						options = [":d"],
-						max = 10,
-						scrapeScript = "irrelevant";
-					window.pagehop.init( query, options, max, scrapeScript );
-				},
-				intermediateResults,
-				function(urls, result) {
-					should.exist( urls );
-					should.exist( result );
-
-					result[0].address.should.equal( "discussionAddress" );
-					result[0].text.should.equal( "Discussion: text" );
-
-					// the one without a discussion link
-					result[5].address.should.equal( "address" );
-					result[5].text.should.equal( "text" );
-
-					done();
-				}
-			);
-		});
-		it( "selects the correct starting page, even if :d is present mutliple times", function(done){
-			var asyncCount = 2;
-			test.pageLoop(
-				pathToRecipe,
-				function() {
-					var query = "irrelevant",
-						options = [":d", ":j", ":d", ":d"],
-						max = 10,
-						scrapeScript = "irrelevant";
-					window.pagehop.init( query, options, max, scrapeScript );
-				},
-				[{
-					result: {
-						nextUrl: "https://news.ycombinator.com/x?fnid=xwRo27NTrZmxqQK6yDFHnv",
-						items: generateResults( 10 )
-					}
-				}],
-				function(urls, result) {
-					should.exist( urls );
-					should.exist( result );
-
-					result[0].address.should.equal( "address" );
-
-					if ( --asyncCount === 0 ) {
-						done();
-					}
-				}
-			);
-			test.pageLoop(
-				pathToRecipe,
-				function() {
-					var query = "irrelevant",
-						options = [":d", ":c", ":d", ":d"],
-						max = 10,
-						scrapeScript = "irrelevant";
-					window.pagehop.init( query, options, max, scrapeScript );
-				},
-				[{
-					result: {
-						nextUrl: "https://news.ycombinator.com/x?fnid=xwRo27NTrZmxqQK6yDFHnv",
-						items: generateResults( 10 )
-					}
-				}],
-				function(urls, result) {
-					should.exist( urls );
-					should.exist( result );
-
-					urls.should.eql( [ "http://news.ycombinator.com/newcomments" ] );
-					result[0].address.should.equal( "discussionAddress" );
-
-					if ( --asyncCount === 0 ) {
-						done();
-					}
-				}
-			);
-		});
+		} );
 	} );
 	describe( "error handling", function() {
-		it( "finishes with error", function(done){
+		it( "finishes with error", function(done) {
 			test.pageLoop(
 				pathToRecipe,
 				function() {
-					var query = "irrelevant",
+					var query = null,
 						options = null,
-						max = 200,
-						scrapeScript = "irrelevant",
-						pagehop = window.pagehop;
-					pagehop.scrape = function(url, callback) {
-						window.boxApi.emitEvent( "scrape", url );
-						callback( "blowup" );
+						max = 30,
+						scrapeScript = "irrelevant";
+
+					window.pagehop.init( query, options, max, scrapeScript );
+					window.$ = {
+						getJSON: function(url) {
+							window.boxApi.emitEvent( "scrape", url );
+							return {
+								done: function() {
+									return {
+										fail: function(callback) {
+											callback( null, null, "blowup" );
+										}
+									};
+								}
+							};
+						}
 					};
-					pagehop.init( query, options, max, scrapeScript );
 				},
 				function(error) {
 					should.exist( error );
@@ -503,9 +332,9 @@ describe("hacker-news recipe's pageLoop",function(){
 					done();
 				}
 			);
-		});
+		} );
 	} );
 	after( function(done) {
 		test.finalize( done );
 	} );
-});
+} );

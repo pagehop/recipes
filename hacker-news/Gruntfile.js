@@ -21,6 +21,12 @@ module.exports = function(grunt) {
 			all: { src: [
 				'test/**/*-test.js'
 			] },
+			utils: { src: [
+				'test/**/*utils-test.js'
+			] },
+			pageLoop: { src: [
+				'test/**/*loop-test.js'
+			] },
 			options: {
 				ui: 'bdd',
 				reporter: 'spec'
@@ -35,5 +41,7 @@ module.exports = function(grunt) {
 
 	// ci task
 	grunt.registerTask( 'h', [ 'jshint:all' ] );
+	grunt.registerTask( 'u', [ 'simplemocha:utils' ] );
+	grunt.registerTask( 'p', [ 'simplemocha:pageLoop' ] );
 	grunt.registerTask( 'default', [ 'simplemocha:all', 'jshint:all' ] );
 };

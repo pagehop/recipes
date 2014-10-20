@@ -1,7 +1,7 @@
 {
   "name": "pagehop-hacker-news-recipe",
   "description": "Recipe for browsing the HackerNews (news.ycombinator.com).",
-  "version": "0.2.0",
+  "version": "0.3.0",
 
   "homepage": "https://github.com/pagehop/recipes/blob/master/hacker-news/README.md",
 
@@ -25,6 +25,7 @@
     "test": "mocha"
   },
   "dependencies": {
+    "jquery-browserify": "^1.8.1"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
@@ -41,20 +42,12 @@
     "id": "HackerNews",
     "options": [
       {
-        "keyword": ":n",
-        "description": "Gets the list with the newest posts."
-      },
-      {
-        "keyword": ":c",
-        "description": "Gets the list with the newest comments."
+        "keyword": ":s",
+        "description": "Gets the list with the newest Show HN: posts."
       },
       {
         "keyword": ":ask",
         "description": "Gets the list with the newest Ask HN: questions."
-      },
-      {
-        "keyword": ":s",
-        "description": "Gets the list with the newest Show HN: posts."
       },
       {
         "keyword": ":j",
