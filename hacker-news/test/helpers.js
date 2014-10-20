@@ -1,3 +1,6 @@
+/* jshint -W020 */
+/* jshint -W061 */
+
 'use strict';
 
 var raw = require("./data/raw");
@@ -26,8 +29,9 @@ exports.generateRequestResults = function(number, type) {
 
 exports.initFunc = function(intermediateResults, max, options) {
 	var query = null,
-		max = max || 30,
 		scrapeScript = "irrelevant";
+
+	max = max || 30;
 	window.pagehop.init( query, options, max, scrapeScript );
 	window.$ = {
 		getJSON: function(url) {
@@ -51,7 +55,7 @@ exports.initFunc = function(intermediateResults, max, options) {
 		}
 		return eval( "new OriginalDate( " +
 			Array.prototype.slice.call( arguments )
-				.map( function( element ) { return JSON.stringify( element ) } ).join( ", " ) +
+				.map( function( element ) { return JSON.stringify( element ); } ).join( ", " ) +
 		" )");
 	};
 };

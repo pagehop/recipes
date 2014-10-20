@@ -106,7 +106,7 @@ var parseItem = exports.parseItem = function(rawItem, hasDiscussionOption, index
 			result = {
 				text: index + "." + rawItem.title + " (" + getDomain( rawItem.url ) + ")",
 				address: rawItem.url
-			}
+			};
 		} else { // !askStory && !job && hasDiscussionOption
 			result = {
 				text: "Discussion: " + index + "." + rawItem.title,
@@ -125,7 +125,7 @@ var parseItem = exports.parseItem = function(rawItem, hasDiscussionOption, index
 			.replace( "%s", rawItem.score )
 			.replace( "%s", rawItem.by )
 			.replace( "%s", getElapsedTime( rawItem.time ) )
-			.replace( "%s", getCommentsStats( rawItem.kids ) )
+			.replace( "%s", getCommentsStats( rawItem.kids ) );
 	}
 
 	return result;
