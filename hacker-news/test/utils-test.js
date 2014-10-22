@@ -43,6 +43,9 @@ describe("hacker-news recipe's utility methods",function() {
 		it( "returns correct domain on https", function() {
 			utils.getDomain( "https://example.com/some/inner/link" ).should.equal( "example.com" );
 		});
+		it( "returns correct domain on subdomains", function() {
+			utils.getDomain( "http://engineroom.trackmaven.com/blog/first-monthly-challenge-elasticsearch/" ).should.equal( "engineroom.trackmaven.com" );
+		});
 	} );
 	describe( "isAskStory(rawItem)", function() {
 		it( "returns true if askStory is passed", function() {
@@ -220,6 +223,14 @@ describe("hacker-news recipe's utility methods",function() {
 		it( "returns successfully parsed job (hasDiscussionOption=true)", function() {
 			var result = utils.parseItem( raw.job, true, 1 );
 			result.should.eql( expected.job );
+		});
+		it( "returns successfully parsed job without a url", function() {
+			var result = utils.parseItem( raw.nonUrlJob, false, 1 );
+			result.should.eql( expected.nonUrlJob );
+		});
+		it( "returns successfully parsed job without a url (hasDiscussionOption=true)", function() {
+			var result = utils.parseItem( raw.nonUrlJob, true, 1 );
+			result.should.eql( expected.nonUrlJob );
 		});
 
 		after( cleanDateMockFunc );

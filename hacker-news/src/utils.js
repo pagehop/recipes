@@ -97,7 +97,7 @@ var parseItem = exports.parseItem = function(rawItem, hasDiscussionOption, index
 		result;
 
 	if ( rawItem.type ) {
-		if ( isAskStory( rawItem ) ) {
+		if ( isAskStory( rawItem ) || ( isJob( rawItem ) && !rawItem.url ) ) {
 			result = {
 				text: index + "." + rawItem.title,
 				address: discussionUrlTemplate.replace( "%s", rawItem.id )

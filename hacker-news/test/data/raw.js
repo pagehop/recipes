@@ -57,3 +57,14 @@ exports.job = {
 	"type" : "job",
 	"url" : "http://flexport.com/careers"
 };
+
+exports.nonUrlJob = {
+	"by" : "thedogeye",
+	"id" : 8492523,
+	"score" : 1,
+	"text" : "Shape the future of international trade as a Customer Service Associate Associate at Flexport<p>Flexport helps companies import products from other countries.<p>Our mission is to bring the world free trade through technology. Our web app gives companies the tools to conduct global trade without regard for geographic distance, logistical complexity or regulatory barriers.<p>We’ve reached product-market fit, with nearly 1000 customers signed up to use our platform to manage their imports.<p>Based on this traction and our team’s track record, we’ve just finished raising over $4M from top tier VCs and Angel investors.<p>We are now building out an amazing customer success team here in San Francisco.<p>The people we’re looking for:\n* Are high energy and customer focused \n* Live for operational efficiency\n* Take attention to detail to the next level\n* Learn quickly and hungrily\n* May have graduated from a top tier school or worked in a startup before\n* Enjoy working with the most cutting edge companies in the world<p>If this sounds interesting, come and talk with us about the chance to forever change the face of international trade in an atmosphere that encourages personal freedom and responsibility.<p>Send a resume and short intro to jobs@flexport.com",
+	"time" : 1413467940,
+	"title" : "Flexport is hiring customer service reps",
+	"type" : "job",
+	"url" : ""
+};

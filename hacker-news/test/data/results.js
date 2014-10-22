@@ -39,3 +39,8 @@ exports.job = {
 	address: "http://flexport.com/careers",
 	displayAddress: "job 22 hours ago"
 };
+exports.nonUrlJob = {
+	text: "1.Flexport is hiring customer service reps",
+	address: "https://news.ycombinator.com/item?id=8492523",
+	displayAddress: "job 1 minute ago"
+};
