@@ -5,7 +5,7 @@ var util = require('util'),
 
 // for tests (to be able to mock jQuery)
 if ( !$ ) {
-	var $ = require('jquery-browserify');
+	$ = require('jquery-browserify');
 }
 
 // Params:
