@@ -21,7 +21,7 @@ var semver = require("semver"),
 		},
 		{
 			text: "To list all tools:",
-			displayAddress: "sys :r",
+			displayAddress: "sys :t",
 			address: "https://github.com/pagehop/recipes/blob/master/system/README.md"
 		},
 		{
