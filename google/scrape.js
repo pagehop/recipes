@@ -1,9 +1,12 @@
 'use strict';
 
-var items = document.querySelectorAll(".g");
+var items = document.querySelectorAll(".g"),
+	DOMAIN_REGEX = /^https?\:\/\/([^\/?#]+)(?:[\/?#]|$)/i,
+	RESULT_URL_REGEX = /^https?\:\/\/(([a-z0-9]+\.)+)?google\.[a-z]+\/url\?(([a-z]\=.*\&)+)?q\=/g;
 
 var getDomain = function(url) {
-	var matches = url.match(/^https?\:\/\/([^\/?#]+)(?:[\/?#]|$)/i);
+	console.log( "		recipes:google:url: " + url );
+	var matches = url.match( DOMAIN_REGEX );
 	return matches[1];
 };
 
@@ -33,7 +36,8 @@ for (var i = 0; i < items.length - 1; i++) {
 		var synopsis = synopsisElement.textContent,
 			address = link.href;
 
-		address = ( address.indexOf( "http://www.google.com/url?q=" ) !== -1 ) ? getQueryParameterValue( address, "q" ) : address;
+		address = ( address.match( RESULT_URL_REGEX ) ) ?
+			getQueryParameterValue( address, "q" ) : address;
 
 		result.push( {
 			text: link.text + " (" + getDomain( address ) + ")",
