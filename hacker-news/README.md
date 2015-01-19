@@ -4,13 +4,13 @@
 
 ## Usage
 
-After opening Pagehop write the minimal necessary to select HackerNews and press space. This will show you the posts as ordered on the news.ycombinator.com page (depending on "Number of results" in the settings it might pull more than just the first-page results).
+After opening Pagehop write the minimal necessary to select HackerNews (no need to press space). This will show you the posts as ordered on the news.ycombinator.com page (depending on "Number of results" in the settings it might pull more than just the first-page results).
 
 ```
-hack[space]
+hack
 ```
 
-You can make an offline fuzzy search on the pulled results. To do this, after you pressed space (look up) simply write your query.
+You can make an offline fuzzy search on the pulled results. To do this, press space and write your query.
 
 ```
 hack [offline search query]
@@ -63,7 +63,9 @@ hack :j [offline search query]
 ## Examples
 
 ```
-hack[space]
+h
+ha
+hack
 hack :d
 hack :s
 hack :ask
