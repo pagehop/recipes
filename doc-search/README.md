@@ -64,3 +64,7 @@ docs php explode
 docs javascript splice
 docs git reset
 ```
+
+## searchcode.com
+
+[searchcode.com](https://searchcode.com), and more specifically Ben E. Boyter (its founder), provide this awesome resource. Thank you, Ben.
