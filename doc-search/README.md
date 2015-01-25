@@ -7,10 +7,12 @@
 Search for documentation for any of the supported Programming Language, Frameworks, Tools, etc. (check the list bellow).
 
 ```
-docs :r [lang] [query]
+docs [lang] [query]
 ```
 
 ## Documentation for...
+
+To select resource, write:
 
  - "all" for All
  - "apache" for Apache 2 Directive
