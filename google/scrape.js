@@ -5,7 +5,6 @@ var items = document.querySelectorAll(".g"),
 	RESULT_URL_REGEX = /^https?\:\/\/(([a-z0-9]+\.)+)?google\.[a-z]+\/url\?(([a-z]\=.*\&)+)?q\=/g;
 
 var getDomain = function(url) {
-	console.log( "		recipes:google:url: " + url );
 	var matches = url.match( DOMAIN_REGEX );
 	return matches[1];
 };
