@@ -64,18 +64,18 @@ var utils = {
 			line,
 			lines,
 			preview,
-			matchParts;
+			predicate = function(a, b) {
+				a = parseInt( a, 10 );
+				b = parseInt( b, 10 );
+
+				return ( a >= b ) ? 1 : -1;
+			};
 
 		for ( var i = 0; i < rawItems.length; i++ ) {
 			rawItem = rawItems[ i ];
 			text = rawItem.filename + " in " + rawItem.name;
 			displayAddress = rawItem.linescount + " lines | " + rawItem.repo;
-			lineNumbers = Object.keys( rawItem.lines ).sort( function(a, b) {
-				a = parseInt( a, 10 );
-				b = parseInt( b, 10 );
-
-				return ( a >= b ) ? 1 : -1;
-			} );
+			lineNumbers = Object.keys( rawItem.lines ).sort( predicate );
 			lines = [];
 
 			for ( var k = 0; k < lineNumbers.length; k++ ) {
@@ -88,7 +88,7 @@ var utils = {
 					lineTemplate
 						.replace( "{{linenumber}}", lineNumber )
 						.replace( "{{line_text}}", line )
-				)
+				);
 			}
 			preview = previewTemplate
 				.replace( "{{repo-url}}", rawItem.repo )
@@ -156,7 +156,7 @@ var utils = {
 						match;
 
 					try {
-						var regex = RegExp( term, "gi" );
+						var regex = new RegExp( term, "gi" );
 
 						while ( match = regex.exec( line ) ) {
 							hasMatchs = true;
@@ -171,7 +171,7 @@ var utils = {
 						}
 					}
 				}
-				for ( var i = 0; i < line.length; i++ ) {
+				for ( i = 0; i < line.length; i++ ) {
 					if ( hash[ i ] ) {
 						result += hash[ i ];
 					}
