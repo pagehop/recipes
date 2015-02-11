@@ -1,4 +1,4 @@
-# DocSearch
+# CodeSearch
 
 > Recipe for programming code search using searchcode.com.
 
