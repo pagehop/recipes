@@ -13,18 +13,20 @@ var utils = require("./src/utils"),
 	query = pagehop.getQuery(),
 	maxResultsCount = pagehop.getMaxCount(),
 	urlTemplate = "https://searchcode.com/api/codesearch_I/?q=%q&p=%p&per_page=%c",
+	hopDefaultUrl = "https://searchcode.com/",
+	hopUrlTemplate = "https://searchcode.com/?q=%q",
 	helpInfo = {
 		text: "Usage: code [query]",
 		displayAddress: "Example: code System.Linq source:Bitbucket lang:C# repo:bvcms",
 		address: utils.RECIPE_DOC_URL
 	};
 
-var search = function() {
+var search = function(query) {
 
 	var url = urlTemplate
-			.replace( "%q", encodeURIComponent( query ) )
-			.replace( "%p", 0 )
-			.replace( "%c", maxResultsCount );
+		.replace( "%q", query )
+		.replace( "%p", 0 )
+		.replace( "%c", maxResultsCount );
 
 	request.get( url ).end( function( error, response ) {
 
@@ -51,7 +53,19 @@ var search = function() {
 };
 
 if ( query ) {
-	search();
+	var encodedQuery = encodeURIComponent( query );
+
+	pagehop.getHops().push( {
+		text: "CodeSearch",
+		address: hopUrlTemplate.replace( "%q", encodedQuery )
+	} );
+
+	search( encodedQuery );
 } else {
+	pagehop.getHops().push( {
+		text: "CodeSearch: no query",
+		address: hopDefaultUrl
+	} );
+
 	pagehop.finish( [ helpInfo ] );
 }

@@ -108,7 +108,7 @@ describe("code-search recipe's utils",function(){
 
 			resultItem.text.should.equal( "Linq.cs in breusable-codeplex" );
 			resultItem.address.should.equal( "https://searchcode.com/codesearch/view/42724484/" );
-			resultItem.displayAddress.should.equal( "106 lines | https://bitbucket.org/Maslow/breusable-codeplex.git");
+			resultItem.displayAddress.should.equal( "106 lines | https://bitbucket.org/Maslow/breusable-codeplex.git" );
 			resultItem.preview.should.containEql( [
 				"<body>",
 				"	<div class=\"code-location\">",
@@ -151,7 +151,7 @@ describe("code-search recipe's utils",function(){
 
 			resultItem.text.should.equal( "Linq.cs in breusable-codeplex" );
 			resultItem.address.should.equal( "https://searchcode.com/codesearch/view/42724484/" );
-			resultItem.displayAddress.should.equal( "106 lines | https://bitbucket.org/Maslow/breusable-codeplex.git");
+			resultItem.displayAddress.should.equal( "106 lines | https://bitbucket.org/Maslow/breusable-codeplex.git" );
 			resultItem.preview.should.containEql( [
 				"<body>",
 				"	<div class=\"code-location\">",

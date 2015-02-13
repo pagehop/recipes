@@ -23,18 +23,84 @@ describe("code-search recipe's pageLoop",function(){
 						options = null,
 						max = 100,
 						scrapeScript = "irrelevant",
-						systemMeta = null;
-					window.pagehop.init( query, options, max, scrapeScript, systemMeta );
+						systemMeta = null,
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
 				},
 				function(urls, results) {
 					should.exist( urls );
-					results.should.eql( [
+					results.items.should.eql( [
 						{
 							text: "Usage: code [query]",
 							displayAddress: "Example: code System.Linq source:Bitbucket lang:C# repo:bvcms",
 							address: "https://github.com/pagehop/recipes/blob/master/code-search/README.md"
 						}
 					] );
+					done();
+				}
+			);
+		});
+	} );
+	describe( "changes to the hops array", function() {
+		it( "adds an item with default address if no query", function(done){
+			test.pageLoop(
+				pathToRecipe,
+				function() {
+					var query = null,
+						options = null,
+						max = 100,
+						scrapeScript = "irrelevant",
+						systemMeta = null,
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
+				},
+				function(urls, results) {
+					should.exist( urls );
+					results.hops.should.eql( [ {
+						text: "CodeSearch: no query",
+						address: "https://searchcode.com/"
+					} ] );
+					done();
+				}
+			);
+		});
+		it( "adds an item with default address if no query", function(done){
+			test.pageLoop(
+				pathToRecipe,
+				function() {
+					var query = "query",
+						options = null,
+						max = 100,
+						scrapeScript = "irrelevant",
+						systemMeta = null,
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
+					window.request = { get: function(url) {
+						window.boxApi.emitEvent( "scrape", url );
+						return {
+							end: function(callback) {
+								callback( null, {
+									body: {
+										"matchterm": "irrelevant",
+										"previouspage": null,
+										"searchterm": "irrelevant",
+										"query": "irrelevant",
+										"total": 0,
+										"page": 0,
+										"nextpage": 1,
+										"results": []
+									}
+								} );
+							}
+						};
+					} };
+				},
+				function(urls, results) {
+					should.exist( urls );
+					results.hops.should.eql( [ {
+						text: "CodeSearch",
+						address: "https://searchcode.com/?q=query"
+					} ] );
 					done();
 				}
 			);
@@ -49,8 +115,9 @@ describe("code-search recipe's pageLoop",function(){
 						options = null,
 						max = 100,
 						scrapeScript = "irrelevant",
-						systemMeta = null;
-					window.pagehop.init( query, options, max, scrapeScript, systemMeta );
+						systemMeta = null,
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
 					window.request = { get: function(url) {
 						return {
 							end: function(callback) {
@@ -64,7 +131,7 @@ describe("code-search recipe's pageLoop",function(){
 				},
 				function(urls, results) {
 					should.exist( urls );
-					results.should.eql( [ {
+					results.items.should.eql( [ {
 						text: "There was a problem, requesting results.",
 						displayAddress: "custom error"
 					} ] );
@@ -80,8 +147,9 @@ describe("code-search recipe's pageLoop",function(){
 						options = null,
 						max = 100,
 						scrapeScript = "irrelevant",
-						systemMeta = null;
-					window.pagehop.init( query, options, max, scrapeScript, systemMeta );
+						systemMeta = null,
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
 					window.request = { get: function(url) {
 						return {
 							end: function(callback) {
@@ -92,7 +160,7 @@ describe("code-search recipe's pageLoop",function(){
 				},
 				function(urls, results) {
 					should.exist( urls );
-					results.should.eql( [ {
+					results.items.should.eql( [ {
 						text: "Bad Server Response",
 						displayAddress: "searchcode.com returned an empty response."
 					} ] );
@@ -108,8 +176,9 @@ describe("code-search recipe's pageLoop",function(){
 						options = null,
 						max = 100,
 						scrapeScript = "irrelevant",
-						systemMeta = null;
-					window.pagehop.init( query, options, max, scrapeScript, systemMeta );
+						systemMeta = null,
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
 					window.request = { get: function(url) {
 						return {
 							end: function(callback) {
@@ -120,7 +189,7 @@ describe("code-search recipe's pageLoop",function(){
 				},
 				function(urls, results) {
 					should.exist( urls );
-					results.should.eql( [ {
+					results.items.should.eql( [ {
 						text: "Bad Server Response",
 						displayAddress: "searchcode.com returned an empty response."
 					} ] );
@@ -138,8 +207,9 @@ describe("code-search recipe's pageLoop",function(){
 						options = null,
 						max = 100,
 						scrapeScript = "irrelevant",
-						systemMeta = null;
-					window.pagehop.init( query, options, max, scrapeScript, systemMeta );
+						systemMeta = null,
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
 					window.request = { get: function(url) {
 						window.boxApi.emitEvent( "scrape", url );
 						return {
@@ -162,7 +232,7 @@ describe("code-search recipe's pageLoop",function(){
 				},
 				function(urls, results) {
 					urls.should.eql( [ "https://searchcode.com/api/codesearch_I/?q=irrelevant&p=0&per_page=100" ] );
-					results.should.eql( [ {
+					results.items.should.eql( [ {
 						text: "No results found."
 					} ] );
 					done();
@@ -180,6 +250,7 @@ describe("code-search recipe's pageLoop",function(){
 						max = 100,
 						scrapeScript = "irrelevant",
 						systemMeta = null,
+						hops = [],
 						responses = [
 							{
 								body: {
@@ -270,7 +341,7 @@ describe("code-search recipe's pageLoop",function(){
 							}
 						],
 						responsesCount = 0;
-					window.pagehop.init( query, options, max, scrapeScript, systemMeta );
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
 					window.request = { get: function(url) {
 						window.boxApi.emitEvent( "scrape", url );
 						return {
@@ -285,12 +356,12 @@ describe("code-search recipe's pageLoop",function(){
 						"https://searchcode.com/api/codesearch_I/?q=irrelevant&p=0&per_page=100"
 					] );
 
-					results.length.should.equal( 2 );
+					results.items.length.should.equal( 2 );
 
-					results[0].text.should.equal( "Linq.cs in impromptu-interface" );
-					results[0].address.should.equal( "https://searchcode.com/codesearch/view/82799715/" );
-					results[0].displayAddress.should.equal( "273 lines | https://github.com/ekonbenefits/impromptu-interface.git");
-					results[0].preview.should.containEql( [
+					results.items[0].text.should.equal( "Linq.cs in impromptu-interface" );
+					results.items[0].address.should.equal( "https://searchcode.com/codesearch/view/82799715/" );
+					results.items[0].displayAddress.should.equal( "273 lines | https://github.com/ekonbenefits/impromptu-interface.git");
+					results.items[0].preview.should.containEql( [
 						"<body>",
 						"	<div class=\"code-location\">",
 						"		<a href=\"https://github.com/ekonbenefits/impromptu-interface.git\">impromptu-interface</a>/Tests/UnitTestImpromptuInterface/Linq.cs",
@@ -317,10 +388,10 @@ describe("code-search recipe's pageLoop",function(){
 						"</body>",
 					].join( "\n" ) );
 
-					results[1].text.should.equal( "Linq.cs in breusable-codeplex" );
-					results[1].address.should.equal( "https://searchcode.com/codesearch/view/42724484/" );
-					results[1].displayAddress.should.equal( "106 lines | https://bitbucket.org/Maslow/breusable-codeplex.git");
-					results[1].preview.should.containEql( [
+					results.items[1].text.should.equal( "Linq.cs in breusable-codeplex" );
+					results.items[1].address.should.equal( "https://searchcode.com/codesearch/view/42724484/" );
+					results.items[1].displayAddress.should.equal( "106 lines | https://bitbucket.org/Maslow/breusable-codeplex.git");
+					results.items[1].preview.should.containEql( [
 						"<body>",
 						"	<div class=\"code-location\">",
 						"		<a href=\"https://bitbucket.org/Maslow/breusable-codeplex.git\">breusable-codeplex</a>/Trunk/BReusable/Linq.cs",
