@@ -37,6 +37,8 @@ var cleanDuplicates = function(items) {
 
 // Query, query, pageNumber (1 => 11 => 21 => 31...)
 var urlTemplate = 'http://www.bing.com/search?q=%s&pq=%s&first=%s&count=%s',
+	hopDefaultUrl = 'http://www.bing.com/',
+	hopUrlTemplate = 'http://www.bing.com/search?q=%s',
 	startAt = 1,
 	itemsAtPage = 100,
 	max = pagehop.getMaxCount(),
@@ -46,11 +48,19 @@ var urlTemplate = 'http://www.bing.com/search?q=%s&pq=%s&first=%s&count=%s',
 	asyncCount = iterationsCount;
 
 if ( query ) {
+	var encodedQuery = encodeURIComponent( query ),
+		lowerEncodedQuery = encodeURIComponent( query.toLowerCase() );
+
+	pagehop.getHops().push( {
+		text: "BingSearch",
+		address: hopUrlTemplate.replace( "%s", encodedQuery )
+	} );
+
 	for ( var i = 0; i < iterationsCount; i++ ) {
 		var url = util.format(
 			urlTemplate,
-			encodeURIComponent( query ),
-			encodeURIComponent( query.toLowerCase() ),
+			encodedQuery,
+			lowerEncodedQuery,
 			startAt,
 			itemsAtPage
 		);
@@ -76,5 +86,10 @@ if ( query ) {
 		startAt += itemsAtPage;
 	}
 } else {
+	pagehop.getHops().push( {
+		text: "BingSearch: no query",
+		address: hopDefaultUrl
+	} );
+
 	pagehop.finish( [] );
 }
