@@ -1,7 +1,7 @@
 {
   "name": "pagehop-define-word-recipe",
   "description": "Recipe for search of word definition through the API of wordnik.com.",
-  "version": "0.2.0",
+  "version": "1.0.0",
 
   "homepage": "https://github.com/pagehop/recipes/blob/master/define-word/README.md",
 

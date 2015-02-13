@@ -12,16 +12,18 @@ describe("define-word recipe's pageLoop",function(){
 	before( function(done) {
 		test.init( done );
 	} );
-	describe( "number of pages to be scraped", function() {
-		it( "scrapes 0 pages, if no query", function(done){
+	describe( "number of result pages to be parsed", function() {
+		it( "parses 0 pages, if no query", function(done){
 			test.pageLoop(
 				pathToRecipe,
 				function() {
 					var query = null,
 						options = null,
 						max = 10,
-						scrapeScript = "irrelevant";
-					window.pagehop.init( query, options, max, scrapeScript );
+						scrapeScript = "irrelevant",
+						systemMeta = {},
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
 					window.$ = {
 						getJSON: function(url) {
 							window.boxApi.emitEvent( "scrape", url );
@@ -40,20 +42,22 @@ describe("define-word recipe's pageLoop",function(){
 					should.exist( urls );
 					should.exist( result );
 					urls.length.should.equal( 0 );
-					result.length.should.equal( 0 );
+					result.items.length.should.equal( 0 );
 					done();
 				}
 			);
 		});
-		it( "scrapes 1 page, if maxCount is 10", function(done){
+		it( "parses 1 page, if maxCount is 10", function(done){
 			test.pageLoop(
 				pathToRecipe,
 				function() {
 					var query = "irrelevant",
 						options = null,
 						max = 10,
-						scrapeScript = "irrelevant";
-					window.pagehop.init( query, options, max, scrapeScript );
+						scrapeScript = "irrelevant",
+						systemMeta = {},
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
 					window.$ = {
 						getJSON: function(url) {
 							window.boxApi.emitEvent( "scrape", url );
@@ -72,20 +76,22 @@ describe("define-word recipe's pageLoop",function(){
 					should.exist( urls );
 					should.exist( result );
 					urls.length.should.equal( 1 );
-					result.length.should.equal( 0 );
+					result.items.length.should.equal( 0 );
 					done();
 				}
 			);
 		});
-		it( "scrapes 1 pages, if maxCount is 500", function(done){
+		it( "parses 1 pages, if maxCount is 500", function(done){
 			test.pageLoop(
 				pathToRecipe,
 				function() {
 					var query = "irrelevant",
 						options = null,
 						max = 51,
-						scrapeScript = "irrelevant";
-					window.pagehop.init( query, options, max, scrapeScript );
+						scrapeScript = "irrelevant",
+						systemMeta = {},
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
 					window.$ = {
 						getJSON: function(url) {
 							window.boxApi.emitEvent( "scrape", url );
@@ -104,22 +110,100 @@ describe("define-word recipe's pageLoop",function(){
 					should.exist( urls );
 					should.exist( result );
 					urls.length.should.equal( 1 );
-					result.length.should.equal( 0 );
+					result.items.length.should.equal( 0 );
 					done();
 				}
 			);
 		});
 	} );
-	describe( "urls of pages to be scraped", function() {
-		it( "scrapes the correct urls", function(done){
+	describe( "hops array changes", function() {
+		it( "adds an item with default url if no query", function(done){
+			test.pageLoop(
+				pathToRecipe,
+				function() {
+					var query = null,
+						options = null,
+						max = 50,
+						scrapeScript = "irrelevant",
+						systemMeta = {},
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
+					window.$ = {
+						getJSON: function(url) {
+							window.boxApi.emitEvent( "scrape", url );
+							return {
+								done: function(func) {
+									func( [] );
+									return {
+										fail: function() {}
+									};
+								}
+							};
+						}
+					};
+				},
+				function(urls, results) {
+					should.exist( urls );
+
+					results.hops.should.eql( [ {
+						text: "DefineWord: no word",
+						address: "https://wordnik.com"
+					} ] );
+
+					done();
+				}
+			);
+		});
+		it( "adds an item with address to the same search in wordnik.com", function(done){
 			test.pageLoop(
 				pathToRecipe,
 				function() {
 					var query = "math",
 						options = null,
 						max = 50,
-						scrapeScript = "irrelevant";
-					window.pagehop.init( query, options, max, scrapeScript );
+						scrapeScript = "irrelevant",
+						systemMeta = {},
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
+					window.$ = {
+						getJSON: function(url) {
+							window.boxApi.emitEvent( "scrape", url );
+							return {
+								done: function(func) {
+									func( [] );
+									return {
+										fail: function() {}
+									};
+								}
+							};
+						}
+					};
+				},
+				function(urls, results) {
+					should.exist( urls );
+
+					results.hops.should.eql( [ {
+						text: "DefineWord",
+						address: "https://wordnik.com/words/math"
+					} ] );
+
+					done();
+				}
+			);
+		});
+	} );
+	describe( "urls of pages to be parsed", function() {
+		it( "requests the correct urls", function(done){
+			test.pageLoop(
+				pathToRecipe,
+				function() {
+					var query = "math",
+						options = null,
+						max = 50,
+						scrapeScript = "irrelevant",
+						systemMeta = {},
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
 					window.$ = {
 						getJSON: function(url) {
 							window.boxApi.emitEvent( "scrape", url );
@@ -152,8 +236,10 @@ describe("define-word recipe's pageLoop",function(){
 					var query = "expressions will always result in an empty set",
 						options = null,
 						max = 50,
-						scrapeScript = "irrelevant";
-					window.pagehop.init( query, options, max, scrapeScript );
+						scrapeScript = "irrelevant",
+						systemMeta = {},
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
 					window.$ = {
 						getJSON: function() {
 							return {
@@ -169,7 +255,7 @@ describe("define-word recipe's pageLoop",function(){
 				},
 				function(urls, results) {
 					should.exist( urls );
-					results.should.eql( [] );
+					results.items.should.eql( [] );
 					done();
 				}
 			);
@@ -181,8 +267,10 @@ describe("define-word recipe's pageLoop",function(){
 					var query = "expressions will always result in an empty set",
 						options = null,
 						max = 50,
-						scrapeScript = "irrelevant";
-					window.pagehop.init( query, options, max, scrapeScript );
+						scrapeScript = "irrelevant",
+						systemMeta = {},
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
 					window.$ = {
 						getJSON: function() {
 							return {
@@ -227,18 +315,33 @@ describe("define-word recipe's pageLoop",function(){
 				},
 				function(urls, results) {
 					should.exist( urls );
-					results.should.eql( [
-						{
-							"text": "math - noun (ahd-legacy)",
-							"displayAddress": "Mathematics.",
-							"tooltip": "Mathematics."
-						},
-						{
-							"text": "math - noun (wiktionary)",
-							"displayAddress": "A mowing; what is gathered from mowing.",
-							"tooltip": "A mowing; what is gathered from mowing."
-						}
-					] );
+					var item1 = results.items[ 0 ],
+						item2 = results.items[ 1 ];
+
+					item1.text.should.equal( "math - noun (ahd-legacy)" );
+					item1.displayAddress.should.equal( "Mathematics." );
+					item1.preview.should.containEql( [
+						"<body>",
+						"	<div class=\"main-container\">",
+						"		<p class=\"def-source\"><i>from The American Heritage® Dictionary of the English Language, 4th Edition</i></p>",
+						"		<h3>math - noun</h3>",
+						"		<p>Mathematics.</p>",
+						"	</div>",
+						"</body>",
+					].join( "\n" ) );
+
+					item2.text.should.equal( "math - noun (wiktionary)" );
+					item2.displayAddress.should.equal( "A mowing; what is gathered from mowing." );
+					item2.preview.should.containEql( [
+						"<body>",
+						"	<div class=\"main-container\">",
+						"		<p class=\"def-source\"><i>from Wiktionary, Creative Commons Attribution/Share-Alike License</i></p>",
+						"		<h3>math - noun</h3>",
+						"		<p>A mowing; what is gathered from mowing.</p>",
+						"	</div>",
+						"</body>",
+					].join( "\n" ) );
+
 					done();
 				}
 			);
@@ -253,9 +356,11 @@ describe("define-word recipe's pageLoop",function(){
 						options = null,
 						max = 200,
 						scrapeScript = "irrelevant",
+						systemMeta = {},
+						hops = [],
 						pagehop = window.pagehop;
 
-					pagehop.init( query, options, max, scrapeScript );
+					pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
 					window.$ = {
 						getJSON: function(url) {
 							window.boxApi.emitEvent( "scrape", url );
