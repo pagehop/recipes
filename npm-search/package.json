@@ -1,7 +1,7 @@
 {
   "name": "pagehop-npm-search-recipe",
   "description": "Recipe for searching the NPM (Node Package Manager) registry.",
-  "version": "0.2.1",
+  "version": "1.0.0",
 
   "homepage": "https://github.com/pagehop/recipes/blob/master/npm-search/README.md",
 

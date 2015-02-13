@@ -12,12 +12,14 @@ if ( !$ ) {
 //
 //	rows
 //	q (query)
-var searchUrlTemplate = 'http://npmsearch.com/query?pretty=true&fl=name,description,version,author,license&rows=%s&sort=rating+desc&q=%s',
+var hopDefaultUrl = "http://npmsearch.com/",
+	hopUrlTemplate = "http://npmsearch.com/?q=%q",
+	searchUrlTemplate = 'http://npmsearch.com/query?pretty=true&fl=name,description,version,author,license&rows=%s&sort=rating+desc&q=%s',
 	searchUrlTemplateWithHomePage = 'http://npmsearch.com/query?pretty=true&fl=name,description,homepage,version,author,license&rows=%s&sort=rating+desc&q=%s';
 
 var addressUrlTemplate = 'https://www.npmjs.org/package/%s',
 	max = pagehop.getMaxCount(),
-	query = pagehop.getQuery(),
+	query = pagehop.getQuery() ? encodeURIComponent( pagehop.getQuery() ) : "",
 	options = pagehop.getOptions(),
 	isHomePage = ( options !== null ) && ( options.indexOf( ":h" ) !== -1 ),
 	results = [];
@@ -48,13 +50,16 @@ var parseItem = function(rawItem) {
 	return result;
 };
 
-if ( !query ) {
-	pagehop.finish( [] );
-} else {
+if ( query ) {
+	pagehop.getHops().push( {
+		text: "NPMSearch" + ( isHomePage ? " with :h (homepage)" : "" ),
+		address: hopUrlTemplate.replace( "%q", query )
+	} );
+
 	var url = util.format(
 		isHomePage ? searchUrlTemplateWithHomePage : searchUrlTemplate,
 		max,
-		encodeURIComponent( query )
+		query
 	);
 
 	$.getJSON( url )
@@ -70,4 +75,11 @@ if ( !query ) {
 			console.log( "Request Failed: " + err );
 			pagehop.finishWithError( error );
 		});
+} else {
+	pagehop.getHops().push( {
+		text: "NPMSearch: no query",
+		address: hopDefaultUrl
+	} );
+
+	pagehop.finish( [] );
 }

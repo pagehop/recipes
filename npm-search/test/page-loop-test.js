@@ -20,8 +20,10 @@ describe("npm-search recipe's pageLoop",function(){
 					var query = null,
 						options = null,
 						max = 50,
-						scrapeScript = "irrelevant";
-					window.pagehop.init( query, options, max, scrapeScript );
+						scrapeScript = "irrelevant",
+						systemMeta = null,
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
 					window.$ = {
 						getJSON: function(url) {
 							window.boxApi.emitEvent( "scrape", url );
@@ -38,11 +40,11 @@ describe("npm-search recipe's pageLoop",function(){
 						}
 					};
 				},
-				function(urls, result) {
+				function(urls, results) {
 					should.exist( urls );
-					should.exist( result );
+					should.exist( results );
 					urls.length.should.equal( 0 );
-					result.length.should.equal( 0 );
+					results.items.length.should.equal( 0 );
 					done();
 				}
 			);
@@ -54,8 +56,10 @@ describe("npm-search recipe's pageLoop",function(){
 					var query = "irrelevant",
 						options = null,
 						max = 500,
-						scrapeScript = "irrelevant";
-					window.pagehop.init( query, options, max, scrapeScript );
+						scrapeScript = "irrelevant",
+						systemMeta = null,
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
 					window.$ = {
 						getJSON: function(url) {
 							window.boxApi.emitEvent( "scrape", url );
@@ -72,11 +76,124 @@ describe("npm-search recipe's pageLoop",function(){
 						}
 					};
 				},
-				function(urls, result) {
+				function(urls, results) {
 					should.exist( urls );
-					should.exist( result );
+					should.exist( results );
 					urls.length.should.equal( 1 );
-					result.length.should.equal( 0 );
+					results.items.length.should.equal( 0 );
+					done();
+				}
+			);
+		});
+	} );
+	describe( "hops array changes", function() {
+		it( "adds an item with default url, if no query", function(done){
+			test.pageLoop(
+				pathToRecipe,
+				function() {
+					var query = null,
+						options = null,
+						max = 50,
+						scrapeScript = "irrelevant",
+						systemMeta = null,
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
+					window.$ = {
+						getJSON: function(url) {
+							window.boxApi.emitEvent( "scrape", url );
+							return {
+								done: function(func) {
+									func( {
+										results:[]
+									} );
+									return {
+										fail: function() {}
+									};
+								}
+							};
+						}
+					};
+				},
+				function(urls, results) {
+					should.exist( urls );
+					results.hops.should.eql( [ {
+						text: "NPMSearch: no query",
+						address: "http://npmsearch.com/"
+					} ] );
+					done();
+				}
+			);
+		});
+		it( "adds an item with url pointing to the same search on a site", function(done){
+			test.pageLoop(
+				pathToRecipe,
+				function() {
+					var query = "some",
+						options = null,
+						max = 500,
+						scrapeScript = "irrelevant",
+						systemMeta = null,
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
+					window.$ = {
+						getJSON: function(url) {
+							window.boxApi.emitEvent( "scrape", url );
+							return {
+								done: function(func) {
+									func( {
+										results:[]
+									} );
+									return {
+										fail: function() {}
+									};
+								}
+							};
+						}
+					};
+				},
+				function(urls, results) {
+					should.exist( urls );
+					results.hops.should.eql( [ {
+						text: "NPMSearch",
+						address: "http://npmsearch.com/?q=some"
+					} ] );
+					done();
+				}
+			);
+		});
+		it( "adds an item notifying the user of the used option :h", function(done){
+			test.pageLoop(
+				pathToRecipe,
+				function() {
+					var query = "some",
+						options = [ ":h" ],
+						max = 500,
+						scrapeScript = "irrelevant",
+						systemMeta = null,
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
+					window.$ = {
+						getJSON: function(url) {
+							window.boxApi.emitEvent( "scrape", url );
+							return {
+								done: function(func) {
+									func( {
+										results:[]
+									} );
+									return {
+										fail: function() {}
+									};
+								}
+							};
+						}
+					};
+				},
+				function(urls, results) {
+					should.exist( urls );
+					results.hops.should.eql( [ {
+						text: "NPMSearch with :h (homepage)",
+						address: "http://npmsearch.com/?q=some"
+					} ] );
 					done();
 				}
 			);
@@ -90,8 +207,10 @@ describe("npm-search recipe's pageLoop",function(){
 					var query = "math",
 						options = null,
 						max = 51,
-						scrapeScript = "irrelevant";
-					window.pagehop.init( query, options, max, scrapeScript );
+						scrapeScript = "irrelevant",
+						systemMeta = null,
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
 					window.$ = {
 						getJSON: function(url) {
 							window.boxApi.emitEvent( "scrape", url );
@@ -124,8 +243,10 @@ describe("npm-search recipe's pageLoop",function(){
 					var query = "math",
 						options = [ ":h" ],
 						max = 51,
-						scrapeScript = "irrelevant";
-					window.pagehop.init( query, options, max, scrapeScript );
+						scrapeScript = "irrelevant",
+						systemMeta = null,
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
 					window.$ = {
 						getJSON: function(url) {
 							window.boxApi.emitEvent( "scrape", url );
@@ -160,8 +281,10 @@ describe("npm-search recipe's pageLoop",function(){
 					var query = "math",
 						options = [ ":h" ],
 						max = 51,
-						scrapeScript = "irrelevant";
-					window.pagehop.init( query, options, max, scrapeScript );
+						scrapeScript = "irrelevant",
+						systemMeta = null,
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
 					window.$ = {
 						getJSON: function(url) {
 							window.boxApi.emitEvent( "scrape", url );
@@ -202,7 +325,7 @@ describe("npm-search recipe's pageLoop",function(){
 					urls.should.eql( [
 						"http://npmsearch.com/query?pretty=true&fl=name,description,homepage,version,author,license&rows=51&sort=rating+desc&q=math"
 					] );
-					results.should.eql( [
+					results.items.should.eql( [
 						{
 							text: "noflo (Flow-Based Programming environment for JavaScript)",
 							displayText: "<b>noflo</b> (Flow-Based Programming environment for JavaScript)",
@@ -227,8 +350,10 @@ describe("npm-search recipe's pageLoop",function(){
 					var query = "math",
 						options = null,
 						max = 51,
-						scrapeScript = "irrelevant";
-					window.pagehop.init( query, options, max, scrapeScript );
+						scrapeScript = "irrelevant",
+						systemMeta = null,
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
 					window.$ = {
 						getJSON: function(url) {
 							window.boxApi.emitEvent( "scrape", url );
@@ -267,7 +392,7 @@ describe("npm-search recipe's pageLoop",function(){
 					urls.should.eql( [
 						"http://npmsearch.com/query?pretty=true&fl=name,description,version,author,license&rows=51&sort=rating+desc&q=math"
 					] );
-					results.should.eql( [
+					results.items.should.eql( [
 						{
 							text: "noflo (Flow-Based Programming environment for JavaScript)",
 							displayText: "<b>noflo</b> (Flow-Based Programming environment for JavaScript)",
@@ -295,9 +420,11 @@ describe("npm-search recipe's pageLoop",function(){
 						options = null,
 						max = 200,
 						scrapeScript = "irrelevant",
+						systemMeta = null,
+						hops = [],
 						pagehop = window.pagehop;
 
-					pagehop.init( query, options, max, scrapeScript );
+					pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
 					window.$ = {
 						getJSON: function(url) {
 							window.boxApi.emitEvent( "scrape", url );
