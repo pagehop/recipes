@@ -11,9 +11,11 @@ if ( !request ) {
 
 var utils = require("./src/utils"),
 	options = pagehop.getOptions(),
-	query = pagehop.getQuery(),
+	query = pagehop.getQuery() ? encodeURIComponent( pagehop.getQuery() ) : "",
 	maxResultsCount = pagehop.getMaxCount(),
 	urlTemplate = "https://searchcode.com/api/search_IV/?q=%q&p=%p",
+	hopDefaultUrl= "https://searchcode.com",
+	hopUrlTemplate= "https://searchcode.com/?q=%q",
 	helpInfo = {
 		text: "Usage: doc [lang/framework/tool] [query]",
 		displayAddress: "Example: doc php explode",
@@ -114,9 +116,24 @@ var search = function() {
 };
 
 if ( query ) {
+	pagehop.getHops().push( {
+		text: "DocSearch",
+		address: hopUrlTemplate.replace( "%q", query )
+	} );
+
 	search();
 } else if ( options && options.length && ( options.indexOf( ":all" ) !== -1 ) ) {
+	pagehop.getHops().push( {
+		text: "DocSearch: list sources",
+		address: hopDefaultUrl
+	} );
+
 	pagehop.finish( allSources );
 } else {
+	pagehop.getHops().push( {
+		text: "DocSearch: no query",
+		address: hopDefaultUrl
+	} );
+
 	pagehop.finish( [ helpInfo ] );
 }

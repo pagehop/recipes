@@ -23,12 +23,13 @@ describe("doc-search recipe's pageLoop",function(){
 						options = null,
 						max = 100,
 						scrapeScript = "irrelevant",
-						systemMeta = null;
-					window.pagehop.init( query, options, max, scrapeScript, systemMeta );
+						systemMeta = null,
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
 				},
 				function(urls, results) {
 					should.exist( urls );
-					results.should.eql( [
+					results.items.should.eql( [
 						{
 							text: "Usage: doc [lang/framework/tool] [query]",
 							displayAddress: "Example: doc php explode",
@@ -47,12 +48,81 @@ describe("doc-search recipe's pageLoop",function(){
 						options = [ ":all" ],
 						max = 100,
 						scrapeScript = "irrelevant",
-						systemMeta = null;
-					window.pagehop.init( query, options, max, scrapeScript, systemMeta );
+						systemMeta = null,
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
 				},
 				function(urls, results) {
 					should.exist( urls );
-					results.length.should.equal( 38 );
+					results.items.length.should.equal( 38 );
+					done();
+				}
+			);
+		});
+	} );
+	describe( "hops array changes", function() {
+		it( "adds a default url item, if no query", function(done){
+			test.pageLoop(
+				pathToRecipe,
+				function() {
+					var query = null,
+						options = null,
+						max = 100,
+						scrapeScript = "irrelevant",
+						systemMeta = null,
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
+				},
+				function(urls, results) {
+					should.exist( urls );
+					results.hops.should.eql( [ {
+						text: "DocSearch: no query",
+						address: "https://searchcode.com"
+					} ] );
+					done();
+				}
+			);
+		});
+		it( "adds a specific item (still default url for address) for :all option", function(done){
+			test.pageLoop(
+				pathToRecipe,
+				function() {
+					var query = null,
+						options = [ ":all" ],
+						max = 100,
+						scrapeScript = "irrelevant",
+						systemMeta = null,
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
+				},
+				function(urls, results) {
+					should.exist( urls );
+					results.hops.should.eql( [ {
+						text: "DocSearch: list sources",
+						address: "https://searchcode.com"
+					} ] );
+					done();
+				}
+			);
+		});
+		it( "adds an item with address to the same search on searchcode.com", function(done){
+			test.pageLoop(
+				pathToRecipe,
+				function() {
+					var query = "explode",
+						options = null,
+						max = 100,
+						scrapeScript = "irrelevant",
+						systemMeta = null,
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
+				},
+				function(urls, results) {
+					should.exist( urls );
+					results.hops.should.eql( [ {
+						text: "DocSearch",
+						address: "https://searchcode.com/?q=explode"
+					} ] );
 					done();
 				}
 			);
@@ -67,8 +137,9 @@ describe("doc-search recipe's pageLoop",function(){
 						options = null,
 						max = 100,
 						scrapeScript = "irrelevant",
-						systemMeta = null;
-					window.pagehop.init( query, options, max, scrapeScript, systemMeta );
+						systemMeta = null,
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
 					window.request = { get: function(url) {
 						return {
 							end: function(callback) {
@@ -82,7 +153,7 @@ describe("doc-search recipe's pageLoop",function(){
 				},
 				function(urls, results) {
 					should.exist( urls );
-					results.should.eql( [ {
+					results.items.should.eql( [ {
 						text: "There was a problem, requesting results.",
 						displayAddress: "custom error"
 					} ] );
@@ -98,8 +169,9 @@ describe("doc-search recipe's pageLoop",function(){
 						options = null,
 						max = 100,
 						scrapeScript = "irrelevant",
-						systemMeta = null;
-					window.pagehop.init( query, options, max, scrapeScript, systemMeta );
+						systemMeta = null,
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
 					window.request = { get: function(url) {
 						return {
 							end: function(callback) {
@@ -110,7 +182,7 @@ describe("doc-search recipe's pageLoop",function(){
 				},
 				function(urls, results) {
 					should.exist( urls );
-					results.should.eql( [ {
+					results.items.should.eql( [ {
 						text: "Bad Server Response",
 						displayAddress: "searchcode.com returned an empty response."
 					} ] );
@@ -126,8 +198,9 @@ describe("doc-search recipe's pageLoop",function(){
 						options = null,
 						max = 100,
 						scrapeScript = "irrelevant",
-						systemMeta = null;
-					window.pagehop.init( query, options, max, scrapeScript, systemMeta );
+						systemMeta = null,
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
 					window.request = { get: function(url) {
 						return {
 							end: function(callback) {
@@ -138,7 +211,7 @@ describe("doc-search recipe's pageLoop",function(){
 				},
 				function(urls, results) {
 					should.exist( urls );
-					results.should.eql( [ {
+					results.items.should.eql( [ {
 						text: "Bad Server Response",
 						displayAddress: "searchcode.com returned an empty response."
 					} ] );
@@ -156,8 +229,9 @@ describe("doc-search recipe's pageLoop",function(){
 						options = null,
 						max = 100,
 						scrapeScript = "irrelevant",
-						systemMeta = null;
-					window.pagehop.init( query, options, max, scrapeScript, systemMeta );
+						systemMeta = null,
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
 					window.request = { get: function(url) {
 						window.boxApi.emitEvent( "scrape", url );
 						return {
@@ -180,7 +254,7 @@ describe("doc-search recipe's pageLoop",function(){
 				},
 				function(urls, results) {
 					urls.should.eql( [ "https://searchcode.com/api/search_IV/?q=irrelevant&p=0" ] );
-					results.should.eql( [ {
+					results.items.should.eql( [ {
 						text: "No results found."
 					} ] );
 					done();
@@ -196,6 +270,7 @@ describe("doc-search recipe's pageLoop",function(){
 						max = 100,
 						scrapeScript = "irrelevant",
 						systemMeta = null,
+						hops = [],
 						responses = [
 							{
 								body: {
@@ -223,7 +298,7 @@ describe("doc-search recipe's pageLoop",function(){
 							}
 						],
 						responsesCount = 0;
-					window.pagehop.init( query, options, max, scrapeScript, systemMeta );
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
 					window.request = { get: function(url) {
 						window.boxApi.emitEvent( "scrape", url );
 						return {
@@ -238,7 +313,7 @@ describe("doc-search recipe's pageLoop",function(){
 						"https://searchcode.com/api/search_IV/?q=irrelevant&p=0",
 						"https://searchcode.com/api/search_IV/?q=irrelevant&p=1"
 					] );
-					results.should.eql( [] );
+					results.items.should.eql( [] );
 					done();
 				}
 			);
@@ -252,6 +327,7 @@ describe("doc-search recipe's pageLoop",function(){
 						max = 16,
 						scrapeScript = "irrelevant",
 						systemMeta = null,
+						hops = [],
 						responses = [
 							{
 								body: {
@@ -279,7 +355,7 @@ describe("doc-search recipe's pageLoop",function(){
 							}
 						],
 						responsesCount = 0;
-					window.pagehop.init( query, options, max, scrapeScript, systemMeta );
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
 					window.request = { get: function(url) {
 						window.boxApi.emitEvent( "scrape", url );
 						return {
@@ -294,7 +370,7 @@ describe("doc-search recipe's pageLoop",function(){
 						"https://searchcode.com/api/search_IV/?q=irrelevant&p=0",
 						"https://searchcode.com/api/search_IV/?q=irrelevant&p=1"
 					] );
-					results.should.eql( [] );
+					results.items.should.eql( [] );
 					done();
 				}
 			);
@@ -310,6 +386,7 @@ describe("doc-search recipe's pageLoop",function(){
 						max = 16,
 						scrapeScript = "irrelevant",
 						systemMeta = null,
+						hops = [],
 						responses = [
 							{
 								body: {
@@ -346,7 +423,7 @@ describe("doc-search recipe's pageLoop",function(){
 							}
 						],
 						responsesCount = 0;
-					window.pagehop.init( query, options, max, scrapeScript, systemMeta );
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
 					window.request = { get: function(url) {
 						window.boxApi.emitEvent( "scrape", url );
 						return {
@@ -360,7 +437,7 @@ describe("doc-search recipe's pageLoop",function(){
 					urls.should.eql( [
 						"https://searchcode.com/api/search_IV/?q=irrelevant&p=0"
 					] );
-					results.should.eql( [
+					results.items.should.eql( [
 						{
 							text: "explode (php)",
 							address: "http://www.php.net/manual/en/function.explode.php",
@@ -388,6 +465,7 @@ describe("doc-search recipe's pageLoop",function(){
 						max = 16,
 						scrapeScript = "irrelevant",
 						systemMeta = null,
+						hops = [],
 						responses = [
 							{
 								body: {
@@ -437,7 +515,7 @@ describe("doc-search recipe's pageLoop",function(){
 							}
 						],
 						responsesCount = 0;
-					window.pagehop.init( query, options, max, scrapeScript, systemMeta );
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
 					window.request = { get: function(url) {
 						window.boxApi.emitEvent( "scrape", url );
 						return {
@@ -452,7 +530,7 @@ describe("doc-search recipe's pageLoop",function(){
 						"https://searchcode.com/api/search_IV/?q=irrelevant&p=0",
 						"https://searchcode.com/api/search_IV/?q=irrelevant&p=1"
 					] );
-					results.should.eql( [
+					results.items.should.eql( [
 						{
 							text: "explode (php)",
 							address: "http://www.php.net/manual/en/function.explode.php",
