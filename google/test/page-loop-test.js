@@ -20,14 +20,16 @@ describe("google recipe's pageLoop",function(){
 					var query = null,
 						options = null,
 						max = 200,
-						scrapeScript = "irrelevant";
-					window.pagehop.init( query, options, max, scrapeScript );
+						scrapeScript = "irrelevant",
+						systemMeta = null,
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
 				},
 				function(urls, result) {
 					should.exist( urls );
 					should.exist( result );
 					urls.length.should.equal( 0 );
-					result.length.should.equal( 0 );
+					result.items.length.should.equal( 0 );
 					done();
 				}
 			);
@@ -39,14 +41,16 @@ describe("google recipe's pageLoop",function(){
 					var query = "irrelevant",
 						options = null,
 						max = 200,
-						scrapeScript = "irrelevant";
-					window.pagehop.init( query, options, max, scrapeScript );
+						scrapeScript = "irrelevant",
+						systemMeta = null,
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
 				},
 				function(urls, result) {
 					should.exist( urls );
 					should.exist( result );
 					urls.length.should.equal( 2 );
-					result.length.should.equal( 0 );
+					result.items.length.should.equal( 0 );
 					done();
 				}
 			);
@@ -58,14 +62,62 @@ describe("google recipe's pageLoop",function(){
 					var query = "irrelevant",
 						options = null,
 						max = 300,
-						scrapeScript = "irrelevant";
-					window.pagehop.init( query, options, max, scrapeScript );
+						scrapeScript = "irrelevant",
+						systemMeta = null,
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
 				},
 				function(urls, result) {
 					should.exist( urls );
 					should.exist( result );
 					urls.length.should.equal( 3 );
-					result.length.should.equal( 0 );
+					result.items.length.should.equal( 0 );
+					done();
+				}
+			);
+		});
+	} );
+	describe( "hops array changes", function() {
+		it( "adds an item with default url, if no query", function(done){
+			test.pageLoop(
+				pathToRecipe,
+				function() {
+					var query = null,
+						options = null,
+						max = 200,
+						scrapeScript = "irrelevant",
+						systemMeta = null,
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
+				},
+				function(urls, result) {
+					should.exist( urls );
+					result.hops.should.eql( [ {
+						text: "GoogleSearch: no query",
+						address: "https://google.com/"
+					} ] );
+					done();
+				}
+			);
+		});
+		it( "adds an item with address the same search in the site", function(done){
+			test.pageLoop(
+				pathToRecipe,
+				function() {
+					var query = "some",
+						options = null,
+						max = 200,
+						scrapeScript = "irrelevant",
+						systemMeta = null,
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
+				},
+				function(urls, result) {
+					should.exist( urls );
+					result.hops.should.eql( [ {
+						text: "GoogleSearch",
+						address: "https://google.com/?q=some"
+					} ] );
 					done();
 				}
 			);
@@ -79,8 +131,10 @@ describe("google recipe's pageLoop",function(){
 					var query = "irrelevant",
 						options = null,
 						max = 20,
-						scrapeScript = "irrelevant";
-					window.pagehop.init( query, options, max, scrapeScript );
+						scrapeScript = "irrelevant",
+						systemMeta = null,
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
 				},
 				function(urls) {
 					should.exist( urls );
@@ -98,8 +152,10 @@ describe("google recipe's pageLoop",function(){
 					var query = "irrelevant",
 						options = null,
 						max = 200,
-						scrapeScript = "irrelevant";
-					window.pagehop.init( query, options, max, scrapeScript );
+						scrapeScript = "irrelevant",
+						systemMeta = null,
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
 				},
 				function(urls) {
 					should.exist( urls );
@@ -121,12 +177,14 @@ describe("google recipe's pageLoop",function(){
 						options = null,
 						max = 200,
 						scrapeScript = "irrelevant",
+						systemMeta = null,
+						hops = [],
 						pagehop = window.pagehop;
 					pagehop.scrape = function(url, callback) {
 						window.boxApi.emitEvent( "scrape", url );
 						callback( "blowup" );
 					};
-					pagehop.init( query, options, max, scrapeScript );
+					pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
 				},
 				function(error) {
 					should.exist( error );

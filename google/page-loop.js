@@ -15,15 +15,23 @@ function flattenResults( results ) {
 	return result;
 }
 
-var urlTemplate = 'http://www.google.com/search?hl=en&q=%s&start=%s&sa=N&num=%s&ie=UTF-8&oe=UTF-8',
+var hopDefaultUrl = "https://google.com/",
+	hopUrlTemplate = "https://google.com/?q=%q",
+	urlTemplate = 'http://www.google.com/search?hl=en&q=%s&start=%s&sa=N&num=%s&ie=UTF-8&oe=UTF-8',
 	startAt = 0,
 	max = pagehop.getMaxCount(),
 	itemsAtPage = max <= 100 ? max : 100,
 	iterationsCount = Math.ceil( max / itemsAtPage ),
-	query = pagehop.getQuery(),
+	query = pagehop.getQuery() ? encodeURIComponent( pagehop.getQuery() ) : "",
 	results = new Array( iterationsCount ),
 	asyncCount = iterationsCount;
+
 if ( query ) {
+	pagehop.getHops().push( {
+		text: "GoogleSearch",
+		address: hopUrlTemplate.replace( "%q", query )
+	} );
+
 	for ( var i = 0; i < iterationsCount; i++ ) {
 		var url = util.format(
 			urlTemplate,
@@ -53,5 +61,10 @@ if ( query ) {
 		startAt += itemsAtPage;
 	}
 } else {
+	pagehop.getHops().push( {
+		text: "GoogleSearch: no query",
+		address: hopDefaultUrl
+	} );
+
 	pagehop.finish( [] );
 }
