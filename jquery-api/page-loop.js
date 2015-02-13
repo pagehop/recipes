@@ -13,8 +13,9 @@ if ( $ ) {
 	$ = jQuery;
 }
 
-var urlTemplate = 'http://api.jquery.com/?s=%s',
-	query = pagehop.getQuery(),
+var hopDefaultUrl = "http://api.jquery.com/",
+	urlTemplate = "http://api.jquery.com/?s=%s",
+	query = pagehop.getQuery() ? encodeURIComponent( pagehop.getQuery() ) : "",
 	max = pagehop.getMaxCount();
 
 var scrapeUrl = function(url, callback) {
@@ -57,11 +58,15 @@ var scrapeUrl = function(url, callback) {
 var results = [];
 
 if ( query ) {
-
 	var url = util.format(
 		urlTemplate,
-		encodeURIComponent( query )
+		query
 	);
+
+	pagehop.getHops().push( {
+		text: "jQueryAPI",
+		address: url
+	} );
 
 	scrapeUrl( url, function(error, items) {
 
@@ -80,5 +85,10 @@ if ( query ) {
 	} );
 
 } else {
+	pagehop.getHops().push( {
+		text: "jQueryAPI: no query",
+		address: hopDefaultUrl
+	} );
+
 	pagehop.finish( [] );
 }

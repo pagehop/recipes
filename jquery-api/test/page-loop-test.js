@@ -48,8 +48,10 @@ describe("jquery-api recipe's pageLoop",function(){
 					var query = null,
 						options = null,
 						max = 20,
-						scrapeScript = "irrelevant";
-					window.pagehop.init( query, options, max, scrapeScript );
+						scrapeScript = "irrelevant",
+						systemMeta = null,
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
 					window.$ = function( jQuery ) {
 						jQuery.get = function(url) {
 							window.boxApi.emitEvent( "scrape", url );
@@ -65,11 +67,11 @@ describe("jquery-api recipe's pageLoop",function(){
 						return jQuery;
 					};
 				} + ")(" + JSON.stringify( defaultHttpPage ) + ");" ),
-				function(urls, result) {
+				function(urls, results) {
 					should.exist( urls );
-					should.exist( result );
+					should.exist( results );
 					urls.length.should.equal( 0 );
-					result.length.should.equal( 0 );
+					results.items.length.should.equal( 0 );
 					done();
 				}
 			);
@@ -81,8 +83,10 @@ describe("jquery-api recipe's pageLoop",function(){
 					var query = "irrelevant",
 						options = null,
 						max = 20,
-						scrapeScript = "irrelevant";
-					window.pagehop.init( query, options, max, scrapeScript );
+						scrapeScript = "irrelevant",
+						systemMeta = null,
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
 					window.$ = function( jQuery ) {
 						jQuery.get = function(url) {
 							window.boxApi.emitEvent( "scrape", url );
@@ -98,11 +102,85 @@ describe("jquery-api recipe's pageLoop",function(){
 						return jQuery;
 					};
 				} + ")(" + JSON.stringify( defaultHttpPage ) + ");" ),
-				function(urls, result) {
+				function(urls, results) {
 					should.exist( urls );
-					should.exist( result );
+					should.exist( results );
 					urls.length.should.equal( 1 );
-					result.length.should.equal( 20 );
+					results.items.length.should.equal( 20 );
+					done();
+				}
+			);
+		});
+	} );
+	describe( "hops array changes", function() {
+		it( "adds an item with default url if no query", function(done){
+			test.pageLoop(
+				pathToRecipe,
+				new Function( "(" + function(page) {
+					var query = null,
+						options = null,
+						max = 20,
+						scrapeScript = "irrelevant",
+						systemMeta = null,
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
+					window.$ = function( jQuery ) {
+						jQuery.get = function(url) {
+							window.boxApi.emitEvent( "scrape", url );
+							return {
+								done: function(func) {
+									func( page );
+									return {
+										fail: function() {}
+									};
+								}
+							};
+						};
+						return jQuery;
+					};
+				} + ")(" + JSON.stringify( defaultHttpPage ) + ");" ),
+				function(urls, results) {
+					should.exist( urls );
+					results.hops.should.eql( [ {
+						text: "jQueryAPI: no query",
+						address: "http://api.jquery.com/"
+					} ] );
+					done();
+				}
+			);
+		});
+		it( "adds an item with address the same search on the site", function(done){
+			test.pageLoop(
+				pathToRecipe,
+				new Function( "(" + function(page) {
+					var query = "some",
+						options = null,
+						max = 20,
+						scrapeScript = "irrelevant",
+						systemMeta = null,
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
+					window.$ = function( jQuery ) {
+						jQuery.get = function(url) {
+							window.boxApi.emitEvent( "scrape", url );
+							return {
+								done: function(func) {
+									func( page );
+									return {
+										fail: function() {}
+									};
+								}
+							};
+						};
+						return jQuery;
+					};
+				} + ")(" + JSON.stringify( defaultHttpPage ) + ");" ),
+				function(urls, results) {
+					should.exist( urls );
+					results.hops.should.eql( [ {
+						text: "jQueryAPI",
+						address: "http://api.jquery.com/?s=some"
+					} ] );
 					done();
 				}
 			);
@@ -116,8 +194,10 @@ describe("jquery-api recipe's pageLoop",function(){
 					var query = "math",
 						options = null,
 						max = 20,
-						scrapeScript = "irrelevant";
-					window.pagehop.init( query, options, max, scrapeScript );
+						scrapeScript = "irrelevant",
+						systemMeta = null,
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
 					window.$ = function( jQuery ) {
 						jQuery.get = function(url) {
 							window.boxApi.emitEvent( "scrape", url );
@@ -151,8 +231,10 @@ describe("jquery-api recipe's pageLoop",function(){
 					var query = "irrelevant",
 						options = null,
 						max = 200,
-						scrapeScript = "irrelevant";
-					window.pagehop.init( query, options, max, scrapeScript );
+						scrapeScript = "irrelevant",
+						systemMeta = null,
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
 					window.$ = function( jQuery ) {
 						jQuery.get = function(url) {
 							window.boxApi.emitEvent( "scrape", url );
@@ -172,7 +254,7 @@ describe("jquery-api recipe's pageLoop",function(){
 					should.exist( urls );
 					removeFSPath( results );
 					removeFSPath( expected.default_http );
-					results.forEach( function(element, index) {
+					results.items.forEach( function(element, index) {
 						element.should.eql( expected.default_http[ index ] );
 					} );
 					done();
@@ -186,8 +268,10 @@ describe("jquery-api recipe's pageLoop",function(){
 					var query = "irrelevant",
 						options = null,
 						max = 200,
-						scrapeScript = "irrelevant";
-					window.pagehop.init( query, options, max, scrapeScript );
+						scrapeScript = "irrelevant",
+						systemMeta = null,
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
 					window.$ = function( jQuery ) {
 						jQuery.get = function(url) {
 							window.boxApi.emitEvent( "scrape", url );
@@ -205,7 +289,7 @@ describe("jquery-api recipe's pageLoop",function(){
 				} + ")(" + JSON.stringify( defaultDoubleSlashPage ) + ");" ),
 				function(urls, results) {
 					should.exist( urls );
-					results.forEach( function(element, index) {
+					results.items.forEach( function(element, index) {
 						element.should.eql( expected.default_double_slash[ index ] );
 					} );
 					done();
@@ -219,8 +303,10 @@ describe("jquery-api recipe's pageLoop",function(){
 					var query = "irrelevant",
 						options = null,
 						max = 200,
-						scrapeScript = "irrelevant";
-					window.pagehop.init( query, options, max, scrapeScript );
+						scrapeScript = "irrelevant",
+						systemMeta = null,
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
 					window.$ = function( jQuery ) {
 						jQuery.get = function(url) {
 							window.boxApi.emitEvent( "scrape", url );
@@ -238,7 +324,7 @@ describe("jquery-api recipe's pageLoop",function(){
 				} + ")(" + JSON.stringify( emptyPage ) + ");" ),
 				function(urls, results) {
 					should.exist( urls );
-					results.should.eql( expected.empty );
+					results.items.should.eql( expected.empty );
 					done();
 				}
 			);
@@ -253,6 +339,8 @@ describe("jquery-api recipe's pageLoop",function(){
 						options = null,
 						max = 200,
 						scrapeScript = "irrelevant",
+						systemMeta = null,
+						hops = [],
 						pagehop = window.pagehop;
 					window.$ = function( jQuery ) {
 						jQuery.get = function(url) {
@@ -269,7 +357,7 @@ describe("jquery-api recipe's pageLoop",function(){
 						};
 						return jQuery;
 					};
-					pagehop.init( query, options, max, scrapeScript );
+					pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
 				},
 				function(error) {
 					should.exist( error );
