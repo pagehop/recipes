@@ -29,10 +29,12 @@ exports.generateRequestResults = function(number, type) {
 
 exports.initFunc = function(intermediateResults, max, options) {
 	var query = null,
-		scrapeScript = "irrelevant";
+		scrapeScript = "irrelevant",
+		systemMeta = null,
+		hops = [];
 
 	max = max || 30;
-	window.pagehop.init( query, options, max, scrapeScript );
+	window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
 	window.$ = {
 		getJSON: function(url) {
 			window.boxApi.emitEvent( "scrape", url );

@@ -11,7 +11,11 @@ if ( !$ ) {
 
 var utils = require("./src/utils");
 
-var topStoriesUrl = "https://hacker-news.firebaseio.com/v0/topstories.json",
+var hopDefaultUrl = "https://news.ycombinator.com/",
+	hopUrlShow = "https://news.ycombinator.com/show",
+	hopUrlAsk = "https://news.ycombinator.com/ask",
+	hopUrlJobs = "https://news.ycombinator.com/jobs",
+	topStoriesUrl = "https://hacker-news.firebaseio.com/v0/topstories.json",
 	OPTION_TYPE = utils.OPTION_TYPE,
 	processRawResults = utils.processRawResults,
 	max = pagehop.getMaxCount(),
@@ -70,6 +74,33 @@ var getItems = function(ids, startIndex, count, rawResults) {
 		} )();
 	}
 };
+
+
+var hopText,
+	hopUrl;
+switch ( option ) {
+	case ":s":
+		hopText = ": ShowHN";
+		hopUrl = hopUrlShow;
+		break;
+	case ":ask":
+		hopText = ": AskHN";
+		hopUrl = hopUrlAsk;
+		break;
+	case ":j":
+		hopText = ": Jobs";
+		hopUrl = hopUrlJobs;
+		break;
+	default:
+		hopText = hasDiscussionOption ? ": Discussions" : "";
+		hopUrl = hopDefaultUrl;
+		break;
+}
+
+pagehop.getHops().push( {
+	text: "HackerNews" + hopText,
+	address: hopUrl
+} );
 
 request( topStoriesUrl, function(ids) {
 	if ( !ids || !ids.length ) {

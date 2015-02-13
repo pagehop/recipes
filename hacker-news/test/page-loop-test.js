@@ -26,13 +26,106 @@ describe("hacker-news recipe's pageLoop",function() {
 				pathToRecipe,
 				new Function( "(" + initFunc + ")(" +
 					JSON.stringify( [] ) + ", " +
+					JSON.stringify( 10 ) + ", " +
 					JSON.stringify( [] ) +
 				");" ),
-				function(urls, result) {
+				function(urls, results) {
 					should.exist( urls );
-					should.exist( result );
+					should.exist( results );
 					urls.length.should.equal( 1 );
-					result.length.should.equal( 0 );
+					results.items.length.should.equal( 0 );
+					done();
+				}
+			);
+		} );
+	} );
+	describe( "hops array changes", function() {
+		it( "adds an item with a default url if no option is used", function(done) {
+			test.pageLoop(
+				pathToRecipe,
+				new Function( "(" + initFunc + ")(" +
+					JSON.stringify( [] ) + ", " +
+					JSON.stringify( 10 ) + ", " +
+					JSON.stringify( [] ) +
+				");" ),
+				function(urls, results) {
+					should.exist( urls );
+					results.hops.should.eql( [ {
+						text: "HackerNews",
+						address: "https://news.ycombinator.com/"
+					} ] );
+					done();
+				}
+			);
+		} );
+		it( "adds an item with a default url if :d is used", function(done) {
+			test.pageLoop(
+				pathToRecipe,
+				new Function( "(" + initFunc + ")(" +
+					JSON.stringify( [] ) + ", " +
+					JSON.stringify( 10 ) + ", " +
+					JSON.stringify( [ ":d" ] ) +
+				");" ),
+				function(urls, results) {
+					should.exist( urls );
+					results.hops.should.eql( [ {
+						text: "HackerNews: Discussions",
+						address: "https://news.ycombinator.com/"
+					} ] );
+					done();
+				}
+			);
+		} );
+		it( "adds an item with address pointing to ShowHN page", function(done) {
+			test.pageLoop(
+				pathToRecipe,
+				new Function( "(" + initFunc + ")(" +
+					JSON.stringify( [] ) + ", " +
+					JSON.stringify( 10 ) + ", " +
+					JSON.stringify( [ ":s" ] ) +
+				");" ),
+				function(urls, results) {
+					should.exist( urls );
+					results.hops.should.eql( [ {
+						text: "HackerNews: ShowHN",
+						address: "https://news.ycombinator.com/show"
+					} ] );
+					done();
+				}
+			);
+		} );
+		it( "adds an item with address pointing to AskHN page", function(done) {
+			test.pageLoop(
+				pathToRecipe,
+				new Function( "(" + initFunc + ")(" +
+					JSON.stringify( [] ) + ", " +
+					JSON.stringify( 10 ) + ", " +
+					JSON.stringify( [ ":ask" ] ) +
+				");" ),
+				function(urls, results) {
+					should.exist( urls );
+					results.hops.should.eql( [ {
+						text: "HackerNews: AskHN",
+						address: "https://news.ycombinator.com/ask"
+					} ] );
+					done();
+				}
+			);
+		} );
+		it( "adds an item with address pointing to Jobs page", function(done) {
+			test.pageLoop(
+				pathToRecipe,
+				new Function( "(" + initFunc + ")(" +
+					JSON.stringify( [] ) + ", " +
+					JSON.stringify( 10 ) + ", " +
+					JSON.stringify( [ ":j" ] ) +
+				");" ),
+				function(urls, results) {
+					should.exist( urls );
+					results.hops.should.eql( [ {
+						text: "HackerNews: Jobs",
+						address: "https://news.ycombinator.com/jobs"
+					} ] );
 					done();
 				}
 			);
@@ -62,7 +155,7 @@ describe("hacker-news recipe's pageLoop",function() {
 						"https://hacker-news.firebaseio.com/v0/item/%s.json".replace( "%s", intermediateResults[0][1] )
 					] );
 					should.exist( results );
-					results.should.eql( enumerateResults( [
+					results.items.should.eql( enumerateResults( [
 						expected.defaultStory,
 						expected.askStory
 					] ) );
@@ -93,7 +186,7 @@ describe("hacker-news recipe's pageLoop",function() {
 				function(urls, results) {
 					should.exist( urls );
 					should.exist( results );
-					results.length.should.equal( 30 );
+					results.items.length.should.equal( 30 );
 					done();
 				}
 			);
@@ -118,7 +211,7 @@ describe("hacker-news recipe's pageLoop",function() {
 				function(urls, results) {
 					should.exist( urls );
 					should.exist( results );
-					results.should.eql( enumerateResults( [
+					results.items.should.eql( enumerateResults( [
 						expected.defaultStory,
 						expected.defaultStory,
 						expected.defaultStory,
@@ -147,7 +240,7 @@ describe("hacker-news recipe's pageLoop",function() {
 				function(urls, results) {
 					should.exist( urls );
 					should.exist( results );
-					results.should.eql( enumerateResults( [
+					results.items.should.eql( enumerateResults( [
 						expected.askStory,
 						expected.askStory
 					] ) );
@@ -173,7 +266,7 @@ describe("hacker-news recipe's pageLoop",function() {
 				function(urls, results) {
 					should.exist( urls );
 					should.exist( results );
-					results.should.eql( enumerateResults( [
+					results.items.should.eql( enumerateResults( [
 						expected.showStory,
 						expected.showStory
 					] ) );
@@ -199,7 +292,7 @@ describe("hacker-news recipe's pageLoop",function() {
 				function(urls, results) {
 					should.exist( urls );
 					should.exist( results );
-					results.should.eql( enumerateResults( [
+					results.items.should.eql( enumerateResults( [
 						expected.job,
 						expected.job
 					] ) );
@@ -227,7 +320,7 @@ describe("hacker-news recipe's pageLoop",function() {
 				function(urls, results) {
 					should.exist( urls );
 					should.exist( results );
-					results.should.eql( enumerateResults( [
+					results.items.should.eql( enumerateResults( [
 						expected.defaultStoryDiscussion,
 						expected.defaultStoryDiscussion,
 						expected.defaultStoryDiscussion,
@@ -263,7 +356,7 @@ describe("hacker-news recipe's pageLoop",function() {
 				function(urls, results) {
 					should.exist( urls );
 					should.exist( results );
-					results.should.eql( enumerateResults( [
+					results.items.should.eql( enumerateResults( [
 						expected.askStory,
 						expected.askStory
 					] ) );
@@ -291,7 +384,7 @@ describe("hacker-news recipe's pageLoop",function() {
 				function(urls, results) {
 					should.exist( urls );
 					should.exist( results );
-					results.should.eql( enumerateResults( [
+					results.items.should.eql( enumerateResults( [
 						expected.askStory,
 						expected.askStory
 					] ) );
@@ -308,9 +401,11 @@ describe("hacker-news recipe's pageLoop",function() {
 					var query = null,
 						options = null,
 						max = 30,
-						scrapeScript = "irrelevant";
+						scrapeScript = "irrelevant",
+						systemMeta = {},
+						hops = [];
 
-					window.pagehop.init( query, options, max, scrapeScript );
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
 					window.$ = {
 						getJSON: function(url) {
 							window.boxApi.emitEvent( "scrape", url );
