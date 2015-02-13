@@ -45,8 +45,10 @@ describe("mdn recipe's pageLoop",function(){
 					var query = null,
 						options = null,
 						max = 20,
-						scrapeScript = "irrelevant";
-					window.pagehop.init( query, options, max, scrapeScript );
+						scrapeScript = "irrelevant",
+						systemMeta = null,
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
 					window.$ = function( jQuery ) {
 						jQuery.get = function(url) {
 							window.boxApi.emitEvent( "scrape", url );
@@ -62,11 +64,11 @@ describe("mdn recipe's pageLoop",function(){
 						return jQuery;
 					};
 				} + ")(" + JSON.stringify( defaultPage ) + ");" ),
-				function(urls, result) {
+				function(urls, results) {
 					should.exist( urls );
-					should.exist( result );
+					should.exist( results );
 					urls.length.should.equal( 0 );
-					result.length.should.equal( 0 );
+					results.items.length.should.equal( 0 );
 					done();
 				}
 			);
@@ -78,8 +80,10 @@ describe("mdn recipe's pageLoop",function(){
 					var query = "irrelevant",
 						options = null,
 						max = 10,
-						scrapeScript = "irrelevant";
-					window.pagehop.init( query, options, max, scrapeScript );
+						scrapeScript = "irrelevant",
+						systemMeta = null,
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
 					window.$ = function( jQuery ) {
 						jQuery.get = function(url) {
 							window.boxApi.emitEvent( "scrape", url );
@@ -95,11 +99,11 @@ describe("mdn recipe's pageLoop",function(){
 						return jQuery;
 					};
 				} + ")(" + JSON.stringify( defaultPage ) + ");" ),
-				function(urls, result) {
+				function(urls, results) {
 					should.exist( urls );
-					should.exist( result );
+					should.exist( results );
 					urls.length.should.equal( 1 );
-					result.length.should.equal( 10 );
+					results.items.length.should.equal( 10 );
 					done();
 				}
 			);
@@ -111,8 +115,10 @@ describe("mdn recipe's pageLoop",function(){
 					var query = "irrelevant",
 						options = null,
 						max = 20,
-						scrapeScript = "irrelevant";
-					window.pagehop.init( query, options, max, scrapeScript );
+						scrapeScript = "irrelevant",
+						systemMeta = null,
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
 					window.$ = function( jQuery ) {
 						jQuery.get = function(url) {
 							window.boxApi.emitEvent( "scrape", url );
@@ -128,11 +134,11 @@ describe("mdn recipe's pageLoop",function(){
 						return jQuery;
 					};
 				} + ")(" + JSON.stringify( defaultPage ) + ");" ),
-				function(urls, result) {
+				function(urls, results) {
 					should.exist( urls );
-					should.exist( result );
+					should.exist( results );
 					urls.length.should.equal( 2 );
-					result.length.should.equal( 20 );
+					results.items.length.should.equal( 20 );
 					done();
 				}
 			);
@@ -144,8 +150,10 @@ describe("mdn recipe's pageLoop",function(){
 					var query = "irrelevant",
 						options = null,
 						max = 30,
-						scrapeScript = "irrelevant";
-					window.pagehop.init( query, options, max, scrapeScript );
+						scrapeScript = "irrelevant",
+						systemMeta = null,
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
 					window.$ = function( jQuery ) {
 						jQuery.get = function(url) {
 							window.boxApi.emitEvent( "scrape", url );
@@ -161,11 +169,85 @@ describe("mdn recipe's pageLoop",function(){
 						return jQuery;
 					};
 				} + ")(" + JSON.stringify( defaultPage ) + ");" ),
-				function(urls, result) {
+				function(urls, results) {
 					should.exist( urls );
-					should.exist( result );
+					should.exist( results );
 					urls.length.should.equal( 3 );
-					result.length.should.equal( 30 );
+					results.items.length.should.equal( 30 );
+					done();
+				}
+			);
+		});
+	} );
+	describe( "hops array changes", function() {
+		it( "adds an item with default url, if no query", function(done){
+			test.pageLoop(
+				pathToRecipe,
+				new Function( "(" + function(page) {
+					var query = null,
+						options = null,
+						max = 20,
+						scrapeScript = "irrelevant",
+						systemMeta = null,
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
+					window.$ = function( jQuery ) {
+						jQuery.get = function(url) {
+							window.boxApi.emitEvent( "scrape", url );
+							return {
+								done: function(func) {
+									func( page );
+									return {
+										fail: function() {}
+									};
+								}
+							};
+						};
+						return jQuery;
+					};
+				} + ")(" + JSON.stringify( defaultPage ) + ");" ),
+				function(urls, results) {
+					should.exist( urls );
+					results.hops.should.eql( [ {
+						text: "MDN: no query",
+						address: "https://developer.mozilla.org/"
+					} ] );
+					done();
+				}
+			);
+		});
+		it( "adds an item with address to the same search on the site", function(done){
+			test.pageLoop(
+				pathToRecipe,
+				new Function( "(" + function(page) {
+					var query = "some",
+						options = null,
+						max = 10,
+						scrapeScript = "irrelevant",
+						systemMeta = null,
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
+					window.$ = function( jQuery ) {
+						jQuery.get = function(url) {
+							window.boxApi.emitEvent( "scrape", url );
+							return {
+								done: function(func) {
+									func( page );
+									return {
+										fail: function() {}
+									};
+								}
+							};
+						};
+						return jQuery;
+					};
+				} + ")(" + JSON.stringify( defaultPage ) + ");" ),
+				function(urls, results) {
+					should.exist( urls );
+					results.hops.should.eql( [ {
+						text: "MDN",
+						address: "https://developer.mozilla.org/en-US/search?q=some&page=1"
+					} ] );
 					done();
 				}
 			);
@@ -179,8 +261,10 @@ describe("mdn recipe's pageLoop",function(){
 					var query = "math",
 						options = null,
 						max = 20,
-						scrapeScript = "irrelevant";
-					window.pagehop.init( query, options, max, scrapeScript );
+						scrapeScript = "irrelevant",
+						systemMeta = null,
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
 					window.$ = function( jQuery ) {
 						jQuery.get = function(url) {
 							window.boxApi.emitEvent( "scrape", url );
@@ -215,8 +299,10 @@ describe("mdn recipe's pageLoop",function(){
 					var query = "irrelevant",
 						options = null,
 						max = 10,
-						scrapeScript = "irrelevant";
-					window.pagehop.init( query, options, max, scrapeScript );
+						scrapeScript = "irrelevant",
+						systemMeta = null,
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
 					window.$ = function( jQuery ) {
 						jQuery.get = function(url) {
 							window.boxApi.emitEvent( "scrape", url );
@@ -234,7 +320,7 @@ describe("mdn recipe's pageLoop",function(){
 				} + ")(" + JSON.stringify( defaultPage ) + ");" ),
 				function(urls, results) {
 					should.exist( urls );
-					removeFSPath( results ).should.eql( removeFSPath( expected.default ) );
+					removeFSPath( results.items ).should.eql( removeFSPath( expected.default ) );
 					done();
 				}
 			);
@@ -246,8 +332,10 @@ describe("mdn recipe's pageLoop",function(){
 					var query = "irrelevant",
 						options = null,
 						max = 10,
-						scrapeScript = "irrelevant";
-					window.pagehop.init( query, options, max, scrapeScript );
+						scrapeScript = "irrelevant",
+						systemMeta = null,
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
 					window.$ = function( jQuery ) {
 						jQuery.get = function(url) {
 							window.boxApi.emitEvent( "scrape", url );
@@ -265,7 +353,7 @@ describe("mdn recipe's pageLoop",function(){
 				} + ")(" + JSON.stringify( defaultNoMorePage ) + ");" ),
 				function(urls, results) {
 					should.exist( urls );
-					removeFSPath( results ).should.eql( removeFSPath( expected.default_no_more ) );
+					removeFSPath( results.items ).should.eql( removeFSPath( expected.default_no_more ) );
 					done();
 				}
 			);
@@ -277,8 +365,10 @@ describe("mdn recipe's pageLoop",function(){
 					var query = "irrelevant",
 						options = null,
 						max = 10,
-						scrapeScript = "irrelevant";
-					window.pagehop.init( query, options, max, scrapeScript );
+						scrapeScript = "irrelevant",
+						systemMeta = null,
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
 					window.$ = function( jQuery ) {
 						jQuery.get = function(url) {
 							window.boxApi.emitEvent( "scrape", url );
@@ -296,7 +386,7 @@ describe("mdn recipe's pageLoop",function(){
 				} + ")(" + JSON.stringify( emptyPage ) + ");" ),
 				function(urls, results) {
 					should.exist( urls );
-					removeFSPath( results ).should.eql( removeFSPath( expected.empty ) );
+					removeFSPath( results.items ).should.eql( removeFSPath( expected.empty ) );
 					done();
 				}
 			);
@@ -311,6 +401,8 @@ describe("mdn recipe's pageLoop",function(){
 						options = null,
 						max = 200,
 						scrapeScript = "irrelevant",
+						systemMeta = null,
+						hops = [],
 						pagehop = window.pagehop;
 					window.$ = function( jQuery ) {
 						jQuery.get = function(url) {
@@ -327,7 +419,7 @@ describe("mdn recipe's pageLoop",function(){
 						};
 						return jQuery;
 					};
-					pagehop.init( query, options, max, scrapeScript );
+					pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
 				},
 				function(error) {
 					should.exist( error );

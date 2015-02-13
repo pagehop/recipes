@@ -13,12 +13,13 @@ if ( $ ) {
 	$ = jQuery;
 }
 
-var urlTemplate = 'https://developer.mozilla.org/en-US/search?q=%s&page=%s',
+var hopDefaultUrl = "https://developer.mozilla.org/",
+	urlTemplate = "https://developer.mozilla.org/en-US/search?q=%s&page=%s",
 	startAt = 1,
 	itemsAtPage = 10,
 	max = pagehop.getMaxCount(),
 	iterationsCount = Math.ceil( max / itemsAtPage ),
-	query = pagehop.getQuery(),
+	query = pagehop.getQuery() ? encodeURIComponent( pagehop.getQuery() ) : "",
 	results = [];
 
 var scrapeUrl = function(url, callback) {
@@ -55,7 +56,7 @@ var scrapeUrl = function(url, callback) {
 var getPage = function(pageNumber) {
 	var url = util.format(
 		urlTemplate,
-		encodeURIComponent( query ),
+		query,
 		pageNumber
 	);
 
@@ -80,7 +81,21 @@ var getPage = function(pageNumber) {
 };
 
 if ( query ) {
+	pagehop.getHops().push( {
+		text: "MDN",
+		address: util.format(
+			urlTemplate,
+			query,
+			startAt
+		)
+	} );
+
 	getPage( startAt );
 } else {
+	pagehop.getHops().push( {
+		text: "MDN: no query",
+		address: hopDefaultUrl
+	} );
+
 	pagehop.finish( [] );
 }
