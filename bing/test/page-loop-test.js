@@ -165,7 +165,7 @@ describe("bing recipe's pageLoop",function(){
 						callback( "blowup" );
 					};
 
-					pagehop.init( query, options, max, scrapeScript, systemMeta, hops )
+					pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
 				},
 				function(error) {
 					should.exist( error );

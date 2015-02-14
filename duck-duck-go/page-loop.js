@@ -3,7 +3,7 @@
 'use strict';
 
 var hopDefaultUrl = "https://duckduckgo.com/",
-	hopUrlTemplate = "https://duckduckgo.com/?q=%q"
+	hopUrlTemplate = "https://duckduckgo.com/?q=%q",
 	urlTemplate = "https://duckduckgo.com/?q=%s",
 	max = pagehop.getMaxCount(),
 	query = pagehop.getQuery() ? encodeURIComponent( pagehop.getQuery() ) : "",
