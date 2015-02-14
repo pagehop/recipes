@@ -21,12 +21,13 @@ describe("url recipe's pageLoop",function(){
 						options = null,
 						max = 200,
 						scrapeScript = "irrelevant",
-						systemMeta = { recipes: [] };
-					window.pagehop.init( query, options, max, scrapeScript, systemMeta );
+						systemMeta = { recipes: [] },
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
 				},
 				function(urls, results) {
 					should.exist( urls );
-					results.should.eql( [] );
+					results.items.should.eql( [] );
 					done();
 				}
 			);
@@ -39,12 +40,13 @@ describe("url recipe's pageLoop",function(){
 						options = null,
 						max = 200,
 						scrapeScript = "irrelevant",
-						systemMeta = { recipes: [] };
-					window.pagehop.init( query, options, max, scrapeScript, systemMeta );
+						systemMeta = { recipes: [] },
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
 				},
 				function(urls, results) {
 					should.exist( urls );
-					results.should.eql( [
+					results.items.should.eql( [
 						{
 							text: "http://example.com",
 							address: "http://example.com"
@@ -62,12 +64,13 @@ describe("url recipe's pageLoop",function(){
 						options = null,
 						max = 200,
 						scrapeScript = "irrelevant",
-						systemMeta = { recipes: [] };
-					window.pagehop.init( query, options, max, scrapeScript, systemMeta );
+						systemMeta = { recipes: [] },
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
 				},
 				function(urls, results) {
 					should.exist( urls );
-					results.should.eql( [
+					results.items.should.eql( [
 						{
 							text: "http://example.com",
 							address: "http://example.com"
@@ -85,17 +88,88 @@ describe("url recipe's pageLoop",function(){
 						options = null,
 						max = 200,
 						scrapeScript = "irrelevant",
-						systemMeta = { recipes: [] };
-					window.pagehop.init( query, options, max, scrapeScript, systemMeta );
+						systemMeta = { recipes: [] },
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
 				},
 				function(urls, results) {
 					should.exist( urls );
-					results.should.eql( [
+					results.items.should.eql( [
 						{
 							text: "https://example.com",
 							address: "https://example.com"
 						}
 					] );
+					done();
+				}
+			);
+		});
+		it( "trims everything after first middle-space", function(done){
+			test.pageLoop(
+				pathToRecipe,
+				function() {
+					var query = "getbootstrap.com :ldocs",
+						options = null,
+						max = 200,
+						scrapeScript = "irrelevant",
+						systemMeta = { recipes: [] },
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
+				},
+				function(urls, results) {
+					should.exist( urls );
+					results.items.should.eql( [
+						{
+							text: "http://getbootstrap.com",
+							address: "http://getbootstrap.com"
+						}
+					] );
+					done();
+				}
+			);
+		});
+	} );
+	describe( "hops array changes", function() {
+		it( "adds an item with default url if no query", function(done){
+			test.pageLoop(
+				pathToRecipe,
+				function() {
+					var query = null,
+						options = null,
+						max = 200,
+						scrapeScript = "irrelevant",
+						systemMeta = { recipes: [] },
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
+				},
+				function(urls, results) {
+					should.exist( urls );
+					results.hops.should.eql( [ {
+						text: "URL: no value",
+						address: "https://github.com/pagehop/recipes/blob/master/url/README.md"
+					} ] );
+					done();
+				}
+			);
+		});
+		it( "adds an item with address the current query", function(done){
+			test.pageLoop(
+				pathToRecipe,
+				function() {
+					var query = "example.com",
+						options = null,
+						max = 200,
+						scrapeScript = "irrelevant",
+						systemMeta = { recipes: [] },
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
+				},
+				function(urls, results) {
+					should.exist( urls );
+					results.hops.should.eql( [ {
+						text: "URL: http://example.com",
+						address: "http://example.com"
+					} ] );
 					done();
 				}
 			);
