@@ -24,17 +24,22 @@ function flattenResults( results ) {
 	return result;
 }
 
-var urlTemplate = 'https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=%s&srlimit=%s&sroffset=%s&srprop=snippet&format=json',
+var hopDefaultUrl = "http://en.wikipedia.org/",
+	hopUrlTemplate = "http://en.wikipedia.org/wiki/%q",
+	urlTemplate = 'https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=%s&srlimit=%s&sroffset=%s&srprop=snippet&format=json',
 	max = pagehop.getMaxCount(),
-	query = pagehop.getQuery(),
+	query = pagehop.getQuery() ? encodeURIComponent( pagehop.getQuery() ) : "",
 	itemsAtPage = 50,
 	iterationsCount = Math.ceil( max / itemsAtPage ),
 	results = new Array( iterationsCount ),
 	asyncCount = iterationsCount;
 
-if ( !query ) {
-	pagehop.finish( [] );
-} else {
+if ( query ) {
+	pagehop.getHops().push( {
+		text: "Wikipedia",
+		address: hopUrlTemplate.replace( "%q", query )
+	} );
+
 	for ( var i = 0; i < iterationsCount; i++ ) {
 		var limit = ( ( i + 1 ) === iterationsCount ) ?
 			max - ( iterationsCount - 1 ) * itemsAtPage
@@ -43,7 +48,7 @@ if ( !query ) {
 		var offset = i * itemsAtPage;
 		var url = util.format(
 			urlTemplate,
-			encodeURIComponent( query ),
+			query,
 			limit,
 			offset
 		);
@@ -78,4 +83,11 @@ if ( !query ) {
 			});
 		})();
 	}
+} else {
+	pagehop.getHops().push( {
+		text: "Wikipedia: no query",
+		address: hopDefaultUrl
+	} );
+
+	pagehop.finish( [] );
 }

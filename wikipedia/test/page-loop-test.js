@@ -12,16 +12,18 @@ describe("wikipedia recipe's pageLoop",function(){
 	before( function(done) {
 		test.init( done );
 	} );
-	describe( "number of pages to be scraped", function() {
-		it( "scrapes 0 pages, if no query", function(done){
+	describe( "number of pages to be parsed", function() {
+		it( "parses 0 pages, if no query", function(done){
 			test.pageLoop(
 				pathToRecipe,
 				function() {
 					var query = null,
 						options = null,
 						max = 10,
-						scrapeScript = "irrelevant";
-					window.pagehop.init( query, options, max, scrapeScript );
+						scrapeScript = "irrelevant",
+						systemMeta = null,
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
 					window.$ = function(jQuery) {
 						jQuery.getJSON = function(url) {
 							window.boxApi.emitEvent( "scrape", url );
@@ -37,24 +39,26 @@ describe("wikipedia recipe's pageLoop",function(){
 						return jQuery;
 					};
 				},
-				function(urls, result) {
+				function(urls, results) {
 					should.exist( urls );
-					should.exist( result );
+					should.exist( results );
 					urls.length.should.equal( 0 );
-					result.length.should.equal( 0 );
+					results.items.length.should.equal( 0 );
 					done();
 				}
 			);
 		});
-		it( "scrapes 1 page, if maxCount is 10", function(done){
+		it( "parses 1 page, if maxCount is 10", function(done){
 			test.pageLoop(
 				pathToRecipe,
 				function() {
 					var query = "irrelevant",
 						options = null,
 						max = 10,
-						scrapeScript = "irrelevant";
-					window.pagehop.init( query, options, max, scrapeScript );
+						scrapeScript = "irrelevant",
+						systemMeta = null,
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
 					window.$ = function(jQuery) {
 						jQuery.getJSON = function(url) {
 							window.boxApi.emitEvent( "scrape", url );
@@ -70,24 +74,26 @@ describe("wikipedia recipe's pageLoop",function(){
 						return jQuery;
 					};
 				},
-				function(urls, result) {
+				function(urls, results) {
 					should.exist( urls );
-					should.exist( result );
+					should.exist( results );
 					urls.length.should.equal( 1 );
-					result.length.should.equal( 0 );
+					results.items.length.should.equal( 0 );
 					done();
 				}
 			);
 		});
-		it( "scrapes 2 pages, if maxCount is 51", function(done){
+		it( "parses 2 pages, if maxCount is 51", function(done){
 			test.pageLoop(
 				pathToRecipe,
 				function() {
 					var query = "irrelevant",
 						options = null,
 						max = 51,
-						scrapeScript = "irrelevant";
-					window.pagehop.init( query, options, max, scrapeScript );
+						scrapeScript = "irrelevant",
+						systemMeta = null,
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
 					window.$ = function(jQuery) {
 						jQuery.getJSON = function(url) {
 							window.boxApi.emitEvent( "scrape", url );
@@ -103,24 +109,26 @@ describe("wikipedia recipe's pageLoop",function(){
 						return jQuery;
 					};
 				},
-				function(urls, result) {
+				function(urls, results) {
 					should.exist( urls );
-					should.exist( result );
+					should.exist( results );
 					urls.length.should.equal( 2 );
-					result.length.should.equal( 0 );
+					results.items.length.should.equal( 0 );
 					done();
 				}
 			);
 		});
-		it( "scrapes 2 pages, if maxCount is 100", function(done){
+		it( "parses 2 pages, if maxCount is 100", function(done){
 			test.pageLoop(
 				pathToRecipe,
 				function() {
 					var query = "irrelevant",
 						options = null,
 						max = 100,
-						scrapeScript = "irrelevant";
-					window.pagehop.init( query, options, max, scrapeScript );
+						scrapeScript = "irrelevant",
+						systemMeta = null,
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
 					window.$ = function(jQuery) {
 						jQuery.getJSON = function(url) {
 							window.boxApi.emitEvent( "scrape", url );
@@ -136,11 +144,85 @@ describe("wikipedia recipe's pageLoop",function(){
 						return jQuery;
 					};
 				},
-				function(urls, result) {
+				function(urls, results) {
 					should.exist( urls );
-					should.exist( result );
+					should.exist( results );
 					urls.length.should.equal( 2 );
-					result.length.should.equal( 0 );
+					results.items.length.should.equal( 0 );
+					done();
+				}
+			);
+		});
+	} );
+	describe( "hops array changes", function() {
+		it( "adds an item with default url if no query", function(done){
+			test.pageLoop(
+				pathToRecipe,
+				function() {
+					var query = null,
+						options = null,
+						max = 10,
+						scrapeScript = "irrelevant",
+						systemMeta = null,
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
+					window.$ = function(jQuery) {
+						jQuery.getJSON = function(url) {
+							window.boxApi.emitEvent( "scrape", url );
+							return {
+								done: function(func) {
+									func( { query: { search: [] } } );
+									return {
+										fail: function() {}
+									};
+								}
+							};
+						};
+						return jQuery;
+					};
+				},
+				function(urls, results) {
+					should.exist( urls );
+					results.hops.should.eql( [ {
+						text: "Wikipedia: no query",
+						address: "http://en.wikipedia.org/"
+					} ] );
+					done();
+				}
+			);
+		});
+		it( "adds an item with address pointing to the same search on the site", function(done){
+			test.pageLoop(
+				pathToRecipe,
+				function() {
+					var query = "some",
+						options = null,
+						max = 10,
+						scrapeScript = "irrelevant",
+						systemMeta = null,
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
+					window.$ = function(jQuery) {
+						jQuery.getJSON = function(url) {
+							window.boxApi.emitEvent( "scrape", url );
+							return {
+								done: function(func) {
+									func( { query: { search: [] } } );
+									return {
+										fail: function() {}
+									};
+								}
+							};
+						};
+						return jQuery;
+					};
+				},
+				function(urls, results) {
+					should.exist( urls );
+					results.hops.should.eql( [ {
+						text: "Wikipedia",
+						address: "http://en.wikipedia.org/wiki/some"
+					} ] );
 					done();
 				}
 			);
@@ -154,8 +236,10 @@ describe("wikipedia recipe's pageLoop",function(){
 					var query = "math",
 						options = null,
 						max = 51,
-						scrapeScript = "irrelevant";
-					window.pagehop.init( query, options, max, scrapeScript );
+						scrapeScript = "irrelevant",
+						systemMeta = null,
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
 					window.$ = function(jQuery) {
 						jQuery.getJSON = function(url) {
 							window.boxApi.emitEvent( "scrape", url );
@@ -190,8 +274,10 @@ describe("wikipedia recipe's pageLoop",function(){
 					var query = "math",
 						options = null,
 						max = 2,
-						scrapeScript = "irrelevant";
-					window.pagehop.init( query, options, max, scrapeScript );
+						scrapeScript = "irrelevant",
+						systemMeta = null,
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
 					window.$ = function(jQuery) {
 						jQuery.getJSON = function(url) {
 							window.boxApi.emitEvent( "scrape", url );
@@ -218,7 +304,7 @@ describe("wikipedia recipe's pageLoop",function(){
 				},
 				function(urls, results) {
 					should.exist( urls );
-					results.should.eql( [] );
+					results.items.should.eql( [] );
 					done();
 				}
 			);
@@ -230,8 +316,10 @@ describe("wikipedia recipe's pageLoop",function(){
 					var query = "math",
 						options = null,
 						max = 2,
-						scrapeScript = "irrelevant";
-					window.pagehop.init( query, options, max, scrapeScript );
+						scrapeScript = "irrelevant",
+						systemMeta = null,
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
 					window.$ = function(jQuery) {
 						jQuery.getJSON = function(url) {
 							window.boxApi.emitEvent( "scrape", url );
@@ -276,7 +364,7 @@ describe("wikipedia recipe's pageLoop",function(){
 				},
 				function(urls, results) {
 					should.exist( urls );
-					results.should.eql( [
+					results.items.should.eql( [
 						{
 							"text": "Mathematics",
 							"address": "http://en.wikipedia.org/wiki/Mathematics",
@@ -302,9 +390,11 @@ describe("wikipedia recipe's pageLoop",function(){
 						options = null,
 						max = 200,
 						scrapeScript = "irrelevant",
+						systemMeta = null,
+						hops = [],
 						pagehop = window.pagehop;
 
-					pagehop.init( query, options, max, scrapeScript );
+					pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
 					window.$ = function(jQuery) {
 						jQuery.getJSON = function(url) {
 							window.boxApi.emitEvent( "scrape", url );
