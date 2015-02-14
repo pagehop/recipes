@@ -13,21 +13,22 @@ var semver = require("semver"),
 	shouldGetRecipes = options.indexOf( ":r" ) !== -1,
 	shouldGetTools = options.indexOf( ":t" ) !== -1,
 	shouldCheckForUpdate = options.indexOf( ":u" ) !== -1,
+	readmeUrl = "https://github.com/pagehop/recipes/blob/master/system/README.md",
 	helpInfo = [
 		{
 			text: "To list all recipes:",
 			displayAddress: "sys :r",
-			address: "https://github.com/pagehop/recipes/blob/master/system/README.md"
+			address: readmeUrl
 		},
 		{
 			text: "To list all tools:",
 			displayAddress: "sys :t",
-			address: "https://github.com/pagehop/recipes/blob/master/system/README.md"
+			address: readmeUrl
 		},
 		{
 			text: "To check for an update:",
 			displayAddress: "sys :u",
-			address: "https://github.com/pagehop/recipes/blob/master/system/README.md"
+			address: readmeUrl
 		}
 	],
 	updateCheckUrl = "https://pagehopapp.com/app/version",
@@ -88,12 +89,32 @@ var checkForUpdate = function(systemMeta) {
 
 if ( systemMeta ) {
 	if ( shouldGetRecipes ) {
+		pagehop.getHops().push( {
+			text: "System: all recipes",
+			address: readmeUrl
+		} );
+
 		pagehop.finish( getRecipes( systemMeta ) );
 	} else if ( shouldGetTools ) {
+		pagehop.getHops().push( {
+			text: "System: all tools",
+			address: readmeUrl
+		} );
+
 		pagehop.finish( getTools( systemMeta ) );
 	} else if ( shouldCheckForUpdate ) {
+		pagehop.getHops().push( {
+			text: "System: update check",
+			address: readmeUrl
+		} );
+
 		checkForUpdate(systemMeta);
 	} else {
+		pagehop.getHops().push( {
+			text: "System: use an option (:r, :t or :u)",
+			address: readmeUrl
+		} );
+
 		pagehop.finish( helpInfo );
 	}
 }

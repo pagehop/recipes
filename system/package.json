@@ -1,7 +1,7 @@
 {
   "name": "pagehop-system-recipe",
   "description": "System recipe (replaces AllRecipes and AllTools and adds check for update).",
-  "version": "0.1.1",
+  "version": "1.0.0",
   "homepage": "https://github.com/pagehop/recipes/blob/master/system/README.md",
   "author": {
     "name": "nicroto",

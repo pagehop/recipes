@@ -14,6 +14,104 @@ describe("system recipe's pageLoop",function(){
 	before( function(done) {
 		test.init( done );
 	} );
+	describe( "hops array changes", function() {
+		it( "adds an item with text notifying the user he has to use an option", function(done){
+			test.pageLoop(
+				pathToRecipe,
+				function() {
+					var query = null,
+						options = null,
+						max = 200,
+						scrapeScript = "irrelevant",
+						systemMeta = { recipes: [], tools: [] },
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
+				},
+				function(urls, results) {
+					should.exist( urls );
+					results.hops.should.eql( [ {
+						text: "System: use an option (:r, :t or :u)",
+						address: "https://github.com/pagehop/recipes/blob/master/system/README.md"
+					} ] );
+					done();
+				}
+			);
+		} );
+		it( "adds an item with text notifying the user he has used the 'recipes' (:r) option", function(done){
+			test.pageLoop(
+				pathToRecipe,
+				function() {
+					var query = null,
+						options = [ ":r" ],
+						max = 200,
+						scrapeScript = "irrelevant",
+						systemMeta = { recipes: [], tools: [] },
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
+				},
+				function(urls, results) {
+					should.exist( urls );
+					results.hops.should.eql( [ {
+						text: "System: all recipes",
+						address: "https://github.com/pagehop/recipes/blob/master/system/README.md"
+					} ] );
+					done();
+				}
+			);
+		} );
+		it( "adds an item with text notifying the user he has used the 'tools' (:t) option", function(done){
+			test.pageLoop(
+				pathToRecipe,
+				function() {
+					var query = null,
+						options = [ ":t" ],
+						max = 200,
+						scrapeScript = "irrelevant",
+						systemMeta = { recipes: [], tools: [] },
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
+				},
+				function(urls, results) {
+					should.exist( urls );
+					results.hops.should.eql( [ {
+						text: "System: all tools",
+						address: "https://github.com/pagehop/recipes/blob/master/system/README.md"
+					} ] );
+					done();
+				}
+			);
+		} );
+		it( "adds an item with text notifying the user he has used the 'check for update' (:u) option", function(done){
+			test.pageLoop(
+				pathToRecipe,
+				function() {
+					var query = null,
+						options = [ ":u" ],
+						max = 200,
+						scrapeScript = "irrelevant",
+						systemMeta = { recipes: [], tools: [] },
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
+					window.request = { get: function(url) {
+						return {
+							end: function(callback) {
+								var error = true;
+								callback( error );
+							}
+						};
+					} };
+				},
+				function(urls, results) {
+					should.exist( urls );
+					results.hops.should.eql( [ {
+						text: "System: update check",
+						address: "https://github.com/pagehop/recipes/blob/master/system/README.md"
+					} ] );
+					done();
+				}
+			);
+		} );
+	} );
 	describe( "parsing meta data", function() {
 		it( "shows help results pointing to docs when no options are used", function(done){
 			test.pageLoop(
@@ -23,12 +121,13 @@ describe("system recipe's pageLoop",function(){
 						options = null,
 						max = 200,
 						scrapeScript = "irrelevant",
-						systemMeta = { recipes: [], tools: [] };
-					window.pagehop.init( query, options, max, scrapeScript, systemMeta );
+						systemMeta = { recipes: [], tools: [] },
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
 				},
 				function(urls, results) {
 					should.exist( urls );
-					results.should.eql( [
+					results.items.should.eql( [
 						{
 							text: "To list all recipes:",
 							displayAddress: "sys :r",
@@ -48,7 +147,7 @@ describe("system recipe's pageLoop",function(){
 					done();
 				}
 			);
-		});
+		} );
 		it( "shows all available recipes", function(done){
 			test.pageLoop(
 				pathToRecipe,
@@ -84,12 +183,13 @@ describe("system recipe's pageLoop",function(){
 								}
 							],
 							tools: []
-						};
-					window.pagehop.init( query, options, max, scrapeScript, systemMeta );
+						},
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
 				},
 				function(urls, results) {
 					should.exist( urls );
-					results.should.eql( [
+					results.items.should.eql( [
 							{
 								text: "GithubSearch",
 								displayAddress: "v0.1.0 | Best Github recipe ever",
@@ -110,7 +210,7 @@ describe("system recipe's pageLoop",function(){
 					done();
 				}
 			);
-		});
+		} );
 		it( "shows all available tools", function(done){
 			test.pageLoop(
 				pathToRecipe,
@@ -137,12 +237,13 @@ describe("system recipe's pageLoop",function(){
 									"keyword": ":a"
 								}
 							]
-						};
-					window.pagehop.init( query, options, max, scrapeScript, systemMeta );
+						},
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
 				},
 				function(urls, results) {
 					should.exist( urls );
-					results.should.eql( [
+					results.items.should.eql( [
 							{
 								text: "FuzzySearch (:f)",
 								displayAddress: "v0.1.0 | Tool for the pagehop productivity tool which allows fuzzy search in results.",
@@ -159,7 +260,7 @@ describe("system recipe's pageLoop",function(){
 					done();
 				}
 			);
-		});
+		} );
 		it( "says 'no updates available' on network issues", function(done){
 			test.pageLoop(
 				pathToRecipe,
@@ -172,8 +273,9 @@ describe("system recipe's pageLoop",function(){
 							version: "1.0.0",
 							recipes: [],
 							tools: []
-						};
-					window.pagehop.init( query, options, max, scrapeScript, systemMeta );
+						},
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
 					window.request = { get: function(url) {
 						return {
 							end: function(callback) {
@@ -185,14 +287,14 @@ describe("system recipe's pageLoop",function(){
 				},
 				function(urls, results) {
 					should.exist( urls );
-					results.should.eql( [ {
+					results.items.should.eql( [ {
 						text: "Pagehop is up to date!",
 						displayAddress: "ver. 1.0.0 is the latest one available."
 					} ] );
 					done();
 				}
 			);
-		});
+		} );
 		it( "says 'no updates available' on no-error-no-response situation", function(done){
 			test.pageLoop(
 				pathToRecipe,
@@ -205,8 +307,9 @@ describe("system recipe's pageLoop",function(){
 							version: "1.0.0",
 							recipes: [],
 							tools: []
-						};
-					window.pagehop.init( query, options, max, scrapeScript, systemMeta );
+						},
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
 					window.request = { get: function(url) {
 						return {
 							end: function(callback) {
@@ -217,14 +320,14 @@ describe("system recipe's pageLoop",function(){
 				},
 				function(urls, results) {
 					should.exist( urls );
-					results.should.eql( [ {
+					results.items.should.eql( [ {
 						text: "Pagehop is up to date!",
 						displayAddress: "ver. 1.0.0 is the latest one available."
 					} ] );
 					done();
 				}
 			);
-		});
+		} );
 		it( "says 'no updates available' if response doesn't have a body property", function(done){
 			test.pageLoop(
 				pathToRecipe,
@@ -237,8 +340,9 @@ describe("system recipe's pageLoop",function(){
 							version: "1.0.0",
 							recipes: [],
 							tools: []
-						};
-					window.pagehop.init( query, options, max, scrapeScript, systemMeta );
+						},
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
 					window.request = { get: function(url) {
 						return {
 							end: function(callback) {
@@ -249,14 +353,14 @@ describe("system recipe's pageLoop",function(){
 				},
 				function(urls, results) {
 					should.exist( urls );
-					results.should.eql( [ {
+					results.items.should.eql( [ {
 						text: "Pagehop is up to date!",
 						displayAddress: "ver. 1.0.0 is the latest one available."
 					} ] );
 					done();
 				}
 			);
-		});
+		} );
 		it( "says 'no updates available' if response.body doesn't have a version property", function(done){
 			test.pageLoop(
 				pathToRecipe,
@@ -269,8 +373,9 @@ describe("system recipe's pageLoop",function(){
 							version: "1.0.0",
 							recipes: [],
 							tools: []
-						};
-					window.pagehop.init( query, options, max, scrapeScript, systemMeta );
+						},
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
 					window.request = { get: function(url) {
 						return {
 							end: function(callback) {
@@ -281,14 +386,14 @@ describe("system recipe's pageLoop",function(){
 				},
 				function(urls, results) {
 					should.exist( urls );
-					results.should.eql( [ {
+					results.items.should.eql( [ {
 						text: "Pagehop is up to date!",
 						displayAddress: "ver. 1.0.0 is the latest one available."
 					} ] );
 					done();
 				}
 			);
-		});
+		} );
 		it( "says 'no updates available' if result's version property isn't a valid version", function(done){
 			test.pageLoop(
 				pathToRecipe,
@@ -301,8 +406,9 @@ describe("system recipe's pageLoop",function(){
 							version: "1.0.0",
 							recipes: [],
 							tools: []
-						};
-					window.pagehop.init( query, options, max, scrapeScript, systemMeta );
+						},
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
 					window.request = { get: function(url) {
 						return {
 							end: function(callback) {
@@ -313,14 +419,14 @@ describe("system recipe's pageLoop",function(){
 				},
 				function(urls, results) {
 					should.exist( urls );
-					results.should.eql( [ {
+					results.items.should.eql( [ {
 						text: "Pagehop is up to date!",
 						displayAddress: "ver. 1.0.0 is the latest one available."
 					} ] );
 					done();
 				}
 			);
-		});
+		} );
 		it( "says 'no updates available' when online-available version is same as installed", function(done){
 			test.pageLoop(
 				pathToRecipe,
@@ -333,8 +439,9 @@ describe("system recipe's pageLoop",function(){
 							version: "1.0.0",
 							recipes: [],
 							tools: []
-						};
-					window.pagehop.init( query, options, max, scrapeScript, systemMeta );
+						},
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
 					window.request = { get: function(url) {
 						return {
 							end: function(callback) {
@@ -345,14 +452,14 @@ describe("system recipe's pageLoop",function(){
 				},
 				function(urls, results) {
 					should.exist( urls );
-					results.should.eql( [ {
+					results.items.should.eql( [ {
 						text: "Pagehop is up to date!",
 						displayAddress: "ver. 1.0.0 is the latest one available."
 					} ] );
 					done();
 				}
 			);
-		});
+		} );
 		it( "says 'update is available' when online-available version is newer than installed", function(done){
 			test.pageLoop(
 				pathToRecipe,
@@ -365,8 +472,9 @@ describe("system recipe's pageLoop",function(){
 							version: "1.0.0",
 							recipes: [],
 							tools: []
-						};
-					window.pagehop.init( query, options, max, scrapeScript, systemMeta );
+						},
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
 					window.request = { get: function(url) {
 						return {
 							end: function(callback) {
@@ -377,7 +485,7 @@ describe("system recipe's pageLoop",function(){
 				},
 				function(urls, results) {
 					should.exist( urls );
-					results.should.eql( [ {
+					results.items.should.eql( [ {
 						text: "Update is available!",
 						displayAddress: "Get ver. 1.0.1.",
 						address: "https://pagehopapp.com/download"
@@ -385,9 +493,9 @@ describe("system recipe's pageLoop",function(){
 					done();
 				}
 			);
-		});
+		} );
 	} );
 	after( function(done) {
 		test.finalize( done );
 	} );
-});
+} );
