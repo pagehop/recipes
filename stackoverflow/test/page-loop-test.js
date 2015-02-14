@@ -20,8 +20,10 @@ describe("stackoverflow recipe's pageLoop",function(){
 					var query = null,
 						options = null,
 						max = 10,
-						scrapeScript = "irrelevant";
-					window.pagehop.init( query, options, max, scrapeScript );
+						scrapeScript = "irrelevant",
+						systemMeta = null,
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
 					window.$ = {
 						getJSON: function(url) {
 							window.boxApi.emitEvent( "scrape", url );
@@ -39,11 +41,11 @@ describe("stackoverflow recipe's pageLoop",function(){
 						}
 					};
 				},
-				function(urls, result) {
+				function(urls, results) {
 					should.exist( urls );
-					should.exist( result );
+					should.exist( results );
 					urls.length.should.equal( 0 );
-					result.length.should.equal( 0 );
+					results.items.length.should.equal( 0 );
 					done();
 				}
 			);
@@ -55,8 +57,10 @@ describe("stackoverflow recipe's pageLoop",function(){
 					var query = "irrelevant",
 						options = null,
 						max = 10,
-						scrapeScript = "irrelevant";
-					window.pagehop.init( query, options, max, scrapeScript );
+						scrapeScript = "irrelevant",
+						systemMeta = null,
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
 					window.$ = {
 						getJSON: function(url) {
 							window.boxApi.emitEvent( "scrape", url );
@@ -74,11 +78,11 @@ describe("stackoverflow recipe's pageLoop",function(){
 						}
 					};
 				},
-				function(urls, result) {
+				function(urls, results) {
 					should.exist( urls );
-					should.exist( result );
+					should.exist( results );
 					urls.length.should.equal( 1 );
-					result.length.should.equal( 0 );
+					results.items.length.should.equal( 0 );
 					done();
 				}
 			);
@@ -90,8 +94,10 @@ describe("stackoverflow recipe's pageLoop",function(){
 					var query = "irrelevant",
 						options = null,
 						max = 101,
-						scrapeScript = "irrelevant";
-					window.pagehop.init( query, options, max, scrapeScript );
+						scrapeScript = "irrelevant",
+						systemMeta = null,
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
 					window.$ = {
 						getJSON: function(url) {
 							window.boxApi.emitEvent( "scrape", url );
@@ -109,11 +115,11 @@ describe("stackoverflow recipe's pageLoop",function(){
 						}
 					};
 				},
-				function(urls, result) {
+				function(urls, results) {
 					should.exist( urls );
-					should.exist( result );
+					should.exist( results );
 					urls.length.should.equal( 1 );
-					result.length.should.equal( 0 );
+					results.items.length.should.equal( 0 );
 					done();
 				}
 			);
@@ -125,8 +131,10 @@ describe("stackoverflow recipe's pageLoop",function(){
 					var query = "irrelevant",
 						options = null,
 						max = 101,
-						scrapeScript = "irrelevant";
-					window.pagehop.init( query, options, max, scrapeScript );
+						scrapeScript = "irrelevant",
+						systemMeta = null,
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
 					window.$ = {
 						getJSON: function(url) {
 							window.boxApi.emitEvent( "scrape", url );
@@ -144,11 +152,11 @@ describe("stackoverflow recipe's pageLoop",function(){
 						}
 					};
 				},
-				function(urls, result) {
+				function(urls, results) {
 					should.exist( urls );
-					should.exist( result );
+					should.exist( results );
 					urls.length.should.equal( 2 );
-					result.length.should.equal( 0 );
+					results.items.length.should.equal( 0 );
 					done();
 				}
 			);
@@ -160,8 +168,10 @@ describe("stackoverflow recipe's pageLoop",function(){
 					var query = "irrelevant",
 						options = null,
 						max = 200,
-						scrapeScript = "irrelevant";
-					window.pagehop.init( query, options, max, scrapeScript );
+						scrapeScript = "irrelevant",
+						systemMeta = null,
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
 					window.$ = {
 						getJSON: function(url) {
 							window.boxApi.emitEvent( "scrape", url );
@@ -179,11 +189,89 @@ describe("stackoverflow recipe's pageLoop",function(){
 						}
 					};
 				},
-				function(urls, result) {
+				function(urls, results) {
 					should.exist( urls );
-					should.exist( result );
+					should.exist( results );
 					urls.length.should.equal( 2 );
-					result.length.should.equal( 0 );
+					results.items.length.should.equal( 0 );
+					done();
+				}
+			);
+		});
+	} );
+	describe( "hops array changes", function() {
+		it( "adds an items with url, if no query", function(done){
+			test.pageLoop(
+				pathToRecipe,
+				function() {
+					var query = null,
+						options = null,
+						max = 10,
+						scrapeScript = "irrelevant",
+						systemMeta = null,
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
+					window.$ = {
+						getJSON: function(url) {
+							window.boxApi.emitEvent( "scrape", url );
+							return {
+								done: function(func) {
+									func( {
+										items:[],
+										has_more: true
+									} );
+									return {
+										fail: function() {}
+									};
+								}
+							};
+						}
+					};
+				},
+				function(urls, results) {
+					should.exist( urls );
+					results.hops.should.eql( [ {
+						text: "StackOverflow: no query",
+						address: "https://stackoverflow.com/"
+					} ] );
+					done();
+				}
+			);
+		});
+		it( "adds an item with address pointing to the same search in the site", function(done){
+			test.pageLoop(
+				pathToRecipe,
+				function() {
+					var query = "some",
+						options = null,
+						max = 10,
+						scrapeScript = "irrelevant",
+						systemMeta = null,
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
+					window.$ = {
+						getJSON: function(url) {
+							window.boxApi.emitEvent( "scrape", url );
+							return {
+								done: function(func) {
+									func( {
+										items:[],
+										has_more: true
+									} );
+									return {
+										fail: function() {}
+									};
+								}
+							};
+						}
+					};
+				},
+				function(urls, results) {
+					should.exist( urls );
+					results.hops.should.eql( [ {
+						text: "StackOverflow",
+						address: "https://stackoverflow.com/search?q=some"
+					} ] );
 					done();
 				}
 			);
@@ -197,8 +285,10 @@ describe("stackoverflow recipe's pageLoop",function(){
 					var query = "math",
 						options = null,
 						max = 2,
-						scrapeScript = "irrelevant";
-					window.pagehop.init( query, options, max, scrapeScript );
+						scrapeScript = "irrelevant",
+						systemMeta = null,
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
 					window.$ = {
 						getJSON: function(url) {
 							window.boxApi.emitEvent( "scrape", url );
@@ -271,7 +361,7 @@ describe("stackoverflow recipe's pageLoop",function(){
 				},
 				function(urls, results) {
 					should.exist( urls );
-					results.should.eql( [
+					results.items.should.eql( [
 						{
 							"text": "Interview question: f(f(n)) == -n",
 							"address": "http://stackoverflow.com/questions/731832/interview-question-ffn-n",
@@ -294,8 +384,10 @@ describe("stackoverflow recipe's pageLoop",function(){
 					var query = "math",
 						options = null,
 						max = 20,
-						scrapeScript = "irrelevant";
-					window.pagehop.init( query, options, max, scrapeScript );
+						scrapeScript = "irrelevant",
+						systemMeta = null,
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
 					window.$ = {
 						getJSON: function(url) {
 							window.boxApi.emitEvent( "scrape", url );
@@ -317,7 +409,7 @@ describe("stackoverflow recipe's pageLoop",function(){
 				},
 				function(urls, results) {
 					should.exist( urls );
-					results.should.eql( [] );
+					results.items.should.eql( [] );
 					done();
 				}
 			);
@@ -331,8 +423,10 @@ describe("stackoverflow recipe's pageLoop",function(){
 					var query = "math",
 						options = null,
 						max = 101,
-						scrapeScript = "irrelevant";
-					window.pagehop.init( query, options, max, scrapeScript );
+						scrapeScript = "irrelevant",
+						systemMeta = null,
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
 					window.$ = {
 						getJSON: function(url) {
 							window.boxApi.emitEvent( "scrape", url );
@@ -371,9 +465,11 @@ describe("stackoverflow recipe's pageLoop",function(){
 						options = null,
 						max = 200,
 						scrapeScript = "irrelevant",
+						systemMeta = null,
+						hops = [],
 						pagehop = window.pagehop;
 
-					pagehop.init( query, options, max, scrapeScript );
+					pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
 					window.$ = {
 						getJSON: function(url) {
 							window.boxApi.emitEvent( "scrape", url );

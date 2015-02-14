@@ -13,9 +13,11 @@ if ( !$ ) {
 // page {1,...,n}
 // pagesize <= 100
 // !NB! key is only for Pagehop use
-var urlTemplate = 'http://api.stackexchange.com/2.2/search/advanced?key=Z10BXZ9DtCJ7470hy*SYsw((&page=%s&pagesize=%s&order=desc&sort=relevance&q=%s&site=stackoverflow',
+var hopDefaultUrl = "https://stackoverflow.com/",
+	hopUrlTemplate = "https://stackoverflow.com/search?q=%q",
+	urlTemplate = "http://api.stackexchange.com/2.2/search/advanced?key=Z10BXZ9DtCJ7470hy*SYsw((&page=%s&pagesize=%s&order=desc&sort=relevance&q=%s&site=stackoverflow",
 	max = pagehop.getMaxCount(),
-	query = pagehop.getQuery(),
+	query = pagehop.getQuery() ? encodeURIComponent( pagehop.getQuery() ) : "",
 	itemsAtPage = 100,
 	firstPageNumber = 1,
 	iterationsCount = Math.ceil( max / itemsAtPage ),
@@ -26,7 +28,7 @@ var getPage = function(pageNumber) {
 		urlTemplate,
 		pageNumber,
 		itemsAtPage,
-		encodeURIComponent( query )
+		query
 	);
 
 	$.getJSON( url )
@@ -66,8 +68,18 @@ var getPage = function(pageNumber) {
 
 };
 
-if ( !query ) {
-	pagehop.finish( [] );
-} else {
+if ( query ) {
+	pagehop.getHops().push( {
+		text: "StackOverflow",
+		address: hopUrlTemplate.replace( "%q", query )
+	} );
+
 	getPage( firstPageNumber );
+} else {
+	pagehop.getHops().push( {
+		text: "StackOverflow: no query",
+		address: hopDefaultUrl
+	} );
+
+	pagehop.finish( [] );
 }
