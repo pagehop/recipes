@@ -12,16 +12,18 @@ describe("youtube recipe's pageLoop",function(){
 	before( function(done) {
 		test.init( done );
 	} );
-	describe( "number of pages to be scraped", function() {
-		it( "scrapes 0 pages, if no query", function(done){
+	describe( "number of pages to be parsed", function() {
+		it( "parses 0 pages, if no query", function(done){
 			test.pageLoop(
 				pathToRecipe,
 				function() {
 					var query = null,
 						options = null,
 						max = 50,
-						scrapeScript = "irrelevant";
-					window.pagehop.init( query, options, max, scrapeScript );
+						scrapeScript = "irrelevant",
+						systemMeta = null,
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
 					window.$ = {
 						getJSON: function(url) {
 							window.boxApi.emitEvent( "scrape", url );
@@ -39,24 +41,26 @@ describe("youtube recipe's pageLoop",function(){
 						}
 					};
 				},
-				function(urls, result) {
+				function(urls, results) {
 					should.exist( urls );
-					should.exist( result );
+					should.exist( results );
 					urls.length.should.equal( 0 );
-					result.length.should.equal( 0 );
+					results.items.length.should.equal( 0 );
 					done();
 				}
 			);
 		});
-		it( "scrapes 1 page, if maxCount is 50", function(done){
+		it( "parses 1 page, if maxCount is 50", function(done){
 			test.pageLoop(
 				pathToRecipe,
 				function() {
 					var query = "irrelevant",
 						options = null,
 						max = 50,
-						scrapeScript = "irrelevant";
-					window.pagehop.init( query, options, max, scrapeScript );
+						scrapeScript = "irrelevant",
+						systemMeta = null,
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
 					window.$ = {
 						getJSON: function(url) {
 							window.boxApi.emitEvent( "scrape", url );
@@ -74,24 +78,26 @@ describe("youtube recipe's pageLoop",function(){
 						}
 					};
 				},
-				function(urls, result) {
+				function(urls, results) {
 					should.exist( urls );
-					should.exist( result );
+					should.exist( results );
 					urls.length.should.equal( 1 );
-					result.length.should.equal( 0 );
+					results.items.length.should.equal( 0 );
 					done();
 				}
 			);
 		});
-		it( "scrapes 1 page, if maxCount is 51 and firstResult.nextPageToken is missing", function(done){
+		it( "parses 1 page, if maxCount is 51 and firstResult.nextPageToken is missing", function(done){
 			test.pageLoop(
 				pathToRecipe,
 				function() {
 					var query = "irrelevant",
 						options = null,
 						max = 51,
-						scrapeScript = "irrelevant";
-					window.pagehop.init( query, options, max, scrapeScript );
+						scrapeScript = "irrelevant",
+						systemMeta = null,
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
 					window.$ = {
 						getJSON: function(url) {
 							window.boxApi.emitEvent( "scrape", url );
@@ -108,24 +114,26 @@ describe("youtube recipe's pageLoop",function(){
 						}
 					};
 				},
-				function(urls, result) {
+				function(urls, results) {
 					should.exist( urls );
-					should.exist( result );
+					should.exist( results );
 					urls.length.should.equal( 1 );
-					result.length.should.equal( 0 );
+					results.items.length.should.equal( 0 );
 					done();
 				}
 			);
 		});
-		it( "scrapes 2 pages, if maxCount is 51", function(done){
+		it( "parses 2 pages, if maxCount is 51", function(done){
 			test.pageLoop(
 				pathToRecipe,
 				function() {
 					var query = "irrelevant",
 						options = null,
 						max = 51,
-						scrapeScript = "irrelevant";
-					window.pagehop.init( query, options, max, scrapeScript );
+						scrapeScript = "irrelevant",
+						systemMeta = null,
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
 					window.$ = {
 						getJSON: function(url) {
 							window.boxApi.emitEvent( "scrape", url );
@@ -143,24 +151,26 @@ describe("youtube recipe's pageLoop",function(){
 						}
 					};
 				},
-				function(urls, result) {
+				function(urls, results) {
 					should.exist( urls );
-					should.exist( result );
+					should.exist( results );
 					urls.length.should.equal( 2 );
-					result.length.should.equal( 0 );
+					results.items.length.should.equal( 0 );
 					done();
 				}
 			);
 		});
-		it( "scrapes 2 pages, if maxCount is 100", function(done){
+		it( "parses 2 pages, if maxCount is 100", function(done){
 			test.pageLoop(
 				pathToRecipe,
 				function() {
 					var query = "irrelevant",
 						options = null,
 						max = 100,
-						scrapeScript = "irrelevant";
-					window.pagehop.init( query, options, max, scrapeScript );
+						scrapeScript = "irrelevant",
+						systemMeta = null,
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
 					window.$ = {
 						getJSON: function(url) {
 							window.boxApi.emitEvent( "scrape", url );
@@ -178,11 +188,89 @@ describe("youtube recipe's pageLoop",function(){
 						}
 					};
 				},
-				function(urls, result) {
+				function(urls, results) {
 					should.exist( urls );
-					should.exist( result );
+					should.exist( results );
 					urls.length.should.equal( 2 );
-					result.length.should.equal( 0 );
+					results.items.length.should.equal( 0 );
+					done();
+				}
+			);
+		});
+	} );
+	describe( "hops array changes", function() {
+		it( "adds an item with a default url if no query", function(done){
+			test.pageLoop(
+				pathToRecipe,
+				function() {
+					var query = null,
+						options = null,
+						max = 50,
+						scrapeScript = "irrelevant",
+						systemMeta = null,
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
+					window.$ = {
+						getJSON: function(url) {
+							window.boxApi.emitEvent( "scrape", url );
+							return {
+								done: function(func) {
+									func( {
+										items:[],
+										nextPageToken: "ASKJHH1"
+									} );
+									return {
+										fail: function() {}
+									};
+								}
+							};
+						}
+					};
+				},
+				function(urls, results) {
+					should.exist( urls );
+					results.hops.should.eql( [ {
+						text: "YouTube: no query",
+						address: "https://www.youtube.com/"
+					} ] );
+					done();
+				}
+			);
+		});
+		it( "adds an item with address pointing to the same search on the site", function(done){
+			test.pageLoop(
+				pathToRecipe,
+				function() {
+					var query = "some",
+						options = null,
+						max = 50,
+						scrapeScript = "irrelevant",
+						systemMeta = null,
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
+					window.$ = {
+						getJSON: function(url) {
+							window.boxApi.emitEvent( "scrape", url );
+							return {
+								done: function(func) {
+									func( {
+										items:[],
+										nextPageToken: "ASKJHH1"
+									} );
+									return {
+										fail: function() {}
+									};
+								}
+							};
+						}
+					};
+				},
+				function(urls, results) {
+					should.exist( urls );
+					results.hops.should.eql( [ {
+						text: "YouTube",
+						address: "https://www.youtube.com/results?search_query=some"
+					} ] );
 					done();
 				}
 			);
@@ -196,8 +284,10 @@ describe("youtube recipe's pageLoop",function(){
 					var query = "math",
 						options = null,
 						max = 2,
-						scrapeScript = "irrelevant";
-					window.pagehop.init( query, options, max, scrapeScript );
+						scrapeScript = "irrelevant",
+						systemMeta = null,
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
 					window.$ = {
 						getJSON: function(url) {
 							window.boxApi.emitEvent( "scrape", url );
@@ -280,7 +370,7 @@ describe("youtube recipe's pageLoop",function(){
 				},
 				function(urls, results) {
 					should.exist( urls );
-					results.should.eql( [
+					results.items.should.eql( [
 						{
 							"text": "Learn Math Tutorials",
 							"address": "http://www.youtube.com/channel/UCn2SbZWi4yTkmPUj5wnbfoA",
@@ -303,8 +393,10 @@ describe("youtube recipe's pageLoop",function(){
 					var query = "math",
 						options = null,
 						max = 2,
-						scrapeScript = "irrelevant";
-					window.pagehop.init( query, options, max, scrapeScript );
+						scrapeScript = "irrelevant",
+						systemMeta = null,
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
 					window.$ = {
 						getJSON: function(url) {
 							window.boxApi.emitEvent( "scrape", url );
@@ -323,7 +415,7 @@ describe("youtube recipe's pageLoop",function(){
 				},
 				function(urls, results) {
 					should.exist( urls );
-					results.should.eql( [] );
+					results.items.should.eql( [] );
 					done();
 				}
 			);
@@ -337,8 +429,10 @@ describe("youtube recipe's pageLoop",function(){
 					var query = "math",
 						options = null,
 						max = 51,
-						scrapeScript = "irrelevant";
-					window.pagehop.init( query, options, max, scrapeScript );
+						scrapeScript = "irrelevant",
+						systemMeta = null,
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
 					window.$ = {
 						getJSON: function(url) {
 							window.boxApi.emitEvent( "scrape", url );
@@ -377,9 +471,11 @@ describe("youtube recipe's pageLoop",function(){
 						options = null,
 						max = 200,
 						scrapeScript = "irrelevant",
+						systemMeta = null,
+						hops = [],
 						pagehop = window.pagehop;
 
-					pagehop.init( query, options, max, scrapeScript );
+					pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
 					window.$ = {
 						getJSON: function(url) {
 							window.boxApi.emitEvent( "scrape", url );

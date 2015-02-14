@@ -8,6 +8,9 @@ if ( !$ ) {
 	var $ = require('jquery-browserify');
 }
 
+var hopDefaultUrl = "https://www.youtube.com/",
+	hopUrlTemplate = "https://www.youtube.com/results?search_query=%q";
+
 // Params:
 //
 // query (q)
@@ -19,7 +22,7 @@ var initialUrl = 'https://www.googleapis.com/youtube/v3/search?part=snippet&maxR
 // pageToken
 var pageUrl = 'https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=50&q=%s&fields=items(id%2Csnippet)%2CnextPageToken&key=AIzaSyA76ApLecQ78zo38QKNet_0fT5aewyKV3c&pageToken=%s',
 	max = pagehop.getMaxCount(),
-	query = pagehop.getQuery(),
+	query = pagehop.getQuery() ? encodeURIComponent( pagehop.getQuery() ) : "",
 	itemsAtPage = 50,
 	iterationsCount = Math.ceil( max / itemsAtPage ),
 	results = [];
@@ -59,12 +62,12 @@ var getPage = function(pageToken) {
 	if ( !pageToken ) {
 		url = util.format(
 			initialUrl,
-			encodeURIComponent( query )
+			query
 		);
 	} else {
 		url = util.format(
 			pageUrl,
-			encodeURIComponent( query ),
+			query,
 			pageToken
 		);
 	}
@@ -93,8 +96,18 @@ var getPage = function(pageToken) {
 
 };
 
-if ( !query ) {
-	pagehop.finish( [] );
-} else {
+if ( query ) {
+	pagehop.getHops().push( {
+		text: "YouTube",
+		address: hopUrlTemplate.replace( "%q", query )
+	} );
+
 	getPage();
+} else {
+	pagehop.getHops().push( {
+		text: "YouTube: no query",
+		address: hopDefaultUrl
+	} );
+
+	pagehop.finish( [] );
 }
