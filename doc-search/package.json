@@ -31,7 +31,7 @@
     "grunt-simple-mocha": "~0.4.0",
     "mocha": "~1.13.0",
     "should": "^4.6.5",
-    "pagehop": "^1.0.9"
+    "pagehop": "^1.1.1"
   },
   "private": true,
   "keywords": [],
