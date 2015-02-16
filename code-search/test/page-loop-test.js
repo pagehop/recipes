@@ -64,7 +64,7 @@ describe("code-search recipe's pageLoop",function(){
 				}
 			);
 		});
-		it( "adds an item with default address if no query", function(done){
+		it( "adds an item with address pointing to the same search on the site", function(done){
 			test.pageLoop(
 				pathToRecipe,
 				function() {
