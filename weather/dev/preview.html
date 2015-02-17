@@ -131,26 +131,94 @@
 			var skycons = new Skycons( {
 					color: appearance=='dark' ? 'white' : 'black'
 				} ),
-				hundred = Math.floor( code / 100 ),
-				codes = [
-					Skycons.CLEAR_DAY,
-					Skycons.CLEAR_DAY, 
-					Skycons.RAIN, 
-					Skycons.RAIN, 
-					Skycons.RAIN, // 400 is skipped..?
-					Skycons.RAIN, 
-					Skycons.SLEET, 
-					nighttime ? Skycons.PARTLY_CLOUDY_NIGHT : Skycons.CLOUDY, 
-					nighttime ? Skycons.PARTLY_CLOUDY_NIGHT : Skycons.CLOUDY, 
-					Skycons.SLEET
-				],
+				codes = {
+					200: Skycons.RAIN,
+					201: Skycons.RAIN,
+					202: Skycons.RAIN,
+					210: Skycons.RAIN,
+					211: Skycons.RAIN,
+					212: Skycons.RAIN,
+					221: Skycons.RAIN,
+					230: Skycons.RAIN,
+					231: Skycons.RAIN,
+					232: Skycons.RAIN,
+					300: Skycons.RAIN,
+					301: Skycons.RAIN,
+					302: Skycons.RAIN,
+					310: Skycons.RAIN,
+					311: Skycons.RAIN,
+					312: Skycons.RAIN,
+					313: Skycons.RAIN,
+					314: Skycons.RAIN,
+					321: Skycons.RAIN,
+					500: Skycons.RAIN,
+					501: Skycons.RAIN,
+					502: Skycons.RAIN,
+					503: Skycons.RAIN,
+					504: Skycons.RAIN,
+					511: Skycons.SNOW,
+					520: Skycons.RAIN,
+					521: Skycons.RAIN,
+					522: Skycons.RAIN,
+					531: Skycons.RAIN,
+					600: Skycons.SNOW,
+					601: Skycons.SNOW,
+					602: Skycons.SNOW,
+					611: Skycons.SNOW,
+					612: Skycons.SNOW,
+					615: Skycons.SNOW,
+					616: Skycons.SNOW,
+					620: Skycons.SNOW,
+					621: Skycons.SNOW,
+					622: Skycons.SNOW,
+					701: Skycons.FOG,
+					711: Skycons.FOG,
+					721: Skycons.FOG,
+					731: Skycons.FOG,
+					741: Skycons.FOG,
+					751: Skycons.FOG,
+					761: Skycons.FOG,
+					762: Skycons.FOG,
+					771: Skycons.FOG,
+					781: Skycons.FOG,
+					800: { day: Skycons.CLEAR_DAY, night: Skycons.CLEAR_NIGHT },
+					801: { day: Skycons.PARTLY_CLOUDY_DAY, night: Skycons.PARTLY_CLOUDY_NIGHT },
+					802: Skycons.CLOUDY,
+					803: Skycons.CLOUDY,
+					804: Skycons.CLOUDY,
+					900: Skycons.WIND,
+					901: Skycons.WIND,
+					902: Skycons.WIND,
+					903: Skycons.WIND,
+					904: Skycons.WIND,
+					905: Skycons.WIND,
+					906: Skycons.WIND,
+					951: Skycons.WIND,
+					952: Skycons.WIND,
+					953: Skycons.WIND,
+					954: Skycons.WIND,
+					955: Skycons.WIND,
+					956: Skycons.WIND,
+					957: Skycons.WIND,
+					958: Skycons.WIND,
+					959: Skycons.WIND,
+					960: Skycons.RAIN,
+					961: Skycons.RAIN,
+					962: Skycons.RAIN
+				},
 				el = crel( "canvas", {
 					width: size * 2,
 					height: size * 2,
 					style: "width: " + size + "px; height: " + size + "px"
-				} );
+				} ),
+				iconSet = codes[ code ],
+				icon = iconSet;
 
-			skycons.add(el, codes[hundred]);
+			if ( iconSet.day && iconSet.night ) {
+				icon = nighttime ? iconSet.night : iconSet.day;
+			}
+
+			skycons.add( el, icon );
 			skycons.play();
 
 			return el;
