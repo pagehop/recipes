@@ -35,7 +35,7 @@ if ( query ) {
 	for ( var i = 0; i < iterationsCount; i++ ) {
 		var url = util.format(
 			urlTemplate,
-			encodeURIComponent( query ),
+			query,
 			startAt,
 			itemsAtPage
 		);

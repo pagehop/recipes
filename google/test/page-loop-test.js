@@ -149,7 +149,7 @@ describe("google recipe's pageLoop",function(){
 			test.pageLoop(
 				pathToRecipe,
 				function() {
-					var query = "irrelevant",
+					var query = "some query",
 						options = null,
 						max = 200,
 						scrapeScript = "irrelevant",
@@ -160,8 +160,8 @@ describe("google recipe's pageLoop",function(){
 				function(urls) {
 					should.exist( urls );
 					urls.should.eql( [
-						"http://www.google.com/search?hl=en&q=irrelevant&start=0&sa=N&num=100&ie=UTF-8&oe=UTF-8",
-						"http://www.google.com/search?hl=en&q=irrelevant&start=100&sa=N&num=100&ie=UTF-8&oe=UTF-8"
+						"http://www.google.com/search?hl=en&q=some%20query&start=0&sa=N&num=100&ie=UTF-8&oe=UTF-8",
+						"http://www.google.com/search?hl=en&q=some%20query&start=100&sa=N&num=100&ie=UTF-8&oe=UTF-8"
 					] );
 					done();
 				}
