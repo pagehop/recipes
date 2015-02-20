@@ -34,13 +34,13 @@ describe("bing recipe's pageLoop",function(){
 				}
 			);
 		});
-		it( "scrape 2 pages, if maxCount is set to 200", function(done){
+		it( "scrape 1 page, if maxCount is set to 100", function(done){
 			test.pageLoop(
 				pathToRecipe,
 				function() {
 					var query = "irrelevant",
 						options = null,
-						max = 200,
+						max = 100,
 						scrapeScript = "irrelevant",
 						systemMeta = {},
 						hops = [];
@@ -49,28 +49,7 @@ describe("bing recipe's pageLoop",function(){
 				function(urls, result) {
 					should.exist( urls );
 					should.exist( result );
-					urls.length.should.equal( 2 );
-					result.items.length.should.equal( 0 );
-					done();
-				}
-			);
-		});
-		it( "scrape 3 pages, if maxCount is set to 300", function(done){
-			test.pageLoop(
-				pathToRecipe,
-				function() {
-					var query = "irrelevant",
-						options = null,
-						max = 300,
-						scrapeScript = "irrelevant",
-						systemMeta = {},
-						hops = [];
-					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
-				},
-				function(urls, result) {
-					should.exist( urls );
-					should.exist( result );
-					urls.length.should.equal( 3 );
+					urls.length.should.equal( 1 );
 					result.items.length.should.equal( 0 );
 					done();
 				}
@@ -84,7 +63,7 @@ describe("bing recipe's pageLoop",function(){
 				function() {
 					var query = "irrelevant",
 						options = null,
-						max = 200,
+						max = 100,
 						scrapeScript = "irrelevant",
 						systemMeta = {},
 						hops = [];
@@ -93,8 +72,7 @@ describe("bing recipe's pageLoop",function(){
 				function(urls) {
 					should.exist( urls );
 					urls.should.eql( [
-						"http://www.bing.com/search?q=irrelevant&pq=irrelevant&first=1&count=100",
-						"http://www.bing.com/search?q=irrelevant&pq=irrelevant&first=101&count=100"
+						"http://www.bing.com/search?q=irrelevant&pq=irrelevant&first=1&count=100"
 					] );
 					done();
 				}
