@@ -21,6 +21,22 @@ var urlTemplate = 'http://api.wordnik.com:80/v4/word.json/%s/definitions?limit=%
 	query = pagehop.getQuery(),
 	results = [];
 
+var cleanUpItem = function(item) {
+	var lambda = function(value) {
+		return value ? value.replace( /[\u0000-\u0008\u000a-\u001f\u007f-\u009f\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g, "?" ) : "";
+	};
+
+	if ( item ) {
+		item.word = lambda( item.word );
+		item.partOfSpeech = lambda( item.partOfSpeech );
+		item.sourceDictionary = lambda( item.sourceDictionary );
+		item.attributionText = lambda( item.attributionText );
+		item.text = lambda( item.text );
+	}
+
+	return item;
+};
+
 if ( query ) {
 	var encodedQuery = encodeURIComponent( query ),
 		url = util.format(
@@ -39,6 +55,9 @@ if ( query ) {
 			var items = json;
 			if ( items && items.length ) {
 				results = items.map( function(item) {
+
+					cleanUpItem( item );
+
 					var text = [item.word, "-", item.partOfSpeech, "(" + item.sourceDictionary + ")"].join(" "),
 						preview = previewTemplate
 							.replace( "{{attribution-text}}", item.attributionText )

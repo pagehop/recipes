@@ -1,3 +1,5 @@
+/* jshint -W100 */
+
 'use strict';
 
 var should = require("should"),
@@ -338,6 +340,72 @@ describe("define-word recipe's pageLoop",function(){
 						"		<p class=\"def-source\"><i>from Wiktionary, Creative Commons Attribution/Share-Alike License</i></p>",
 						"		<h3>math - noun</h3>",
 						"		<p>A mowing; what is gathered from mowing.</p>",
+						"	</div>",
+						"</body>",
+					].join( "\n" ) );
+
+					done();
+				}
+			);
+		} );
+		it( "parses results with unicode characters", function(done) {
+			test.pageLoop(
+				pathToRecipe,
+				function() {
+					var query = "expressions will always result in an empty set",
+						options = null,
+						max = 50,
+						scrapeScript = "irrelevant",
+						systemMeta = {},
+						hops = [];
+					window.pagehop.init( query, options, max, scrapeScript, systemMeta, hops );
+					window.$ = {
+						getJSON: function() {
+							return {
+								done: function(func) {
+									func( [
+										{
+											"textProns": [],
+											"sourceDictionary": "gcide�",
+											"exampleUses": [],
+											"relatedWords": [],
+											"labels": [{
+												"type": "mark",
+												"text": "rare"
+											}],
+											"citations": [{
+												"source": "Shak."
+											}],
+											"word": "retention�",
+											"partOfSpeech": "noun�",
+											"sequence": "2",
+											"seqString": "3.",
+											"text": "That which contains something, as a tablet; a � of preserving impressions.",
+											"score": 0.0,
+											"attributionText": "from the GNU� version of the Collaborative International Dictionary of English"
+										}
+									] );
+									return {
+										fail: function() {}
+									};
+								}
+							};
+						}
+					};
+				},
+				function(urls, results) {
+					should.exist( urls );
+
+					var item1 = results.items[ 0 ];
+
+					item1.text.should.equal( "retention? - noun? (gcide?)" );
+					item1.displayAddress.should.equal( "That which contains something, as a tablet; a ? of preserving impressions." );
+					item1.preview.should.containEql( [
+						"<body>",
+						"	<div class=\"main-container\">",
+						"		<p class=\"def-source\"><i>from the GNU? version of the Collaborative International Dictionary of English</i></p>",
+						"		<h3>retention? - noun?</h3>",
+						"		<p>That which contains something, as a tablet; a ? of preserving impressions.</p>",
 						"	</div>",
 						"</body>",
 					].join( "\n" ) );
