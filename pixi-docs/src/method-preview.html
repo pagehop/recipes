@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<style type="text/css">
+		html {
+			background-color: #eee;
+			font-family: PT Sans;
+			font-size: 12;
+		}
+		.header {
+			font-size: 1.5em;
+		}
+		.type,
+		.definitionSource {
+			font-size: 0.8em;
+			font-style: italic;
+		}
+		.typeName {
+			font-style: normal;
+			font-weight: bold;
+		}
+	</style>
+</head>
+<body>
+	<div class="header">
+		<b>{{name}}</b>( {{paramList}} )
+	</div>
+
+	<hr class="separator">
+	<p class="definitionSource">
+		defined in <span class="typeName">{{class}}</span>
+	</p>
+
+	{{#if paramList}}
+	<p>
+		Parameters:
+	</p>
+	<ul>
+		{{#each params}}
+			<li>
+				{{name}} <b>{{type}}</b> {{#if optional}}<span class="optional">optional</span>{{/if}}<br/>{{description}}
+				{{#if props.length}}
+					<ul>
+					{{#each props}}
+						<li>{{name}} <b>{{type}}</b> {{#if optional}}<span class="optional">optional</span>{{/if}}<br/>{{description}}</li>
+					{{/each}}
+					</ul>
+				{{/if}}
+			</li>
+		{{/each}}
+	</ul>
+	<hr class="separator">
+	{{/if}}
+
+	<p class="description">
+		{{description}}
+	</p>
+</body>
+</html>

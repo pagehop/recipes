@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<style type="text/css">
+		html {
+			background-color: #eee;
+			font-family: PT Sans;
+			font-size: 12;
+		}
+		.header {
+			font-size: 1.5em;
+		}
+		#constructorExpression {
+			width: 100%;
+			text-align: center;
+		}
+		.js-keyword {
+			color: #3600FF;
+		}
+		.extends {
+			font-size: 0.8em;
+			font-style: italic;
+		}
+		.typeName {
+			font-style: normal;
+			font-weight: bold;
+		}
+	</style>
+</head>
+<body>
+	<div class="header">
+		<b>{{name}}</b> Class
+	</div>
+	<hr class="separator">
+	{{#if extends}}
+	<p class="extends">
+		extends <span class="typeName">{{extends}}</span>
+	</p>
+	{{/if}}
+	{{#if is_constructor}}
+	<div>
+		<p>
+			Constructor:
+			<div id="constructorExpression">
+				<span class="js-keyword">new</span> {{name}}( {{paramList}} )
+			</div>
+		</p>
+		{{#if paramList}}
+		<p>
+			Parameters:
+		</p>
+		<ul>
+			{{#each params}}
+				<li>
+					{{name}} <b>{{type}}</b> {{#if optional}}<span class="optional">optional</span>{{/if}}<br/>{{description}}
+					{{#if props.length}}
+						<ul>
+						{{#each props}}
+							<li>{{name}} <b>{{type}}</b> {{#if optional}}<span class="optional">optional</span>{{/if}}<br/>{{description}}</li>
+						{{/each}}
+						</ul>
+					{{/if}}
+				</li>
+			{{/each}}
+		</ul>
+		{{/if}}
+	</div>
+	{{else}}
+	<h3>No constructor</h3>
+	{{/if}}
+	<hr class="separator">
+	{{#if properties}}
+	<h3>Properties</h3>
+	<ul class="propertyList">
+	{{#each properties}}
+		<li>
+			{{name}}
+		</li>
+	{{/each}}
+	</ul>
+	{{/if}}
+	{{#if methods}}
+	<h3>Methods</h3>
+	<ul class="methodList">
+	{{#each methods}}
+		<li>
+			{{name}}
+		</li>
+	{{/each}}
+	</ul>
+	{{/if}}
+</body>
+</html>
