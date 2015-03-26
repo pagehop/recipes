@@ -1,7 +1,7 @@
 {
   "name": "pagehop-pixi-docs-recipe",
   "description": "Recipe for the documentation of pixi.js",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "homepage": "https://github.com/pagehop/recipes/blob/master/pixi-docs/README.md",
   "author": {
     "name": "nicroto",

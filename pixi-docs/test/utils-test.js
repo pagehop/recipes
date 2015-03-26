@@ -7,6 +7,7 @@ var should = require("should"),
 var beforeFunc = function(done) {
 	this.timeout( 100000 );
 
+	System.baseURL = "file:" + __dirname;
 	System.transpiler = "babel";
 	System.import( "../src/utils" ).then( function(u) {
 		utils = u.default;
