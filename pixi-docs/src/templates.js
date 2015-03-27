@@ -1,3 +1,5 @@
+/* jshint -W020 */
+
 'use strict';
 
 // <Don't use ES6 here>

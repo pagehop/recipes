@@ -1,3 +1,5 @@
+/* jshint -W117 */
+
 'use strict';
 
 import templates from "./templates";

@@ -12,5 +12,5 @@
 	"eqnull": true,
 	"node": true,
 	"esnext": true,
-	"predef": ["describe", "it", "before", "beforeEach", "after", "afterEach", "module", "pagehop", "document", "window"]
+	"predef": ["describe", "it", "before", "beforeEach", "after", "afterEach", "module", "pagehop", "document", "window", "__moduleAddress"]
 }
