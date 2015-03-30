@@ -1,7 +1,7 @@
 {
   "name": "pagehop-doc-search-recipe",
   "description": "Recipe for Technical Documentation Search using searchcode.com.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "homepage": "https://github.com/pagehop/recipes/blob/master/doc-search/README.md",
   "author": {
     "name": "nicroto",
@@ -23,7 +23,7 @@
     "test": "mocha"
   },
   "dependencies": {
-    "superagent": "^0.21.0"
+    "superagent": "^1.1.0"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
