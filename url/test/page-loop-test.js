@@ -9,6 +9,7 @@ var pathToRecipe = pathUtils.resolve( pathUtils.join( __dirname, '../' ) );
 
 describe("url recipe's pageLoop",function(){
 	this.timeout( 10000 );
+
 	before( function(done) {
 		test.init( done );
 	} );

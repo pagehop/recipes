@@ -42,6 +42,7 @@ var testScraping = function( pageName, expectedResults, done ) {
 };
 
 describe("bing recipe's scrape",function(){
+	this.timeout( 10000 );
 	before( function(done) {
 		test.init( done );
 	} );

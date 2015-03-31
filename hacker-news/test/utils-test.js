@@ -36,6 +36,8 @@ var cleanDateMockFunc =  function() {
 };
 
 describe("hacker-news recipe's utility methods",function() {
+	this.timeout( 10000 );
+
 	describe( "getDomain(url)", function() {
 		it( "returns correct domain on http", function() {
 			utils.getDomain( "http://example.com/some/inner/link" ).should.equal( "example.com" );

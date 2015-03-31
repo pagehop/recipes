@@ -1,7 +1,7 @@
 {
   "name": "pagehop-hacker-news-recipe",
   "description": "Recipe for browsing the HackerNews (news.ycombinator.com).",
-  "version": "1.0.0",
+  "version": "1.0.1",
 
   "homepage": "https://github.com/pagehop/recipes/blob/master/hacker-news/README.md",
 

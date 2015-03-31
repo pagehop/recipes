@@ -1,7 +1,7 @@
 {
   "name": "pagehop-weather-recipe",
   "description": "Recipe for a weather check using openweathermap.org",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "homepage": "https://github.com/pagehop/recipes/blob/master/weather/README.md",
   "author": {
     "name": "nicroto",

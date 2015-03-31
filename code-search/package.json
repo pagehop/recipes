@@ -1,7 +1,7 @@
 {
   "name": "pagehop-code-search-recipe",
   "description": "Recipe for programming code search using searchcode.com",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "homepage": "https://github.com/pagehop/recipes/blob/master/code-search/README.md",
   "author": {
     "name": "nicroto",

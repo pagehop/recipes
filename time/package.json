@@ -1,7 +1,7 @@
 {
   "name": "pagehop-time-recipe",
   "description": "Recipe for checking the local time of a place.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "homepage": "https://github.com/pagehop/recipes/blob/master/time/README.md",
   "author": {
     "name": "nicroto",

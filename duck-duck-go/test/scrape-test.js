@@ -40,6 +40,7 @@ var testScraping = function( pageName, preScrape, expectedResults, done ) {
 };
 
 describe("duck-duck-go recipe's scrape",function(){
+	this.timeout( 10000 );
 	before( function(done) {
 		test.init( done );
 	} );

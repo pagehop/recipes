@@ -4,6 +4,7 @@ var should = require("should"),
 	utils = require("../src/utils");
 
 describe("doc-search recipe's utils",function(){
+	this.timeout( 10000 );
 
 	describe( "consts", function() {
 		utils.RECIPE_DOC_URL.should.equal( "https://github.com/pagehop/recipes/blob/master/doc-search/README.md" );

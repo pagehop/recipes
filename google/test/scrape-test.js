@@ -27,6 +27,8 @@ var removeFSPath = function(items) {
 };
 
 describe("google recipe's scrape",function(){
+	this.timeout( 10000 );
+
 	before( function(done) {
 		test.init( done );
 	} );

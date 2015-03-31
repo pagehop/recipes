@@ -11,6 +11,7 @@ var pathToRecipe = pathUtils.resolve( pathUtils.join( __dirname, '../' ) );
 
 describe("time recipe's pageLoop",function(){
 	this.timeout( 10000 );
+
 	before( function(done) {
 		test.init( done );
 	} );

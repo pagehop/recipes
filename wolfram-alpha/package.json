@@ -1,7 +1,7 @@
 {
   "name": "pagehop-wolfram-alpha-recipe",
   "description": "Recipe for querying of the Wolfram Alpha knowledge engine.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "homepage": "https://github.com/pagehop/recipes/blob/master/wolfram-alpha/README.md",
   "author": {
     "name": "nicroto",

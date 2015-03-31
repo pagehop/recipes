@@ -5,8 +5,6 @@ var should = require("should"),
 	utils;
 
 var beforeFunc = function(done) {
-	this.timeout( 100000 );
-
 	System.baseURL = "file:" + __dirname;
 	System.transpiler = "babel";
 	System.import( "../src/utils" ).then( function(u) {
@@ -18,6 +16,8 @@ var beforeFunc = function(done) {
 };
 
 describe( "pixi-docs recipe's utils", function() {
+	this.timeout( 10000 );
+
 	before( beforeFunc );
 	describe( "validateJson(dataJson)", function() {
 		it( "throws an error if no data is passed", function() {

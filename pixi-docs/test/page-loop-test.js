@@ -14,6 +14,7 @@ var pathToRecipe = pathUtils.resolve( pathUtils.join( __dirname, '../' ) );
 
 describe( "pixi-docs recipe's pageLoop",function(){
 	this.timeout( 10000 );
+
 	before( function(done) {
 		test.init( done );
 	} );
